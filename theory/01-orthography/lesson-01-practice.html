@@ -488,7 +488,7 @@
         ];
 
         // Инициализация заданий
-        function initExercise1() {
+        window.initExercise1 = function() {
             const container = document.getElementById('exercise1');
             container.innerHTML = exercise1Data.map((item, index) => `
                 <div class="question">
@@ -499,7 +499,7 @@
             `).join('');
         }
 
-        function initExercise2() {
+        window.initExercise2 = function() {
             const container = document.getElementById('exercise2');
             container.innerHTML = exercise2Data.map((item, index) => `
                 <div class="question">
@@ -510,7 +510,7 @@
             `).join('');
         }
 
-        function initExercise3() {
+        window.initExercise3 = function() {
             const container = document.getElementById('exercise3');
             container.innerHTML = exercise3Data.map((item, index) => `
                 <div class="question">
@@ -522,7 +522,7 @@
             `).join('');
         }
 
-        function initTest() {
+        window.initTest = function() {
             const container = document.getElementById('test');
             container.innerHTML = testData.map((item, index) => `
                 <div class="question">
@@ -907,7 +907,7 @@
         window.showResult = showResult;
 
         // Обновление прогресса
-        function updateProgress() {
+        window.updateProgress = function() {
             const totalQuestions = exercise1Data.length + exercise2Data.length + exercise3Data.length + testData.length;
             let answeredQuestions = 0;
 
@@ -932,13 +932,22 @@
         }
 
         // Инициализация при загрузке страницы
-        window.onload = function() {
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                initExercise1();
+                initExercise2();
+                initExercise3();
+                initTest();
+                updateProgress();
+            });
+        } else {
+            // DOM уже загружен
             initExercise1();
             initExercise2();
             initExercise3();
             initTest();
             updateProgress();
-        };
+        }
     </script>
 
     <script type="module">
