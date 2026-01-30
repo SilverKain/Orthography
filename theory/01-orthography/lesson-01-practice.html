@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практические задания - Урок 1: Проверяемые безударные гласные</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            padding: 40px;
+        }
+
+        h1 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #f0f0f0;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .exercise {
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 5px solid #667eea;
+        }
+
+        .exercise h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .exercise-description {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .question {
+            background: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 2px solid #e0e0e0;
+            transition: border-color 0.3s;
+        }
+
+        .question:hover {
+            border-color: #667eea;
+        }
+
+        .question-text {
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        input.correct {
+            border-color: #4CAF50;
+            background-color: #e8f5e9;
+        }
+
+        input.incorrect {
+            border-color: #f44336;
+            background-color: #ffebee;
+        }
+
+        .radio-group label {
+            display: block;
+            padding: 10px;
+            margin-bottom: 8px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .radio-group label:hover {
+            background: #f5f5f5;
+            border-color: #667eea;
+        }
+
+        .radio-group input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .radio-group label.correct {
+            background: #e8f5e9;
+            border-color: #4CAF50;
+        }
+
+        .radio-group label.incorrect {
+            background: #ffebee;
+            border-color: #f44336;
+        }
+
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-left: 4px solid #4CAF50;
+        }
+
+        .feedback.incorrect {
+            background: #ffebee;
+            color: #c62828;
+            border-left: 4px solid #f44336;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            flex: 1;
+            min-width: 150px;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .check-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .check-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .reset-btn {
+            background: #f44336;
+            color: white;
+        }
+
+        .reset-btn:hover {
+            background: #d32f2f;
+            transform: translateY(-2px);
+        }
+
+        .show-answer-btn {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .show-answer-btn:hover {
+            background: #388E3C;
+            transform: translateY(-2px);
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .result-box.show {
+            display: block;
+        }
+
+        .result-box h3 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .result-box p {
+            font-size: 1.2em;
+        }
+
+        .score {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .emoji {
+            font-size: 3em;
+            margin: 10px 0;
+        }
+
+        .answer-key {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .answer-key.show {
+            display: block;
+        }
+
+        .answer-key h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .answer-key-content {
+            color: #856404;
+            line-height: 1.8;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+
+        .hint {
+            background: #e3f2fd;
+            border-left: 4px solid #2196F3;
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            color: #1565c0;
+            font-size: 0.9em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">        <div class="user-info" id="userInfo" style="display: none; background: #e3f2fd; padding: 15px; border-radius: 10px; margin-bottom: 20px; text-align: center;">
+            <span style="font-weight: bold; color: #1976d2;">👤 Авторизован: </span>
+            <span id="userEmail" style="color: #666;"></span>
+        </div>        <h1>📝 Практические задания</h1>
+        <p class="subtitle">Урок 1: Проверяемые безударные гласные в корне слова</p>
+
+        <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap;">
+            <button class="check-btn" onclick="window.location.href='lesson-01-vowels-checked.html'" style="background: #757575;">
+                ⬅️ Вернуться к теории
+            </button>
+            <button class="check-btn" onclick="window.location.href='../../index.html'" style="background: #2196F3;">
+                🏠 На главную
+            </button>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar">0%</div>
+        </div>
+
+        <!-- Задание 1 -->
+        <div class="exercise">
+            <h2>Задание 1: Вставьте пропущенные буквы</h2>
+            <p class="exercise-description">Подберите проверочные слова и вставьте пропущенные буквы (введите только одну букву: а, о, е, и, я)</p>
+            
+            <div id="exercise1"></div>
+            
+            <div class="button-group">
+                <button class="check-btn" onclick="checkExercise1()">Проверить</button>
+                <button class="show-answer-btn" onclick="showAnswers1()">Показать ответы</button>
+                <button class="reset-btn" onclick="resetExercise1()">Сбросить</button>
+            </div>
+            
+            <div class="answer-key" id="answers1">
+                <h4>Правильные ответы с проверочными словами:</h4>
+                <div class="answer-key-content" id="answersContent1"></div>
+            </div>
+            
+            <div class="result-box" id="result1"></div>
+        </div>
+
+        <!-- Задание 2 -->
+        <div class="exercise">
+            <h2>Задание 2: Найдите и исправьте ошибки</h2>
+            <p class="exercise-description">Найдите ошибки в написании слов и исправьте их (введите правильное слово целиком)</p>
+            
+            <div id="exercise2"></div>
+            
+            <div class="button-group">
+                <button class="check-btn" onclick="checkExercise2()">Проверить</button>
+                <button class="show-answer-btn" onclick="showAnswers2()">Показать ответы</button>
+                <button class="reset-btn" onclick="resetExercise2()">Сбросить</button>
+            </div>
+            
+            <div class="answer-key" id="answers2">
+                <h4>Правильные ответы с объяснениями:</h4>
+                <div class="answer-key-content" id="answersContent2"></div>
+            </div>
+            
+            <div class="result-box" id="result2"></div>
+        </div>
+
+        <!-- Задание 3 -->
+        <div class="exercise">
+            <h2>Задание 3: Различите значения слов</h2>
+            <p class="exercise-description">Вставьте нужные буквы, учитывая значение слов (введите две буквы через пробел, например: а о)</p>
+            
+            <div id="exercise3"></div>
+            
+            <div class="button-group">
+                <button class="check-btn" onclick="checkExercise3()">Проверить</button>
+                <button class="show-answer-btn" onclick="showAnswers3()">Показать ответы</button>
+                <button class="reset-btn" onclick="resetExercise3()">Сбросить</button>
+            </div>
+            
+            <div class="answer-key" id="answers3">
+                <h4>Правильные ответы с проверочными словами:</h4>
+                <div class="answer-key-content" id="answersContent3"></div>
+            </div>
+            
+            <div class="result-box" id="result3"></div>
+        </div>
+
+        <!-- Тест -->
+        <div class="exercise">
+            <h2>🎯 Задание 4: Итоговый тест</h2>
+            <p class="exercise-description">Выберите правильный вариант ответа</p>
+            
+            <div id="test"></div>
+            
+            <div class="button-group">
+                <button class="check-btn" onclick="checkTest()">Проверить тест</button>
+                <button class="reset-btn" onclick="resetTest()">Сбросить</button>
+            </div>
+            
+            <div class="result-box" id="resultTest"></div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { AuthService } from '../../src/firebase/services/authService.js';
+        import { ExerciseService } from '../../src/firebase/services/exerciseService.js';
+        import SkillsService from '../../src/firebase/services/skillsService.js';
+
+        // Переменные для хранения результатов каждого задания
+        let taskResults = {
+            'exercise1': { correct: 0, total: 10, name: 'Задание 1: Вставить пропущенные буквы', completed: false },
+            'exercise2': { correct: 0, total: 5, name: 'Задание 2: Исправить ошибки', completed: false },
+            'exercise3': { correct: 0, total: 5, name: 'Задание 3: Различить пары слов', completed: false },
+            'test': { correct: 0, total: 5, name: 'Задание 4: Итоговый тест', completed: false }
+        };
+
+        // Данные для заданий
+        const exercise1Data = [
+            { word: 'д..ревья', answer: 'е', check: 'дерево' },
+            { word: 'гр..за', answer: 'о', check: 'грозы' },
+            { word: 'в..сна', answer: 'е', check: 'вёсны' },
+            { word: 'т..мнеть', answer: 'е', check: 'тёмный' },
+            { word: 'п..тёрка', answer: 'я', check: 'пять' },
+            { word: 'хв..лить', answer: 'а', check: 'хвалит' },
+            { word: 'скр..пучий', answer: 'и', check: 'скрип' },
+            { word: 'зв..нить', answer: 'о', check: 'звон' },
+            { word: 'тр..пинка', answer: 'о', check: 'тропы' },
+            { word: 'л..пить', answer: 'е', check: 'лепит' }
+        ];
+
+        const exercise2Data = [
+            { sentence: 'Висенний дождь', wrong: 'Висенний', correct: 'Весенний', check: 'вёсны' },
+            { sentence: 'Примирять друзей', wrong: 'Примирять', correct: 'Примирять', check: 'мир' },
+            { sentence: 'Посветить фонариком', wrong: 'Посветить', correct: 'Посветить', check: 'свет' },
+            { sentence: 'Полескать бельё', wrong: 'Полескать', correct: 'Полоскать', check: 'полощет' },
+            { sentence: 'Разредить обстановку', wrong: 'Разредить', correct: 'Разрядить', check: 'разрядка' }
+        ];
+
+        const exercise3Data = [
+            { pair: 'Пол..скать котёнка / Пол..скать бельё', answer: 'а о', check: 'ласка / полощет' },
+            { pair: 'Посв..тить стихи / Посв..тить фонариком', answer: 'я е', check: 'святость / свет' },
+            { pair: 'Прим..рять платье / Прим..рять друзей', answer: 'е и', check: 'мерка / мир' },
+            { pair: 'Сл..зать с дерева / Сл..зать сметану', answer: 'е и', check: 'лезть / лижет' },
+            { pair: 'Ув..дать издалека / Ув..дать без воды', answer: 'и я', check: 'видит / вялый' }
+        ];
+
+        const testData = [
+            {
+                question: 'Какую гласную нужно вписать: л..сной?',
+                options: ['И', 'Е', 'Я'],
+                correct: 1,
+                explanation: 'Проверочное слово: лес'
+            },
+            {
+                question: 'Проверочное слово для «г..ра»:',
+                options: ['горы́', 'го́рный', 'горева́ть'],
+                correct: 1,
+                explanation: 'В вариантах А и В гласная безударная'
+            },
+            {
+                question: 'В каком слове пишется О?',
+                options: ['гр..чи́', 'м..ря́', 'з..ря́'],
+                correct: 1,
+                explanation: 'м..ря́ → мо́ре (буква О)'
+            },
+            {
+                question: 'В каком предложении ошибка?',
+                options: ['Надо примирить друзей', 'Я люблю полоскать кота', 'Он стал слизать варенье'],
+                correct: 1,
+                explanation: 'Правильно: «поласкать кота» (ласка)'
+            },
+            {
+                question: 'Проверочное слово для «д..ревня»:',
+                options: ['де́рево', 'дере́вья', 'дровосе́к'],
+                correct: 0,
+                explanation: 'де́рево - ударение на Е'
+            }
+        ];
+
+        // Инициализация заданий
+        function initExercise1() {
+            const container = document.getElementById('exercise1');
+            container.innerHTML = exercise1Data.map((item, index) => `
+                <div class="question">
+                    <div class="question-text">${index + 1}. ${item.word}</div>
+                    <input type="text" id="ex1_${index}" maxlength="1" placeholder="Введите букву">
+                    <div class="feedback" id="feedback1_${index}"></div>
+                </div>
+            `).join('');
+        }
+
+        function initExercise2() {
+            const container = document.getElementById('exercise2');
+            container.innerHTML = exercise2Data.map((item, index) => `
+                <div class="question">
+                    <div class="question-text">${index + 1}. ${item.sentence}</div>
+                    <input type="text" id="ex2_${index}" placeholder="Исправьте слово">
+                    <div class="feedback" id="feedback2_${index}"></div>
+                </div>
+            `).join('');
+        }
+
+        function initExercise3() {
+            const container = document.getElementById('exercise3');
+            container.innerHTML = exercise3Data.map((item, index) => `
+                <div class="question">
+                    <div class="question-text">${index + 1}. ${item.pair}</div>
+                    <input type="text" id="ex3_${index}" placeholder="Введите две буквы через пробел">
+                    <div class="hint">Подсказка: ${item.check}</div>
+                    <div class="feedback" id="feedback3_${index}"></div>
+                </div>
+            `).join('');
+        }
+
+        function initTest() {
+            const container = document.getElementById('test');
+            container.innerHTML = testData.map((item, index) => `
+                <div class="question">
+                    <div class="question-text">${index + 1}. ${item.question}</div>
+                    <div class="radio-group" id="test_${index}">
+                        ${item.options.map((option, optIndex) => `
+                            <label>
+                                <input type="radio" name="test_${index}" value="${optIndex}">
+                                ${String.fromCharCode(65 + optIndex)}) ${option}
+                            </label>
+                        `).join('')}
+                    </div>
+                    <div class="feedback" id="feedbackTest_${index}"></div>
+                </div>
+            `).join('');
+        }
+
+        // Проверка заданий
+        async function checkExercise1() {
+            let correct = 0;
+            
+            exercise1Data.forEach((item, index) => {
+                const input = document.getElementById(`ex1_${index}`);
+                const feedback = document.getElementById(`feedback1_${index}`);
+                const userAnswer = input.value.toLowerCase().trim();
+                
+                if (userAnswer === item.answer) {
+                    input.className = 'correct';
+                    feedback.className = 'feedback correct show';
+                    feedback.innerHTML = `✓ Правильно! Проверочное слово: <strong>${item.check}</strong>`;
+                    correct++;
+                } else if (userAnswer) {
+                    input.className = 'incorrect';
+                    feedback.className = 'feedback incorrect show';
+                    feedback.textContent = '✗ Неверно. Попробуйте ещё раз.';
+                } else {
+                    feedback.className = 'feedback incorrect show';
+                    feedback.textContent = '✗ Пожалуйста, введите ответ';
+                }
+            });
+            
+            taskResults['exercise1'].correct = correct;
+            taskResults['exercise1'].completed = true;
+            
+            await showResult('result1', correct, exercise1Data.length);
+            updateProgress();
+        }
+
+        async function checkExercise2() {
+            let correct = 0;
+            exercise2Data.forEach((item, index) => {
+                const input = document.getElementById(`ex2_${index}`);
+                const feedback = document.getElementById(`feedback2_${index}`);
+                const userAnswer = input.value.trim();
+                
+                if (userAnswer.toLowerCase() === item.correct.toLowerCase()) {
+                    input.className = 'correct';
+                    feedback.className = 'feedback correct show';
+                    feedback.innerHTML = `✓ Правильно! Проверочное слово: <strong>${item.check}</strong>`;
+                    correct++;
+                } else if (userAnswer) {
+                    input.className = 'incorrect';
+                    feedback.className = 'feedback incorrect show';
+                    feedback.innerHTML = `✗ Неверно. Правильно: <strong>${item.correct}</strong>`;
+                } else {
+                    feedback.className = 'feedback incorrect show';
+                    feedback.textContent = '✗ Пожалуйста, введите ответ';
+                }
+            });
+            
+            taskResults['exercise2'].correct = correct;
+            taskResults['exercise2'].completed = true;
+            
+            await showResult('result2', correct, exercise2Data.length);
+            updateProgress();
+        }
+
+        async function checkExercise3() {
+            let correct = 0;
+            exercise3Data.forEach((item, index) => {
+                const input = document.getElementById(`ex3_${index}`);
+                const feedback = document.getElementById(`feedback3_${index}`);
+                const userAnswer = input.value.toLowerCase().trim();
+                
+                if (userAnswer === item.answer) {
+                    input.className = 'correct';
+                    feedback.className = 'feedback correct show';
+                    feedback.innerHTML = `✓ Правильно! Проверочные слова: <em>${item.check}</em>`;
+                    correct++;
+                } else if (userAnswer) {
+                    input.className = 'incorrect';
+                    feedback.className = 'feedback incorrect show';
+                    feedback.innerHTML = `✗ Неверно. Проверочные слова: <em>${item.check}</em>`;
+                } else {
+                    feedback.className = 'feedback incorrect show';
+                    feedback.textContent = '✗ Пожалуйста, введите ответ';
+                }
+            });
+            
+            taskResults['exercise3'].correct = correct;
+            taskResults['exercise3'].completed = true;
+            
+            await showResult('result3', correct, exercise3Data.length);
+            updateProgress();
+        }
+
+        async function checkTest() {
+            let correct = 0;
+            testData.forEach((item, index) => {
+                const radioGroup = document.getElementById(`test_${index}`);
+                const feedback = document.getElementById(`feedbackTest_${index}`);
+                const selected = radioGroup.querySelector('input:checked');
+                
+                if (selected) {
+                    const userAnswer = parseInt(selected.value);
+                    const labels = radioGroup.querySelectorAll('label');
+                    
+                    if (userAnswer === item.correct) {
+                        labels[userAnswer].className = 'correct';
+                        feedback.className = 'feedback correct show';
+                        feedback.innerHTML = `✓ Правильно! ${item.explanation}`;
+                        correct++;
+                    } else {
+                        labels[userAnswer].className = 'incorrect';
+                        labels[item.correct].className = 'correct';
+                        feedback.className = 'feedback incorrect show';
+                        feedback.innerHTML = `✗ Неверно. Правильный ответ: <strong>${String.fromCharCode(65 + item.correct)}</strong>. ${item.explanation}`;
+                    }
+                } else {
+                    feedback.className = 'feedback incorrect show';
+                    feedback.textContent = '✗ Пожалуйста, выберите ответ';
+                }
+            });
+            
+            taskResults['test'].correct = correct;
+            taskResults['test'].completed = true;
+            
+            await showResult('resultTest', correct, testData.length);
+            updateProgress();
+        }
+
+        // Показать ответы
+        function showAnswers1() {
+            const answersDiv = document.getElementById('answers1');
+            const content = document.getElementById('answersContent1');
+            content.innerHTML = exercise1Data.map((item, index) => 
+                `<p>${index + 1}. ${item.word.replace('..', '<strong>' + item.answer + '</strong>')} — проверочное слово: <strong>${item.check}</strong></p>`
+            ).join('');
+            answersDiv.classList.add('show');
+        }
+
+        function showAnswers2() {
+            const answersDiv = document.getElementById('answers2');
+            const content = document.getElementById('answersContent2');
+            content.innerHTML = exercise2Data.map((item, index) => 
+                `<p>${index + 1}. ${item.sentence} → <strong>${item.correct}</strong> (${item.check})</p>`
+            ).join('');
+            answersDiv.classList.add('show');
+        }
+
+        function showAnswers3() {
+            const answersDiv = document.getElementById('answers3');
+            const content = document.getElementById('answersContent3');
+            content.innerHTML = exercise3Data.map((item, index) => 
+                `<p>${index + 1}. ${item.answer.split(' ').join(' / ')} — ${item.check}</p>`
+            ).join('');
+            answersDiv.classList.add('show');
+        }
+
+        // Сброс заданий
+        function resetExercise1() {
+            exercise1Data.forEach((_, index) => {
+                document.getElementById(`ex1_${index}`).value = '';
+                document.getElementById(`ex1_${index}`).className = '';
+                document.getElementById(`feedback1_${index}`).className = 'feedback';
+            });
+            document.getElementById('result1').classList.remove('show');
+            document.getElementById('answers1').classList.remove('show');
+            taskResults['exercise1'].correct = 0;
+            taskResults['exercise1'].completed = false;
+            updateProgress();
+        }
+
+        function resetExercise2() {
+            exercise2Data.forEach((_, index) => {
+                document.getElementById(`ex2_${index}`).value = '';
+                document.getElementById(`ex2_${index}`).className = '';
+                document.getElementById(`feedback2_${index}`).className = 'feedback';
+            });
+            document.getElementById('result2').classList.remove('show');
+            document.getElementById('answers2').classList.remove('show');
+            taskResults['exercise2'].correct = 0;
+            taskResults['exercise2'].completed = false;
+            updateProgress();
+        }
+
+        function resetExercise3() {
+            exercise3Data.forEach((_, index) => {
+                document.getElementById(`ex3_${index}`).value = '';
+                document.getElementById(`ex3_${index}`).className = '';
+                document.getElementById(`feedback3_${index}`).className = 'feedback';
+            });
+            document.getElementById('result3').classList.remove('show');
+            document.getElementById('answers3').classList.remove('show');
+            taskResults['exercise3'].correct = 0;
+            taskResults['exercise3'].completed = false;
+            updateProgress();
+        }
+
+        function resetTest() {
+            testData.forEach((_, index) => {
+                const radioGroup = document.getElementById(`test_${index}`);
+                const radios = radioGroup.querySelectorAll('input');
+                const labels = radioGroup.querySelectorAll('label');
+                radios.forEach(radio => radio.checked = false);
+                labels.forEach(label => label.className = '');
+                document.getElementById(`feedbackTest_${index}`).className = 'feedback';
+            });
+            document.getElementById('resultTest').classList.remove('show');
+            taskResults['test'].correct = 0;
+            taskResults['test'].completed = false;
+            updateProgress();
+        }
+
+        // Функция отправки события обновления навыков
+        function notifySkillUpdate(userId, skillId) {
+            try {
+                const channel = new BroadcastChannel('skills-update');
+                channel.postMessage({
+                    type: 'SKILL_UPDATED',
+                    skillId: skillId,
+                    userId: userId,
+                    timestamp: Date.now()
+                });
+                channel.close();
+                console.log('📡 Отправлено событие обновления навыков:', skillId);
+            } catch (e) {
+                console.log('BroadcastChannel не поддерживается:', e);
+            }
+        }
+
+        // Показать результат
+        async function showResult(resultId, correct, total) {
+            const resultDiv = document.getElementById(resultId);
+            const percentage = Math.round((correct / total) * 100);
+            const emoji = percentage >= 90 ? '🎉' : percentage >= 70 ? '😊' : percentage >= 50 ? '🤔' : '😔';
+            const message = percentage >= 90 ? 'Отлично!' : percentage >= 70 ? 'Хорошо!' : percentage >= 50 ? 'Неплохо!' : 'Нужно повторить!';
+            
+            resultDiv.innerHTML = `
+                <div class="emoji">${emoji}</div>
+                <h3>${message}</h3>
+                <div class="score">${correct} из ${total}</div>
+                <p>Процент правильных ответов: ${percentage}%</p>
+            `;
+            resultDiv.classList.add('show');
+
+            // Сохраняем прогресс и показываем индикацию
+            const user = AuthService.getCurrentUser();
+            if (user) {
+                // Добавляем индикацию сохранения
+                const savingIndicator = document.createElement('div');
+                savingIndicator.id = `saving-${resultId}`;
+                savingIndicator.style.cssText = 'margin-top: 10px; padding: 8px; background: #e3f2fd; border-radius: 5px; color: #1976d2; font-size: 0.9em;';
+                savingIndicator.textContent = '💾 Прогресс сохраняется...';
+                resultDiv.appendChild(savingIndicator);
+
+                // Сохраняем прогресс
+                try {
+                    // Подготавливаем массив со всеми заданиями (включая статус выполнения)
+                    const taskResultsArray = [
+                        {
+                            name: taskResults['exercise1'].name,
+                            correct: taskResults['exercise1'].correct,
+                            total: taskResults['exercise1'].total,
+                            completed: taskResults['exercise1'].completed
+                        },
+                        {
+                            name: taskResults['exercise2'].name,
+                            correct: taskResults['exercise2'].correct,
+                            total: taskResults['exercise2'].total,
+                            completed: taskResults['exercise2'].completed
+                        },
+                        {
+                            name: taskResults['exercise3'].name,
+                            correct: taskResults['exercise3'].correct,
+                            total: taskResults['exercise3'].total,
+                            completed: taskResults['exercise3'].completed
+                        },
+                        {
+                            name: taskResults['test'].name,
+                            correct: taskResults['test'].correct,
+                            total: taskResults['test'].total,
+                            completed: taskResults['test'].completed
+                        }
+                    ];
+
+                    // Вычисляем общий процент только по пройденным заданиям
+                    let totalCorrect = 0;
+                    let totalQuestions = 0;
+                    taskResultsArray.forEach(task => {
+                        if (task.completed) {
+                            totalCorrect += task.correct;
+                            totalQuestions += task.total;
+                        }
+                    });
+                    const totalPercentage = totalQuestions > 0 ? Math.round((totalCorrect / totalQuestions) * 100) : 0;
+
+                    // Сохраняем результат упражнения с детализацией по заданиям
+                    await ExerciseService.saveResult(user.uid, 'exercise-01-vowels-roots', {
+                        score: totalPercentage,
+                        answers: [],
+                        mistakes: [],
+                        taskResults: taskResultsArray
+                    });
+
+                    // Обновляем навык
+                    await SkillsService.updateSkillProgress(
+                        user.uid, 
+                        'vowels-checked', 
+                        correct, 
+                        total
+                    );
+
+                    // Отправляем уведомление об обновлении
+                    notifySkillUpdate(user.uid, 'vowels-checked');
+                    
+                    // Обновляем индикацию на успешное сохранение
+                    savingIndicator.style.background = '#e8f5e9';
+                    savingIndicator.style.color = '#2e7d32';
+                    savingIndicator.textContent = '✅ Прогресс сохранён!';
+                    
+                    console.log(`✅ Прогресс сохранён: ${correct}/${total}`);
+                } catch (error) {
+                    console.error('Ошибка сохранения прогресса:', error);
+                    savingIndicator.style.background = '#ffebee';
+                    savingIndicator.style.color = '#c62828';
+                    savingIndicator.textContent = '⚠️ Ошибка сохранения';
+                }
+            }
+
+            // Если это итоговый тест, добавляем кнопки навигации
+            if (resultId === 'resultTest') {
+                if (percentage >= 70) {
+                    resultDiv.innerHTML += `
+                        <div style="margin-top: 15px; padding: 10px; background: #e8f5e9; border-radius: 5px; color: #2e7d32;">
+                            ✅ Прогресс сохранён! Навык обновлён.
+                        </div>
+                        <div style="margin-top: 20px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                            <button class="check-btn" onclick="window.location.href='lesson-01-vowels-checked.html'" style="background: #757575;">
+                                ⬅️ Вернуться к теории
+                            </button>
+                            <button class="check-btn" onclick="window.location.href='lesson-02-vowels-unchecked.html'" style="background: #2196F3;">
+                                ➡️ Следующий урок
+                            </button>
+                            <button class="check-btn" onclick="window.location.href='../../index.html'" style="background: #4caf50;">
+                                🏠 На главную
+                            </button>
+                        </div>
+                    `;
+                } else {
+                    resultDiv.innerHTML += `
+                        <div style="margin-top: 15px; padding: 10px; background: #fff3e0; border-radius: 5px; color: #e65100;">
+                            ⚠️ Для лучшего результата нужно набрать минимум 70%
+                        </div>
+                        <div style="margin-top: 20px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                            <button class="check-btn" onclick="resetTest()" style="background: #ff9800;">
+                                🔄 Попробовать снова
+                            </button>
+                            <button class="check-btn" onclick="window.location.href='lesson-01-vowels-checked.html'" style="background: #757575;">
+                                ⬅️ Вернуться к теории
+                            </button>
+                            <button class="check-btn" onclick="window.location.href='../../index.html'" style="background: #4caf50;">
+                                🏠 На главную
+                            </button>
+                        </div>
+                    `;
+                }
+            }
+        }
+
+        // Делаем функцию глобальной
+        window.showResult = showResult;
+
+        // Обновление прогресса
+        function updateProgress() {
+            const totalQuestions = exercise1Data.length + exercise2Data.length + exercise3Data.length + testData.length;
+            let answeredQuestions = 0;
+
+            // Подсчет заполненных ответов
+            exercise1Data.forEach((_, index) => {
+                if (document.getElementById(`ex1_${index}`).value.trim()) answeredQuestions++;
+            });
+            exercise2Data.forEach((_, index) => {
+                if (document.getElementById(`ex2_${index}`).value.trim()) answeredQuestions++;
+            });
+            exercise3Data.forEach((_, index) => {
+                if (document.getElementById(`ex3_${index}`).value.trim()) answeredQuestions++;
+            });
+            testData.forEach((_, index) => {
+                if (document.querySelector(`input[name="test_${index}"]:checked`)) answeredQuestions++;
+            });
+
+            const percentage = Math.round((answeredQuestions / totalQuestions) * 100);
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = percentage + '%';
+            progressBar.textContent = percentage + '%';
+        }
+
+        // Инициализация при загрузке страницы
+        window.onload = function() {
+            initExercise1();
+            initExercise2();
+            initExercise3();
+            initTest();
+            updateProgress();
+        };
+
+        // Экспортируем функции в глобальную область
+        window.checkExercise1 = checkExercise1;
+        window.checkExercise2 = checkExercise2;
+        window.checkExercise3 = checkExercise3;
+        window.checkTest = checkTest;
+        window.showAnswers1 = showAnswers1;
+        window.showAnswers2 = showAnswers2;
+        window.showAnswers3 = showAnswers3;
+        window.resetExercise1 = resetExercise1;
+        window.resetExercise2 = resetExercise2;
+        window.resetExercise3 = resetExercise3;
+        window.resetTest = resetTest;
+    </script>
+
+    <script type="module">
+        import { AuthService } from '../../src/firebase/services/authService.js';
+        import SkillsService from '../../src/firebase/services/skillsService.js';
+        import { ExerciseService } from '../../src/firebase/services/exerciseService.js';
+        import { ProgressService } from '../../src/firebase/services/progressService.js';
+
+        let currentUser = null;
+
+        // Проверка авторизации
+        AuthService.onAuthChange((user) => {
+            currentUser = user;
+            if (user) {
+                document.getElementById('userInfo').style.display = 'block';
+                document.getElementById('userEmail').textContent = user.email;
+                console.log('Пользователь авторизован:', user.email);
+            } else {
+                console.log('Пользователь не авторизован');
+            }
+        });
+
+        // Функция сохранения результатов в Firebase
+        async function saveResultsToFirebase() {
+            if (!currentUser) {
+                console.log('Пользователь не авторизован, результаты не сохранены');
+                return;
+            }
+
+            try {
+                // Подсчитываем общую статистику
+                let totalQuestions = 0;
+                let correctAnswers = 0;
+
+                // Упражнение 1
+                const ex1Results = window.lastExercise1Results || { correct: 0, total: 0 };
+                totalQuestions += ex1Results.total;
+                correctAnswers += ex1Results.correct;
+
+                // Упражнение 2
+                const ex2Results = window.lastExercise2Results || { correct: 0, total: 0 };
+                totalQuestions += ex2Results.total;
+                correctAnswers += ex2Results.correct;
+
+                // Упражнение 3
+                const ex3Results = window.lastExercise3Results || { correct: 0, total: 0 };
+                totalQuestions += ex3Results.total;
+                correctAnswers += ex3Results.correct;
+
+                // Тест
+                const testResults = window.lastTestResults || { correct: 0, total: 0 };
+                totalQuestions += testResults.total;
+                correctAnswers += testResults.correct;
+
+                if (totalQuestions === 0) {
+                    console.log('Нет результатов для сохранения');
+                    return;
+                }
+
+                const score = Math.round((correctAnswers / totalQuestions) * 100);
+
+                console.log('Сохранение результатов:', {
+                    correct: correctAnswers,
+                    total: totalQuestions,
+                    score: score
+                });
+
+                // Сохраняем результат упражнения
+                const exerciseResult = await ExerciseService.saveResult(
+                    currentUser.uid,
+                    'exercise-01-vowels-roots',
+                    {
+                        score: score,
+                        correctAnswers: correctAnswers,
+                        totalQuestions: totalQuestions,
+                        details: {
+                            exercise1: ex1Results,
+                            exercise2: ex2Results,
+                            exercise3: ex3Results,
+                            test: testResults
+                        }
+                    }
+                );
+
+                if (exerciseResult.success) {
+                    console.log('✅ Результат упражнения сохранён');
+                } else {
+                    console.error('❌ Ошибка сохранения упражнения:', exerciseResult.error);
+                }
+
+                // Обновляем прогресс урока
+                const progressResult = await ProgressService.saveProgress(
+                    currentUser.uid,
+                    'lesson-01-vowels-checked',
+                    {
+                        completed: score >= 80,
+                        score: score,
+                        exerciseCompleted: true
+                    }
+                );
+
+                if (progressResult.success) {
+                    console.log('✅ Прогресс урока обновлён');
+                } else {
+                    console.error('❌ Ошибка обновления прогресса:', progressResult.error);
+                }
+
+                // Обновляем навык
+                const skillResult = await SkillsService.updateSkillProgress(
+                    currentUser.uid,
+                    'vowels-checked',
+                    correctAnswers,
+                    totalQuestions
+                );
+
+                if (skillResult.success) {
+                    console.log('✅ Навык обновлён:', skillResult.data);
+                    
+                    // Показываем уведомление о сохранении
+                    const notification = document.createElement('div');
+                    notification.style.cssText = `
+                        position: fixed;
+                        top: 20px;
+                        right: 20px;
+                        background: #4caf50;
+                        color: white;
+                        padding: 15px 25px;
+                        border-radius: 8px;
+                        box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+                        z-index: 10000;
+                        animation: slideIn 0.3s ease;
+                    `;
+                    notification.innerHTML = `
+                        <strong>✅ Результаты сохранены!</strong><br>
+                        <span style="font-size: 0.9em;">Балл: ${score}% | Уровень навыка: ${skillResult.data.level}</span>
+                    `;
+                    document.body.appendChild(notification);
+
+                    setTimeout(() => {
+                        notification.style.opacity = '0';
+                        notification.style.transition = 'opacity 0.3s';
+                        setTimeout(() => notification.remove(), 300);
+                    }, 4000);
+                } else {
+                    console.error('❌ Ошибка обновления навыка:', skillResult.error);
+                }
+
+            } catch (error) {
+                console.error('❌ Ошибка при сохранении результатов:', error);
+            }
+        }
+
+        // Переопределяем функцию checkTest для сохранения результатов
+        const originalCheckTest = window.checkTest;
+        window.checkTest = function() {
+            const result = originalCheckTest();
+            
+            // Сохраняем результаты теста
+            const testData = window.testData || [];
+            let correct = 0;
+            testData.forEach((question, index) => {
+                const selected = document.querySelector(`input[name="test_${index}"]:checked`);
+                if (selected && parseInt(selected.value) === question.correct) {
+                    correct++;
+                }
+            });
+            
+            window.lastTestResults = {
+                correct: correct,
+                total: testData.length
+            };
+
+            // Сохраняем в Firebase
+            setTimeout(() => saveResultsToFirebase(), 500);
+            
+            return result;
+        };
+
+        // Переопределяем функции проверки упражнений
+        const originalCheckEx1 = window.checkExercise1;
+        window.checkExercise1 = function() {
+            const result = originalCheckEx1();
+            
+            const data = window.exercise1Data || [];
+            let correct = 0;
+            data.forEach((item, index) => {
+                const input = document.getElementById(`ex1_${index}`);
+                if (input && input.value.trim().toLowerCase() === item.answer.toLowerCase()) {
+                    correct++;
+                }
+            });
+            
+            window.lastExercise1Results = {
+                correct: correct,
+                total: data.length
+            };
+            
+            return result;
+        };
+
+        const originalCheckEx2 = window.checkExercise2;
+        window.checkExercise2 = function() {
+            const result = originalCheckEx2();
+            
+            const data = window.exercise2Data || [];
+            let correct = 0;
+            data.forEach((item, index) => {
+                const input = document.getElementById(`ex2_${index}`);
+                if (input && input.value.trim().toLowerCase() === item.correct.toLowerCase()) {
+                    correct++;
+                }
+            });
+            
+            window.lastExercise2Results = {
+                correct: correct,
+                total: data.length
+            };
+            
+            return result;
+        };
+
+        const originalCheckEx3 = window.checkExercise3;
+        window.checkExercise3 = function() {
+            const result = originalCheckEx3();
+            
+            const data = window.exercise3Data || [];
+            let correct = 0;
+            data.forEach((item, index) => {
+                const input = document.getElementById(`ex3_${index}`);
+                if (input && input.value.trim() !== '') {
+                    const words = input.value.split(',').map(w => w.trim().toLowerCase());
+                    const correctWords = [item.word1.toLowerCase(), item.word2.toLowerCase()];
+                    if (words.every(w => correctWords.includes(w)) && words.length === 2) {
+                        correct++;
+                    }
+                }
+            });
+            
+            window.lastExercise3Results = {
+                correct: correct,
+                total: data.length
+            };
+            
+            return result;
+        };
+
+        // Добавляем CSS для анимации
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from {
+                    transform: translateX(400px);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Экспорт для отладки
+        window.saveResultsToFirebase = saveResultsToFirebase;
+        window.currentUser = () => currentUser;
+    </script>
+</body>
+</html>

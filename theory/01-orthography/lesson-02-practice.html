@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практические задания - Урок 2: Непроверяемые гласные</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            padding: 40px;
+        }
+
+        h1 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 2em;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 30px;
+            background: #f0f0f0;
+            border-radius: 15px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
+        .exercise {
+            background: #f9f9f9;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            border-left: 5px solid #667eea;
+        }
+
+        .exercise h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .exercise-description {
+            color: #666;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .question {
+            background: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 2px solid #e0e0e0;
+            transition: border-color 0.3s;
+        }
+
+        .question:hover {
+            border-color: #667eea;
+        }
+
+        .question-text {
+            margin-bottom: 10px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        input.correct {
+            border-color: #4CAF50;
+            background-color: #e8f5e9;
+        }
+
+        input.incorrect {
+            border-color: #f44336;
+            background-color: #ffebee;
+        }
+
+        .radio-group label {
+            display: block;
+            padding: 10px;
+            margin-bottom: 8px;
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .radio-group label:hover {
+            background: #f5f5f5;
+            border-color: #667eea;
+        }
+
+        .radio-group input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        .radio-group label.correct {
+            background: #e8f5e9;
+            border-color: #4CAF50;
+        }
+
+        .radio-group label.incorrect {
+            background: #ffebee;
+            border-color: #f44336;
+        }
+
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+
+        .feedback.show {
+            display: block;
+        }
+
+        .feedback.correct {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border-left: 4px solid #4CAF50;
+        }
+
+        .feedback.incorrect {
+            background: #ffebee;
+            color: #c62828;
+            border-left: 4px solid #f44336;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        button {
+            flex: 1;
+            min-width: 150px;
+            padding: 15px 30px;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .check-btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+        }
+
+        .check-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .reset-btn {
+            background: #f44336;
+            color: white;
+        }
+
+        .reset-btn:hover {
+            background: #d32f2f;
+            transform: translateY(-2px);
+        }
+
+        .show-answer-btn {
+            background: #4CAF50;
+            color: white;
+        }
+
+        .show-answer-btn:hover {
+            background: #388E3C;
+            transform: translateY(-2px);
+        }
+
+        .result-box {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .result-box.show {
+            display: block;
+        }
+
+        .result-box h3 {
+            font-size: 1.8em;
+            margin-bottom: 10px;
+        }
+
+        .result-box p {
+            font-size: 1.2em;
+        }
+
+        .score {
+            font-size: 2.5em;
+            font-weight: bold;
+            margin: 15px 0;
+        }
+
+        .emoji {
+            font-size: 3em;
+            margin: 10px 0;
+        }
+
+        .answer-key {
+            background: #fff3cd;
+            border: 2px solid #ffc107;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .answer-key.show {
+            display: block;
+        }
+
+        .answer-key h4 {
+            color: #856404;
+            margin-bottom: 10px;
+        }
+
+        .answer-key-content {
+            color: #856404;
+            line-height: 1.8;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            padding: 12px 25px;
+            background: #757575;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            background: #616161;
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.5em;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📝 Практические задания</h1>
+        <p class="subtitle">Урок 2: Непроверяемые гласные в корне слова</p>
+
+        <div class="progress-bar">
+            <div class="progress-fill" id="progressBar">0%</div>
+        </div>
+
+        <!-- Упражнение 1: Вставить пропущенные буквы -->
+        <div class="exercise" id="exercise1">
+            <h2>Упражнение 1: Вставьте пропущенные буквы</h2>
+            <p class="exercise-description">Вставьте пропущенные гласные в словарные слова. Если сомневаетесь, проверьте по орфографическому словарю.</p>
+
+            <div class="question">
+                <p class="question-text">1. к_р_ндаш</p>
+                <input type="text" data-answer="а,а" placeholder="Введите буквы через запятую">
+                <div class="feedback"></div>
+            </div>
+
+            <div class="question">
+                <p class="question-text">2. в_г_н</p>
+                <input type="text" data-answer="а,о" placeholder="Введите буквы через запятую">
+                <div class="feedback"></div>
+            </div>
+
+            <div class="question">
+                <p class="question-text">3. с_б_ка</p>
+                <input type="text" data-answer="о,а" placeholder="Введите буквы через запятую">
+                <div class="feedback"></div>
+            </div>
+
+            <div class="question">
+                <p class="question-text">4. к_р_ва</p>
+                <input type="text" data-answer="о,о" placeholder="Введите буквы через запятую">
+                <div class="feedback"></div>
+            </div>
+
+            <div class="question">
+                <p class="question-text">5. к_п_ста</p>
+                <input type="text" data-answer="а,у" placeholder="Введите буквы через запятую">
+                <div class="feedback"></div>
+            </div>
+
+            <div class="button-group">
+                <button class="check-btn" onclick="checkExercise(1)">Проверить</button>
+                <button class="show-answer-btn" onclick="showAnswers(1)">Показать ответы</button>
+                <button class="reset-btn" onclick="resetExercise(1)">Сбросить</button>
+            </div>
+
+            <div class="answer-key" id="answers1">
+                <h4>Правильные ответы:</h4>
+                <div class="answer-key-content">
+                    1. к<strong>а</strong>р<strong>а</strong>ндаш<br>
+                    2. в<strong>а</strong>г<strong>о</strong>н<br>
+                    3. с<strong>о</strong>б<strong>а</strong>ка<br>
+                    4. к<strong>о</strong>р<strong>о</strong>ва<br>
+                    5. к<strong>а</strong>п<strong>у</strong>ста
+                </div>
+            </div>
+        </div>
+
+        <!-- Упражнение 2: Выбрать правильный вариант -->
+        <div class="exercise" id="exercise2">
+            <h2>Упражнение 2: Выберите правильный вариант</h2>
+            <p class="exercise-description">Выберите правильное написание словарного слова.</p>
+
+            <div class="question">
+                <p class="question-text">1. Как правильно пишется?</p>
+                <div class="radio-group">
+                    <label><input type="radio" name="q1" value="а"> варона</label>
+                    <label><input type="radio" name="q1" value="б"> ворона</label>
+                    <label><input type="radio" name="q1" value="в"> вароно</label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+
+            <div class="question">
+                <p class="question-text">2. Как правильно пишется?</p>
+                <div class="radio-group">
+                    <label><input type="radio" name="q2" value="а"> карова</label>
+                    <label><input type="radio" name="q2" value="б"> корава</label>
+                    <label><input type="radio" name="q2" value="в"> картофель</label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+
+            <div class="question">
+                <p class="question-text">3. Как правильно пишется?</p>
+                <div class="radio-group">
+                    <label><input type="radio" name="q3" value="а"> варобей</label>
+                    <label><input type="radio" name="q3" value="б"> воробей</label>
+                    <label><input type="radio" name="q3" value="в"> ворабей</label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+
+            <div class="question">
+                <p class="question-text">4. Как правильно пишется?</p>
+                <div class="radio-group">
+                    <label><input type="radio" name="q4" value="а"> машына</label>
+                    <label><input type="radio" name="q4" value="б"> мошина</label>
+                    <label><input type="radio" name="q4" value="в"> машина</label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+
+            <div class="question">
+                <p class="question-text">5. Как правильно пишется?</p>
+                <div class="radio-group">
+                    <label><input type="radio" name="q5" value="а"> пинал</label>
+                    <label><input type="radio" name="q5" value="б"> пенал</label>
+                    <label><input type="radio" name="q5" value="в"> пинол</label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+
+            <div class="button-group">
+                <button class="check-btn" onclick="checkExercise(2)">Проверить</button>
+                <button class="show-answer-btn" onclick="showAnswers(2)">Показать ответы</button>
+                <button class="reset-btn" onclick="resetExercise(2)">Сбросить</button>
+            </div>
+
+            <div class="answer-key" id="answers2">
+                <h4>Правильные ответы:</h4>
+                <div class="answer-key-content">
+                    1. <strong>б) ворона</strong> (с двумя О)<br>
+                    2. <strong>в) картофель</strong><br>
+                    3. <strong>б) воробей</strong><br>
+                    4. <strong>в) машина</strong><br>
+                    5. <strong>б) пенал</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Упражнение 3: Найти ошибки -->
+        <div class="exercise" id="exercise3">
+            <h2>Упражнение 3: Найдите и исправьте ошибки</h2>
+            <p class="exercise-description">Найдите словарные слова с ошибками и исправьте их.</p>
+
+            <div class="question">
+                <p class="question-text">1. В огороде растут огурцы, помидоры и капуста.</p>
+                <div class="radio-group">
+                    <label><input type="radio" name="q6" value="а"> Ошибок нет</label>
+                    <label><input type="radio" name="q6" value="б"> огурцы → огурцы (верно)</label>
+                    <label><input type="radio" name="q6" value="в"> помедоры → помидоры</label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+
+            <div class="question">
+                <p class="question-text">2. Собока и карова паслись на лугу.</p>
+                <div class="radio-group">
+                    <label><input type="radio" name="q7" value="а"> Ошибок нет</label>
+                    <label><input type="radio" name="q7" value="б"> собока → собака, карова → корова</label>
+                    <label><input type="radio" name="q7" value="в"> только карова → корова</label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+
+            <div class="question">
+                <p class="question-text">3. Я положил карандаш и пенал в портфель.</p>
+                <div class="radio-group">
+                    <label><input type="radio" name="q8" value="а"> Ошибок нет</label>
+                    <label><input type="radio" name="q8" value="б"> карандаш → корандаш</label>
+                    <label><input type="radio" name="q8" value="в"> пенал → пинал</label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+
+            <div class="question">
+                <p class="question-text">4. Варона сидела на биризе.</p>
+                <div class="radio-group">
+                    <label><input type="radio" name="q9" value="а"> варона → ворона, биризе → берёзе</label>
+                    <label><input type="radio" name="q9" value="б"> только варона → ворона</label>
+                    <label><input type="radio" name="q9" value="в"> Ошибок нет</label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+
+            <div class="question">
+                <p class="question-text">5. Мы поехали на вагзал на машине.</p>
+                <div class="radio-group">
+                    <label><input type="radio" name="q10" value="а"> вагзал → вокзал</label>
+                    <label><input type="radio" name="q10" value="б"> машине → мошине</label>
+                    <label><input type="radio" name="q10" value="в"> Ошибок нет</label>
+                </div>
+                <div class="feedback"></div>
+            </div>
+
+            <div class="button-group">
+                <button class="check-btn" onclick="checkExercise(3)">Проверить</button>
+                <button class="show-answer-btn" onclick="showAnswers(3)">Показать ответы</button>
+                <button class="reset-btn" onclick="resetExercise(3)">Сбросить</button>
+            </div>
+
+            <div class="answer-key" id="answers3">
+                <h4>Правильные ответы:</h4>
+                <div class="answer-key-content">
+                    1. <strong>а) Ошибок нет</strong><br>
+                    2. <strong>б) собока → собака, карова → корова</strong><br>
+                    3. <strong>а) Ошибок нет</strong><br>
+                    4. <strong>а) варона → ворона, биризе → берёзе</strong><br>
+                    5. <strong>а) вагзал → вокзал</strong>
+                </div>
+            </div>
+        </div>
+
+        <!-- Итоговый тест -->
+        <div class="exercise" id="finalTest">
+            <h2>🎓 Итоговый тест</h2>
+            <p class="exercise-description">Проверьте свои знания! Для успешного прохождения нужно набрать не менее 70%.</p>
+
+            <div class="question">
+                <p class="question-text">1. Словарные слова — это:</p>
+                <div class="radio-group">
+                    <label><input type="radio" name="test1" value="а"> Слова, которые можно проверить</label>
+                    <label><input type="radio" name="test1" value="б"> Слова с непроверяемыми гласными</label>
+                    <label><input type="radio" name="test1" value="в"> Слова из словаря синонимов</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="question-text">2. Вставьте буквы: к_р_ва</p>
+                <div class="radio-group">
+                    <label><input type="radio" name="test2" value="а"> а, о</label>
+                    <label><input type="radio" name="test2" value="б"> о, о</label>
+                    <label><input type="radio" name="test2" value="в"> о, а</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="question-text">3. Вставьте буквы: с_б_ка</p>
+                <div class="radio-group">
+                    <label><input type="radio" name="test3" value="а"> а, о</label>
+                    <label><input type="radio" name="test3" value="б"> о, о</label>
+                    <label><input type="radio" name="test3" value="в"> о, а</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="question-text">4. Какое слово написано правильно?</p>
+                <div class="radio-group">
+                    <label><input type="radio" name="test4" value="а"> варона</label>
+                    <label><input type="radio" name="test4" value="б"> ворона</label>
+                    <label><input type="radio" name="test4" value="в"> варано</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="question-text">5. Какое слово написано правильно?</p>
+                <div class="radio-group">
+                    <label><input type="radio" name="test5" value="а"> карандаш</label>
+                    <label><input type="radio" name="test5" value="б"> корандаш</label>
+                    <label><input type="radio" name="test5" value="в"> карондаш</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="question-text">6. Вставьте буквы: в_г_н</p>
+                <div class="radio-group">
+                    <label><input type="radio" name="test6" value="а"> о, а</label>
+                    <label><input type="radio" name="test6" value="б"> а, о</label>
+                    <label><input type="radio" name="test6" value="в"> а, а</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="question-text">7. Где нужно проверять словарные слова?</p>
+                <div class="radio-group">
+                    <label><input type="radio" name="test7" value="а"> В орфографическом словаре</label>
+                    <label><input type="radio" name="test7" value="б"> У друзей</label>
+                    <label><input type="radio" name="test7" value="в"> Не нужно проверять</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="question-text">8. Какое слово написано правильно?</p>
+                <div class="radio-group">
+                    <label><input type="radio" name="test8" value="а"> машына</label>
+                    <label><input type="radio" name="test8" value="б"> машина</label>
+                    <label><input type="radio" name="test8" value="в"> мошина</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="question-text">9. Вставьте буквы: к_п_ста</p>
+                <div class="radio-group">
+                    <label><input type="radio" name="test9" value="а"> о, у</label>
+                    <label><input type="radio" name="test9" value="б"> а, у</label>
+                    <label><input type="radio" name="test9" value="в"> а, о</label>
+                </div>
+            </div>
+
+            <div class="question">
+                <p class="question-text">10. Какое слово написано правильно?</p>
+                <div class="radio-group">
+                    <label><input type="radio" name="test10" value="а"> варобей</label>
+                    <label><input type="radio" name="test10" value="б"> воробей</label>
+                    <label><input type="radio" name="test10" value="в"> ворабей</label>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button class="check-btn" onclick="checkFinalTest()">Проверить тест</button>
+                <button class="reset-btn" onclick="resetExercise('final')">Сбросить</button>
+            </div>
+        </div>
+
+        <div class="result-box" id="resultBox"></div>
+
+        <div class="nav-buttons">
+            <a href="lesson-02-vowels-unchecked.html" class="nav-btn">⬅️ К теории</a>
+            <a href="../../index.html" class="nav-btn">🏠 На главную</a>
+            <a href="../../skills-matrix.html" class="nav-btn">📊 Навыки</a>
+        </div>
+    </div>
+
+    <script type="module">
+        import { ExerciseService } from '../../src/firebase/services/exerciseService.js';
+        import { AuthService } from '../../src/firebase/services/authService.js';
+        import SkillsService from '../../src/firebase/services/skillsService.js';
+
+        // Правильные ответы для упражнений
+        const exercise2Answers = { q1: 'б', q2: 'в', q3: 'б', q4: 'в', q5: 'б' };
+        const exercise3Answers = { q6: 'а', q7: 'б', q8: 'а', q9: 'а', q10: 'а' };
+        const testAnswers = {
+            test1: 'б', test2: 'б', test3: 'в', test4: 'б', test5: 'а',
+            test6: 'б', test7: 'а', test8: 'б', test9: 'б', test10: 'б'
+        };
+
+        let completedExercises = 0;
+        const totalExercises = 4;
+
+        function updateProgress() {
+            const percentage = Math.round((completedExercises / totalExercises) * 100);
+            const progressBar = document.getElementById('progressBar');
+            progressBar.style.width = percentage + '%';
+            progressBar.textContent = percentage + '%';
+        }
+
+        // Проверка упражнения 1 (ввод текста)
+        window.checkExercise = function(exerciseNum) {
+            if (exerciseNum === 1) {
+                const questions = document.querySelectorAll('#exercise1 .question');
+                let correct = 0;
+
+                questions.forEach(question => {
+                    const input = question.querySelector('input[type="text"]');
+                    const feedback = question.querySelector('.feedback');
+                    const userAnswer = input.value.trim().toLowerCase().replace(/\s/g, '');
+                    const correctAnswer = input.dataset.answer.replace(/\s/g, '');
+
+                    if (userAnswer === correctAnswer) {
+                        input.classList.add('correct');
+                        input.classList.remove('incorrect');
+                        feedback.className = 'feedback correct show';
+                        feedback.textContent = '✓ Правильно!';
+                        correct++;
+                    } else {
+                        input.classList.add('incorrect');
+                        input.classList.remove('correct');
+                        feedback.className = 'feedback incorrect show';
+                        feedback.textContent = '✗ Неправильно. Правильный ответ: ' + input.dataset.answer;
+                    }
+                });
+
+                if (correct === questions.length) {
+                    completedExercises = Math.max(completedExercises, 1);
+                    updateProgress();
+                }
+            } else if (exerciseNum === 2) {
+                checkRadioExercise('exercise2', exercise2Answers, 2);
+            } else if (exerciseNum === 3) {
+                checkRadioExercise('exercise3', exercise3Answers, 3);
+            }
+        };
+
+        function checkRadioExercise(exerciseId, answers, exerciseNum) {
+            const questions = document.querySelectorAll(`#${exerciseId} .question`);
+            let correct = 0;
+
+            questions.forEach((question, index) => {
+                const radios = question.querySelectorAll('input[type="radio"]');
+                const feedback = question.querySelector('.feedback');
+                let selected = null;
+
+                radios.forEach(radio => {
+                    if (radio.checked) {
+                        selected = radio.value;
+                    }
+                    radio.parentElement.classList.remove('correct', 'incorrect');
+                });
+
+                if (!selected) {
+                    feedback.className = 'feedback incorrect show';
+                    feedback.textContent = '⚠ Выберите вариант ответа';
+                    return;
+                }
+
+                const correctAnswer = answers[radios[0].name];
+
+                radios.forEach(radio => {
+                    if (radio.value === correctAnswer) {
+                        radio.parentElement.classList.add('correct');
+                    } else if (radio.checked) {
+                        radio.parentElement.classList.add('incorrect');
+                    }
+                });
+
+                if (selected === correctAnswer) {
+                    feedback.className = 'feedback correct show';
+                    feedback.textContent = '✓ Правильно!';
+                    correct++;
+                } else {
+                    feedback.className = 'feedback incorrect show';
+                    feedback.textContent = '✗ Неправильно';
+                }
+            });
+
+            if (correct === questions.length) {
+                completedExercises = Math.max(completedExercises, exerciseNum);
+                updateProgress();
+            }
+        }
+
+        window.showAnswers = function(exerciseNum) {
+            document.getElementById('answers' + exerciseNum).classList.add('show');
+        };
+
+        window.resetExercise = function(exerciseNum) {
+            if (exerciseNum === 'final') {
+                const questions = document.querySelectorAll('#finalTest .question');
+                questions.forEach(question => {
+                    const radios = question.querySelectorAll('input[type="radio"]');
+                    radios.forEach(radio => {
+                        radio.checked = false;
+                        radio.parentElement.classList.remove('correct', 'incorrect');
+                    });
+                });
+                document.getElementById('resultBox').classList.remove('show');
+            } else {
+                const exercise = document.getElementById('exercise' + exerciseNum);
+                const inputs = exercise.querySelectorAll('input');
+                const feedbacks = exercise.querySelectorAll('.feedback');
+                const answerKey = document.getElementById('answers' + exerciseNum);
+
+                inputs.forEach(input => {
+                    if (input.type === 'text') {
+                        input.value = '';
+                        input.classList.remove('correct', 'incorrect');
+                    } else if (input.type === 'radio') {
+                        input.checked = false;
+                        input.parentElement.classList.remove('correct', 'incorrect');
+                    }
+                });
+
+                feedbacks.forEach(feedback => {
+                    feedback.classList.remove('show');
+                });
+
+                if (answerKey) {
+                    answerKey.classList.remove('show');
+                }
+            }
+        };
+
+        window.checkFinalTest = async function() {
+            const questions = document.querySelectorAll('#finalTest .question');
+            let correct = 0;
+            let answered = 0;
+
+            questions.forEach((question, index) => {
+                const radios = question.querySelectorAll('input[type="radio"]');
+                let selected = null;
+
+                radios.forEach(radio => {
+                    if (radio.checked) {
+                        selected = radio.value;
+                        answered++;
+                    }
+                    radio.parentElement.classList.remove('correct', 'incorrect');
+                });
+
+                if (selected) {
+                    const correctAnswer = testAnswers[radios[0].name];
+
+                    radios.forEach(radio => {
+                        if (radio.value === correctAnswer) {
+                            radio.parentElement.classList.add('correct');
+                        } else if (radio.checked) {
+                            radio.parentElement.classList.add('incorrect');
+                        }
+                    });
+
+                    if (selected === correctAnswer) {
+                        correct++;
+                    }
+                }
+            });
+
+            if (answered < questions.length) {
+                alert('⚠️ Ответьте на все вопросы перед проверкой!');
+                return;
+            }
+
+            const percentage = Math.round((correct / questions.length) * 100);
+            const passed = percentage >= 70;
+
+            const resultBox = document.getElementById('resultBox');
+            resultBox.className = 'result-box show';
+            resultBox.innerHTML = `
+                <div class="emoji">${passed ? '🎉' : '😔'}</div>
+                <h3>${passed ? 'Поздравляем!' : 'Попробуйте ещё раз'}</h3>
+                <div class="score">${correct} / ${questions.length}</div>
+                <p>Процент правильных ответов: <strong>${percentage}%</strong></p>
+                <p>${passed 
+                    ? 'Отличная работа! Вы успешно освоили тему словарных слов!' 
+                    : 'Для успешного прохождения нужно набрать не менее 70%. Повторите материал и попробуйте снова.'
+                }</p>
+            `;
+
+            if (passed) {
+                completedExercises = totalExercises;
+                updateProgress();
+
+                // Сохранение результатов в Firebase
+                try {
+                    const user = AuthService.getCurrentUser();
+                    if (user) {
+                        // Сохраняем результат упражнения
+                        await ExerciseService.saveResult(user.uid, 'exercise-02-vowels-dictionary', {
+                            score: percentage,
+                            answers: [],
+                            mistakes: []
+                        });
+
+                        // Обновление навыка
+                        await SkillsService.updateSkillProgress(user.uid, 'vowels-unchecked', correct, questions.length);
+                        
+                        // Отправляем событие об обновлении навыков для обновления матрицы навыков
+                        try {
+                            const channel = new BroadcastChannel('skills-update');
+                            channel.postMessage({
+                                type: 'SKILL_UPDATED',
+                                skillId: 'vowels-unchecked',
+                                userId: user.uid,
+                                timestamp: Date.now()
+                            });
+                            channel.close();
+                            console.log('📡 Отправлено событие обновления навыков');
+                        } catch (e) {
+                            console.log('BroadcastChannel не поддерживается:', e);
+                        }
+                        
+                        console.log('✅ Результаты теста сохранены в Firebase');
+                        
+                        // Добавляем сообщение об успешном сохранении
+                        resultBox.innerHTML += `
+                            <div style="margin-top: 15px; padding: 10px; background: #e8f5e9; border-radius: 5px; color: #2e7d32;">
+                                ✅ Прогресс сохранён! Навык "Непроверяемые гласные" обновлён.
+                            </div>
+                            <div style="margin-top: 20px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                                <button class="check-btn" onclick="window.location.href='lesson-02-vowels-unchecked.html'" style="background: #757575; padding: 10px 20px; border: none; border-radius: 8px; color: white; font-weight: 600; cursor: pointer;">
+                                    ⬅️ Вернуться к теории
+                                </button>
+                                <button class="check-btn" onclick="window.location.href='../../index.html'" style="background: #4caf50; padding: 10px 20px; border: none; border-radius: 8px; color: white; font-weight: 600; cursor: pointer;">
+                                    🏠 На главную
+                                </button>
+                                <button class="check-btn" onclick="window.location.href='../../skills-matrix.html'" style="background: #2196F3; padding: 10px 20px; border: none; border-radius: 8px; color: white; font-weight: 600; cursor: pointer;">
+                                    📊 Посмотреть навыки
+                                </button>
+                            </div>
+                        `;
+                    } else {
+                        console.warn('⚠️ Пользователь не авторизован, результаты не сохранены');
+                        resultBox.innerHTML += `
+                            <div style="margin-top: 15px; padding: 10px; background: #fff3e0; border-radius: 5px; color: #e65100;">
+                                ⚠️ Войдите в систему, чтобы сохранить результаты
+                            </div>
+                        `;
+                    }
+                } catch (error) {
+                    console.error('❌ Ошибка сохранения результатов:', error);
+                    alert('⚠️ Произошла ошибка при сохранении: ' + error.message);
+                }
+            } else {
+                // Если не прошёл тест
+                resultBox.innerHTML += `
+                    <div style="margin-top: 20px; display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+                        <button class="check-btn" onclick="resetExercise('final')" style="background: #ff9800; padding: 10px 20px; border: none; border-radius: 8px; color: white; font-weight: 600; cursor: pointer;">
+                            🔄 Попробовать снова
+                        </button>
+                        <button class="check-btn" onclick="window.location.href='lesson-02-vowels-unchecked.html'" style="background: #757575; padding: 10px 20px; border: none; border-radius: 8px; color: white; font-weight: 600; cursor: pointer;">
+                            📖 Вернуться к теории
+                        </button>
+                    </div>
+                `;
+            }
+
+            resultBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        };
+
+        // Инициализация
+        updateProgress();
+    </script>
+</body>
+</html>

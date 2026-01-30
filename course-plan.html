@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>План курса - Курс русского языка</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Шапка */
+        .header {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.2em;
+        }
+
+        /* Кнопка назад */
+        .nav-panel {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-btn {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Контент */
+        .module {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .module-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .module-icon {
+            font-size: 3em;
+        }
+
+        .module-title {
+            flex: 1;
+        }
+
+        .module-title h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+
+        .module-title p {
+            color: #666;
+            font-size: 1em;
+        }
+
+        /* Футер */
+        .footer {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .module {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Шапка -->
+        <div class="header">
+            <h1>🎯 План курса</h1>
+            <p>Понятное объяснение структуры курса и практической пользы каждого модуля</p>
+        </div>
+
+        <!-- Навигация -->
+        <div class="nav-panel">
+            <a href="index.html" class="nav-btn">🏠 Вернуться на главную</a>
+        </div>
+
+        <!-- ПЛАН КУРСА -->
+        <div class="module">
+            <div style="padding: 10px 0;">
+                <div style="background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%); padding: 25px; border-radius: 12px; margin-bottom: 25px; border-left: 5px solid #ff6f00;">
+                    <h3 style="color: #e65100; margin-top: 0; font-size: 1.4em;">💡 Главная идея курса</h3>
+                    <p style="font-size: 1.05em; line-height: 1.7; color: #333;">
+                        Этот курс не про "школьные правила". Это про <strong>уверенность в переписке</strong>, про то, чтобы не краснеть за ошибку в резюме или письме клиенту. 
+                        Каждый модуль решает конкретную проблему из реальной жизни.
+                    </p>
+                </div>
+
+                <!-- Модуль 1: Орфография -->
+                <div style="background: #f5f5f5; padding: 25px; border-radius: 12px; margin-bottom: 20px;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                        <div style="font-size: 2.5em;">📝</div>
+                        <div>
+                            <h3 style="color: #667eea; margin: 0; font-size: 1.5em;">Модуль 1: Орфография (15 уроков)</h3>
+                            <p style="color: #666; margin: 5px 0 0 0;">Правильное написание слов</p>
+                        </div>
+                    </div>
+                    
+                    <div style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 15px;">
+                        <h4 style="color: #e65100; margin-top: 0;">🎯 Зачем это нужно?</h4>
+                        <p style="line-height: 1.7; color: #333;">
+                            <strong>В жизни:</strong> Пишете "дИректор" вместо "дирЕктор"? Клиент видит и думает: "Непрофессионал". 
+                            Ошибки в переписке = минус к вашему имиджу. Модуль научит писать без ошибок 90% самых частых слов.
+                        </p>
+                    </div>
+
+                    <div style="background: white; padding: 20px; border-radius: 8px;">
+                        <h4 style="color: #4caf50; margin-top: 0;">✅ Что получите?</h4>
+                        <ul style="line-height: 1.9; color: #333;">
+                            <li><strong>Безударные гласные</strong> — перестанете сомневаться в "кОрзина" или "кАрзина"</li>
+                            <li><strong>Словарные слова</strong> — запомните топ-30 "коварных" слов (директор, коллега, вагон...)</li>
+                            <li><strong>Приставки</strong> — разберётесь с "пре-/при-", "раз-/рас-"</li>
+                            <li><strong>Суффиксы</strong> — больше не будете гадать "-чик" или "-щик"</li>
+                            <li><strong>Ь и Ъ</strong> — забудете про ошибки типа "сьемка" или "обьект"</li>
+                        </ul>
+                        <p style="margin-top: 15px; padding: 12px; background: #e8f5e9; border-radius: 6px; color: #2e7d32;">
+                            <strong>💪 Результат:</strong> Уверенность в деловой переписке, резюме без опечаток, сообщения без автозамен
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Модуль 2: Пунктуация -->
+                <div style="background: #f5f5f5; padding: 25px; border-radius: 12px; margin-bottom: 20px;">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                        <div style="font-size: 2.5em;">✏️</div>
+                        <div>
+                            <h3 style="color: #667eea; margin: 0; font-size: 1.5em;">Модуль 2: Пунктуация (16 уроков)</h3>
+                            <p style="color: #666; margin: 5px 0 0 0;">Знаки препинания</p>
+                        </div>
+                    </div>
+                    
+                    <div style="background: white; padding: 20px; border-radius: 8px; margin-bottom: 15px;">
+                        <h4 style="color: #e65100; margin-top: 0;">🎯 Зачем это нужно?</h4>
+                        <p style="line-height: 1.7; color: #333;">
+                            <strong>В жизни:</strong> "Казнить нельзя помиловать" — помните эту фразу? Одна запятая меняет смысл. 
+                            В договоре, письме, даже в сообщении клиенту — неправильная запятая может стоить денег или репутации.
+                        </p>
+                        <p style="line-height: 1.7; color: #333; margin-top: 10px;">
+                            <em>Пример:</em> "Отгрузка завтра утром подтверждаю" vs "Отгрузка завтра, утром подтверждаю" — два разных смысла!
+                        </p>
+                    </div>
+
+                    <div style="background: white; padding: 20px; border-radius: 8px;">
+                        <h4 style="color: #4caf50; margin-top: 0;">✅ Что получите?</h4>
+                        <ul style="line-height: 1.9; color: #333;">
+                            <li><strong>Запятые</strong> — научитесь ставить их осознанно, а не "на слух"</li>
+                            <li><strong>Тире и двоеточие</strong> — разберётесь, где что уместно</li>
+                            <li><strong>Кавычки и скобки</strong> — узнаете правила для цитат и пояснений</li>
+                            <li><strong>Сложные случаи</strong> — "как" (запятая или нет?), "однако", "поэтому"...</li>
+                        </ul>
+                        <p style="margin-top: 15px; padding: 12px; background: #e8f5e9; border-radius: 6px; color: #2e7d32;">
+                            <strong>💪 Результат:</strong> Ясность в текстах, никакой двусмысленности, профессиональный вид документов
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Итоговая мотивация -->
+                <div style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 25px; border-radius: 12px; border-left: 5px solid #1976d2;">
+                    <h3 style="color: #0d47a1; margin-top: 0; font-size: 1.4em;">🚀 Как это работает?</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px;">
+                        <div style="background: white; padding: 20px; border-radius: 8px;">
+                            <div style="font-size: 2em; margin-bottom: 10px;">📖</div>
+                            <h4 style="margin: 0 0 10px 0; color: #1976d2;">1. Теория (10 минут)</h4>
+                            <p style="color: #555; font-size: 0.95em; line-height: 1.6;">Короткие объяснения с примерами из жизни. Без воды и занудства.</p>
+                        </div>
+                        <div style="background: white; padding: 20px; border-radius: 8px;">
+                            <div style="font-size: 2em; margin-bottom: 10px;">✍️</div>
+                            <h4 style="margin: 0 0 10px 0; color: #1976d2;">2. Практика (15 минут)</h4>
+                            <p style="color: #555; font-size: 0.95em; line-height: 1.6;">Интерактивные задания с проверкой. Ошиблись? Объясним почему.</p>
+                        </div>
+                        <div style="background: white; padding: 20px; border-radius: 8px;">
+                            <div style="font-size: 2em; margin-bottom: 10px;">💪</div>
+                            <h4 style="margin: 0 0 10px 0; color: #1976d2;">3. Результат</h4>
+                            <p style="color: #555; font-size: 0.95em; line-height: 1.6;">Навык закрепляется. Через 5-7 уроков пишете автоматически правильно.</p>
+                        </div>
+                    </div>
+                    <p style="margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.8); border-radius: 8px; font-size: 1.05em; color: #0d47a1;">
+                        <strong>⏱️ Всего 31 урок × 25 минут = 13 часов.</strong> За 2-3 недели спокойных занятий вы закроете 90% своих проблем с грамотностью.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Кнопка назад внизу -->
+        <div class="nav-panel">
+            <a href="index.html" class="nav-btn">🏠 Вернуться на главную</a>
+        </div>
+
+        <!-- Футер -->
+        <div class="footer">
+            <p>© 2026 Курс русского языка. Все права защищены.</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">Полный курс изучения орфографии и пунктуации русского языка</p>
+        </div>
+    </div>
+</body>
+</html>

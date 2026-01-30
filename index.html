@@ -1,0 +1,1765 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Курс русского языка - Орфография и Пунктуация</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Шапка */
+        .header {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            text-align: center;
+        }
+
+        .header h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            color: #666;
+            font-size: 1.2em;
+        }
+
+        /* Панель навигации */
+        .nav-panel {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-btn {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Модуль */
+        .module {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .module-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .module-icon {
+            font-size: 3em;
+        }
+
+        .module-title {
+            flex: 1;
+        }
+
+        .module-title h2 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 5px;
+        }
+
+        .module-title p {
+            color: #666;
+            font-size: 1em;
+        }
+
+        .module-stats {
+            background: #f5f5f5;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .module-stats strong {
+            display: block;
+            font-size: 1.5em;
+            color: #667eea;
+        }
+
+        .module-stats span {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        /* Двухколоночный макет для уроков и упражнений */
+        .module-content {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .lesson-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            align-items: start;
+        }
+
+        .lesson-cell {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        /* Список уроков */
+        .lessons-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .lessons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .lesson-card {
+            background: #f9f9f9;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .lesson-card:hover {
+            transform: translateX(5px);
+            background: #f0f0f0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .lesson-card.completed {
+            border-left-color: #4caf50;
+            background: linear-gradient(to right, #f1f8f4 0%, #f9f9f9 100%);
+        }
+
+        .lesson-completed-toggle {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: #e0e0e0;
+            color: #666;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            z-index: 10;
+        }
+
+        .lesson-completed-toggle:hover {
+            background: #d0d0d0;
+            transform: scale(1.05);
+        }
+
+        .lesson-completed-toggle.completed {
+            background: #4caf50;
+            color: white;
+            box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+        }
+
+        .lesson-completed-toggle.completed:hover {
+            background: #45a049;
+        }
+
+        .lesson-number {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .lesson-name {
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .lesson-description {
+            color: #666;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+
+        .lesson-meta {
+            display: flex;
+            gap: 15px;
+            margin-top: 10px;
+            font-size: 0.85em;
+            color: #999;
+        }
+
+        /* Упражнения */
+        .exercises-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .exercise-card {
+            background: #fff3e0;
+            padding: 15px;
+            border-radius: 10px;
+            border-left: 4px solid #ff9800;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .exercise-card:hover {
+            transform: translateX(5px);
+            background: #ffe0b2;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .exercise-progress {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: bold;
+            color: #ff9800;
+            border: 1px solid #ff9800;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .exercise-progress.completed {
+            background: #4caf50;
+            color: white;
+            border-color: #4caf50;
+        }
+
+        .exercise-number {
+            display: inline-block;
+            background: #ff9800;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 5px;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .exercise-name {
+            font-size: 1em;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .exercise-type {
+            font-size: 0.85em;
+            color: #666;
+        }
+
+        /* Футер */
+        .footer {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            color: #666;
+        }
+
+        /* Модальное окно авторизации */
+        .auth-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            backdrop-filter: blur(5px);
+        }
+
+        .auth-modal.show {
+            display: flex;
+        }
+
+        .auth-content {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            max-width: 450px;
+            width: 90%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            position: relative;
+        }
+
+        .auth-close {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            font-size: 2em;
+            cursor: pointer;
+            color: #999;
+            transition: color 0.3s;
+        }
+
+        .auth-close:hover {
+            color: #333;
+        }
+
+        .auth-title {
+            font-size: 2em;
+            color: #667eea;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .auth-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .auth-tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .auth-tab {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            color: #666;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .auth-tab.active {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-color: #667eea;
+        }
+
+        .auth-form {
+            display: none;
+        }
+
+        .auth-form.active {
+            display: block;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: bold;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .auth-button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .auth-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .auth-button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .auth-divider {
+            text-align: center;
+            margin: 25px 0;
+            color: #999;
+            position: relative;
+        }
+
+        .auth-divider::before,
+        .auth-divider::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 40%;
+            height: 1px;
+            background: #e0e0e0;
+        }
+
+        .auth-divider::before {
+            left: 0;
+        }
+
+        .auth-divider::after {
+            right: 0;
+        }
+
+        .google-button {
+            width: 100%;
+            padding: 12px;
+            background: white;
+            color: #333;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .google-button:hover {
+            border-color: #667eea;
+            background: #f5f5f5;
+        }
+
+        .error-message {
+            background: #ffebee;
+            color: #c62828;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .success-message {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .user-panel {
+            display: none;
+            align-items: center;
+            gap: 15px;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+
+        .user-panel.show {
+            display: flex;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .user-info {
+            flex: 1;
+        }
+
+        .user-email {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .user-status {
+            font-size: 0.85em;
+            color: #666;
+        }
+
+        .logout-btn {
+            padding: 8px 16px;
+            background: #f44336;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #d32f2f;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+
+            .module-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .lesson-row {
+                grid-template-columns: 1fr;
+            }
+
+            .lessons-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-panel {
+                flex-direction: column;
+            }
+
+            .auth-content {
+                padding: 30px 20px;
+            }
+
+            .user-panel {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Шапка -->
+        <div class="header">
+            <h1>📚 Курс русского языка</h1>
+            <p>Полный курс изучения орфографии и пунктуации</p>
+        </div>
+
+        <!-- Навигация -->
+        <div class="nav-panel">
+            <!-- <a href="/skills-matrix.html" class="nav-btn">📊 Матрица навыков</a> -->
+            <!--button class="nav-btn" id="authBtn" onclick="showAuth()">🔐 Войти / Регистрация</button>
+            <div class="user-panel" id="userPanel">
+                <div class="user-avatar" id="userAvatar"></div>
+                <div class="user-info">
+                    <div class="user-email" id="userEmail"></div>
+                    <div class="user-status">✅ Авторизован</div>
+                </div>
+                <button class="logout-btn" onclick="handleLogout()">Выйти</button>
+            </div-->
+            <a href="course-plan.html" class="nav-btn">📖 План курса</a>
+        </div>
+
+        <!-- МОДУЛЬ 1: ОРФОГРАФИЯ -->
+        <div class="module">
+            <div class="module-header">
+                <div class="module-icon">📝</div>
+                <div class="module-title">
+                    <h2>Модуль 1: Орфография</h2>
+                    <p>Правила написания слов, изучение безударных гласных, согласных, приставок, суффиксов и окончаний</p>
+                </div>
+                <div class="module-stats">
+                    <strong>15</strong>
+                    <span>уроков</span>
+                </div>
+            </div>
+
+            <!-- Двухколоночный макет: урок - упражнения -->
+            <div class="module-content">
+                <!-- Урок 1 -->
+                <div class="lesson-row">
+                    <div class="lesson-cell">
+                        <div class="lesson-card" data-lesson-id="lesson-01-vowels-checked" onclick="openLessonHTML('lesson-01-vowels-checked')">
+                            <span class="lesson-number">Урок 1</span>
+                            <div class="lesson-name">Проверяемые безударные гласные</div>
+                            <div class="lesson-description">Методы проверки безударных гласных в корне слова</div>
+                            <div class="lesson-meta">
+                                <span>⏱ 30 мин</span>
+                                <span>📊 Базовый</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-cell">
+                        <div class="exercise-card" data-exercise-id="exercise-01-vowels-roots" onclick="openPractice('lesson-01-practice')">
+                            <span class="exercise-number">Упражнение 1</span>
+                            <div class="exercise-name">Гласные в корне</div>
+                            <div class="exercise-type">Интерактивные задания • 4 задания</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Урок 2 -->
+                <div class="lesson-row">
+                    <div class="lesson-cell">
+                        <div class="lesson-card" data-lesson-id="lesson-02-vowels-unchecked" onclick="openLessonHTML('lesson-02-vowels-unchecked')">
+                            <span class="lesson-number">Урок 2</span>
+                            <div class="lesson-name">Непроверяемые гласные</div>
+                            <div class="lesson-description">Словарные слова и методы их запоминания</div>
+                            <div class="lesson-meta">
+                                <span>⏱ 40 мин</span>
+                                <span>📊 Базовый</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-cell">
+                        <div class="exercise-card" data-exercise-id="exercise-02-vowels-dictionary" onclick="openPractice('lesson-02-practice')">
+                            <span class="exercise-number">Упражнение 2</span>
+                            <div class="exercise-name">Словарные слова</div>
+                            <div class="exercise-type">Тесты • 1 задание</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Урок 3 -->
+                <div class="lesson-row">
+                    <div class="lesson-cell">
+                        <div class="lesson-card" data-lesson-id="lesson-03-alternating-vowels" onclick="openLessonHTML('lesson-03-alternating-vowels')">
+                            <span class="lesson-number">Урок 3</span>
+                            <div class="lesson-name">Чередующиеся гласные</div>
+                            <div class="lesson-description">Правила написания корней с чередованием</div>
+                            <div class="lesson-meta">
+                                <span>⏱ 45 мин</span>
+                                <span>📊 Средний</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-cell">
+                        <div class="exercise-card" data-exercise-id="exercise-03-alternating-vowels" onclick="openPractice('lesson-03-practice')">
+                            <span class="exercise-number">Упражнение 3</span>
+                            <div class="exercise-name">Чередующиеся гласные</div>
+                            <div class="exercise-type">Интерактивные задания • 4 задания</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Уроки 4-7 -->
+                <div class="lesson-row">
+                    <div class="lesson-cell">
+                        <div class="lesson-card">
+                            <span class="lesson-number">Урок 4</span>
+                            <div class="lesson-name">Проверяемые согласные</div>
+                            <div class="lesson-description">Проверка согласных в слабой позиции</div>
+                            <div class="lesson-meta">
+                                <span>⏱ 30 мин</span>
+                                <span>📊 Базовый</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-cell">
+                        <div class="exercise-card">
+                            <span class="exercise-number">Упражнение 4</span>
+                            <div class="exercise-name">Приставки и суффиксы</div>
+                            <div class="exercise-type">Комплексное упражнение • 25 вопросов</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lesson-row">
+                    <div class="lesson-cell">
+                        <div class="lesson-card">
+                            <span class="lesson-number">Урок 5</span>
+                            <div class="lesson-name">Непроизносимые согласные</div>
+                            <div class="lesson-description">Правила написания непроизносимых согласных</div>
+                            <div class="lesson-meta">
+                                <span>⏱ 35 мин</span>
+                                <span>📊 Базовый</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-cell">
+                        <div class="exercise-card">
+                            <span class="exercise-number">Упражнение 5</span>
+                            <div class="exercise-name">Глаголы и причастия</div>
+                            <div class="exercise-type">Н и НН • 18 вопросов</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lesson-row">
+                    <div class="lesson-cell">
+                        <div class="lesson-card">
+                            <span class="lesson-number">Урок 6</span>
+                            <div class="lesson-name">Гласные после шипящих и Ц</div>
+                            <div class="lesson-description">О-Е после шипящих, И-Ы после Ц</div>
+                            <div class="lesson-meta">
+                                <span>⏱ 35 мин</span>
+                                <span>📊 Средний</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-cell">
+                        <div class="exercise-card">
+                            <span class="exercise-number">Упражнение 6</span>
+                            <div class="exercise-name">Наречия и частицы</div>
+                            <div class="exercise-type">Слитно/раздельно • 20 вопросов</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lesson-row">
+                    <div class="lesson-cell">
+                        <div class="lesson-card">
+                            <span class="lesson-number">Урок 7</span>
+                            <div class="lesson-name">Употребление Ь и Ъ</div>
+                            <div class="lesson-description">Правила употребления разделительных знаков</div>
+                            <div class="lesson-meta">
+                                <span>⏱ 30 мин</span>
+                                <span>📊 Базовый</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-cell">
+                        <div class="exercise-card">
+                            <span class="exercise-number">Упражнение 7</span>
+                            <div class="exercise-name">Комплексное задание</div>
+                            <div class="exercise-type">Все темы орфографии • 30 вопросов</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Уроки 8-15 без упражнений -->
+                <div class="lesson-row">
+                    <div class="lesson-cell">
+                        <div class="lesson-card">
+                            <span class="lesson-number">Урок 8</span>
+                            <div class="lesson-name">Правописание приставок</div>
+                            <div class="lesson-description">Приставки на З-С, ПРЕ-ПРИ</div>
+                            <div class="lesson-meta">
+                                <span>⏱ 40 мин</span>
+                                <span>📊 Средний</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-cell"></div>
+                </div>
+
+                <div class="lesson-row">
+                    <div class="lesson-cell">
+                        <div class="lesson-card">
+                            <span class="lesson-number">Урок 9</span>
+                            <div class="lesson-name">Суффиксы существительных</div>
+                            <div class="lesson-description">ЕК-ИК, ЧИК-ЩИК и другие суффиксы</div>
+                            <div class="lesson-meta">
+                                <span>⏱ 35 мин</span>
+                                <span>📊 Средний</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-cell"></div>
+                </div>
+
+                <div class="lesson-row">
+                    <div class="lesson-cell">
+                        <div class="lesson-card">
+                            <span class="lesson-number">Урок 10</span>
+                            <div class="lesson-name">Суффиксы прилагательных</div>
+                            <div class="lesson-description">Н и НН в прилагательных</div>
+                            <div class="lesson-meta">
+                                <span>⏱ 40 мин</span>
+                                <span>📊 Продвинутый</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-cell"></div>
+                </div>
+
+                <div class="lesson-row">
+                    <div class="lesson-cell">
+                        <div class="lesson-card">
+                            <span class="lesson-number">Урок 11</span>
+                            <div class="lesson-name">Личные окончания глаголов</div>
+                            <div class="lesson-description">Определение спряжения глаголов</div>
+                            <div class="lesson-meta">
+                                <span>⏱ 45 мин</span>
+                                <span>📊 Средний</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-cell"></div>
+                </div>
+
+                <div class="lesson-row">
+                    <div class="lesson-cell">
+                        <div class="lesson-card">
+                            <span class="lesson-number">Урок 12</span>
+                            <div class="lesson-name">Правописание причастий</div>
+                            <div class="lesson-description">Н и НН в причастиях, суффиксы причастий</div>
+                            <div class="lesson-meta">
+                                <span>⏱ 50 мин</span>
+                                <span>📊 Продвинутый</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-cell"></div>
+                </div>
+
+                <div class="lesson-row">
+                    <div class="lesson-cell">
+                        <div class="lesson-card">
+                            <span class="lesson-number">Урок 13</span>
+                            <div class="lesson-name">Правописание наречий</div>
+                            <div class="lesson-description">Слитное, дефисное, раздельное написание</div>
+                            <div class="lesson-meta">
+                                <span>⏱ 40 мин</span>
+                                <span>📊 Продвинутый</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-cell"></div>
+                </div>
+
+                <div class="lesson-row">
+                    <div class="lesson-cell">
+                        <div class="lesson-card">
+                            <span class="lesson-number">Урок 14</span>
+                            <div class="lesson-name">Частицы НЕ и НИ</div>
+                            <div class="lesson-description">Различение НЕ и НИ, слитное и раздельное написание</div>
+                            <div class="lesson-meta">
+                                <span>⏱ 45 мин</span>
+                                <span>📊 Продвинутый</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-cell"></div>
+                </div>
+
+                <div class="lesson-row">
+                    <div class="lesson-cell">
+                        <div class="lesson-card">
+                            <span class="lesson-number">Урок 15</span>
+                            <div class="lesson-name">Слитное, дефисное, раздельное написание</div>
+                            <div class="lesson-description">Общие правила написания сложных слов</div>
+                            <div class="lesson-meta">
+                                <span>⏱ 50 мин</span>
+                                <span>📊 Продвинутый</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-cell"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- МОДУЛЬ 2: ПУНКТУАЦИЯ -->
+        <div class="module">
+            <div class="module-header">
+                <div class="module-icon">✍️</div>
+                <div class="module-title">
+                    <h2>Модуль 2: Пунктуация</h2>
+                    <p>Правила расстановки знаков препинания в простых и сложных предложениях</p>
+                </div>
+                <div class="module-stats">
+                    <strong>16</strong>
+                    <span>уроков</span>
+                </div>
+            </div>
+
+            <!-- Двухколоночный макет: урок - упражнения -->
+            <div class="module-content">
+                <!-- Урок 16 -->
+                <div class="lesson-row">
+                    <div class="lesson-cell">
+                        <div class="lesson-card">
+                            <span class="lesson-number">Урок 16</span>
+                            <div class="lesson-name">Правила расположения запятых</div>
+                            <div class="lesson-description">Систематизация всех правил постановки запятых</div>
+                            <div class="lesson-meta">
+                                <span>⏱ 60 мин</span>
+                                <span>📊 Базовый</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-cell">
+                        <div class="exercise-card">
+                            <span class="exercise-number">Упражнение 8</span>
+                            <div class="exercise-name">Знаки в конце предложения</div>
+                            <div class="exercise-type">Базовые правила • 10 вопросов</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Урок 17 -->
+                <div class="lesson-row">
+                    <div class="lesson-cell">
+                        <div class="lesson-card">
+                            <span class="lesson-number">Урок 17</span>
+                            <div class="lesson-name">Знаки в конце предложения</div>
+                            <div class="lesson-description">Точка, вопросительный и восклицательный знаки</div>
+                            <div class="lesson-meta">
+                                <span>⏱ 20 мин</span>
+                                <span>📊 Базовый</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-cell">
+                        <div class="exercise-card">
+                            <span class="exercise-number">Упражнение 9</span>
+                            <div class="exercise-name">Расположение запятых</div>
+                            <div class="exercise-type">Систематизация • 25 вопросов</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Урок 18 -->
+                <div class="lesson-row">
+                    <div class="lesson-cell">
+                        <div class="lesson-card">
+                            <span class="lesson-number">Урок 18</span>
+                            <div class="lesson-name">Однородные члены предложения</div>
+                            <div class="lesson-description">Запятые при однородных членах</div>
+                            <div class="lesson-meta">
+                                <span>⏱ 40 мин</span>
+                                <span>📊 Средний</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-cell">
+                        <div class="exercise-card">
+                            <span class="exercise-number">Упражнение 10</span>
+                            <div class="exercise-name">Простое предложение</div>
+                            <div class="exercise-type">Однородные члены • 15 вопросов</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Урок 19 -->
+                <div class="lesson-row">
+                    <div class="lesson-cell">
+                        <div class="lesson-card">
+                            <span class="lesson-number">Урок 19</span>
+                            <div class="lesson-name">Обобщающие слова</div>
+                            <div class="lesson-description">Двоеточие и тире при обобщающих словах</div>
+                            <div class="lesson-meta">
+                                <span>⏱ 30 мин</span>
+                                <span>📊 Средний</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-cell">
+                        <div class="exercise-card">
+                            <span class="exercise-number">Упражнение 11</span>
+                            <div class="exercise-name">Обособленные члены</div>
+                            <div class="exercise-type">Причастия и деепричастия • 20 вопросов</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Урок 20 -->
+                <div class="lesson-row">
+                    <div class="lesson-cell">
+                        <div class="lesson-card">
+                            <span class="lesson-number">Урок 20</span>
+                            <div class="lesson-name">Обособленные определения</div>
+                            <div class="lesson-description">Причастные обороты и определения</div>
+                            <div class="lesson-meta">
+                                <span>⏱ 45 мин</span>
+                                <span>📊 Продвинутый</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-cell">
+                        <div class="exercise-card">
+                            <span class="exercise-number">Упражнение 12</span>
+                            <div class="exercise-name">Вводные конструкции</div>
+                            <div class="exercise-type">Обращения и вводные слова • 18 вопросов</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Урок 21 -->
+                <div class="lesson-row">
+                    <div class="lesson-cell">
+                        <div class="lesson-card">
+                            <span class="lesson-number">Урок 21</span>
+                            <div class="lesson-name">Обособленные приложения</div>
+                            <div class="lesson-description">Выделение приложений запятыми и тире</div>
+                            <div class="lesson-meta">
+                                <span>⏱ 35 мин</span>
+                                <span>📊 Средний</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-cell">
+                        <div class="exercise-card">
+                            <span class="exercise-number">Упражнение 13</span>
+                            <div class="exercise-name">Сложные предложения</div>
+                            <div class="exercise-type">ССП, СПП, БСП • 25 вопросов</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Урок 22 -->
+                <div class="lesson-row">
+                    <div class="lesson-cell">
+                        <div class="lesson-card">
+                            <span class="lesson-number">Урок 22</span>
+                            <div class="lesson-name">Обособленные обстоятельства</div>
+                            <div class="lesson-description">Деепричастные обороты</div>
+                            <div class="lesson-meta">
+                                <span>⏱ 40 мин</span>
+                                <span>📊 Средний</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-cell">
+                        <div class="exercise-card">
+                            <span class="exercise-number">Упражнение 14</span>
+                            <div class="exercise-name">Прямая речь и диалог</div>
+                            <div class="exercise-type">Оформление речи • 15 вопросов</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Урок 23 -->
+                <div class="lesson-row">
+                    <div class="lesson-cell">
+                        <div class="lesson-card">
+                            <span class="lesson-number">Урок 23</span>
+                            <div class="lesson-name">Уточняющие члены предложения</div>
+                            <div class="lesson-description">Уточняющие и поясняющие члены</div>
+                            <div class="lesson-meta">
+                                <span>⏱ 35 мин</span>
+                                <span>📊 Средний</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-cell">
+                        <div class="exercise-card">
+                            <span class="exercise-number">Упражнение 15</span>
+                            <div class="exercise-name">Итоговый тест по пунктуации</div>
+                            <div class="exercise-type">Все темы • 40 вопросов</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Уроки 24-31 без упражнений -->
+                <div class="lesson-row">
+                    <div class="lesson-cell">
+                        <div class="lesson-card">
+                            <span class="lesson-number">Урок 24</span>
+                            <div class="lesson-name">Обращения и вводные слова</div>
+                            <div class="lesson-description">Выделение обращений и вводных слов</div>
+                            <div class="lesson-meta">
+                                <span>⏱ 40 мин</span>
+                                <span>📊 Средний</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-cell"></div>
+                </div>
+
+                <div class="lesson-row">
+                    <div class="lesson-cell">
+                        <div class="lesson-card">
+                            <span class="lesson-number">Урок 25</span>
+                            <div class="lesson-name">Вводные конструкции</div>
+                            <div class="lesson-description">Вводные предложения и вставные конструкции</div>
+                            <div class="lesson-meta">
+                                <span>⏱ 35 мин</span>
+                                <span>📊 Продвинутый</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-cell"></div>
+                </div>
+
+                <div class="lesson-row">
+                    <div class="lesson-cell">
+                        <div class="lesson-card">
+                            <span class="lesson-number">Урок 26</span>
+                            <div class="lesson-name">Прямая речь и диалог</div>
+                            <div class="lesson-description">Оформление чужой речи</div>
+                            <div class="lesson-meta">
+                                <span>⏱ 40 мин</span>
+                                <span>📊 Средний</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-cell"></div>
+                </div>
+
+                <div class="lesson-row">
+                    <div class="lesson-cell">
+                        <div class="lesson-card">
+                            <span class="lesson-number">Урок 27</span>
+                            <div class="lesson-name">Сложносочинённое предложение</div>
+                            <div class="lesson-description">Знаки препинания в ССП</div>
+                            <div class="lesson-meta">
+                                <span>⏱ 40 мин</span>
+                                <span>📊 Продвинутый</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-cell"></div>
+                </div>
+
+                <div class="lesson-row">
+                    <div class="lesson-cell">
+                        <div class="lesson-card">
+                            <span class="lesson-number">Урок 28</span>
+                            <div class="lesson-name">Сложноподчинённое предложение</div>
+                            <div class="lesson-description">Знаки препинания в СПП</div>
+                            <div class="lesson-meta">
+                                <span>⏱ 50 мин</span>
+                                <span>📊 Продвинутый</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-cell"></div>
+                </div>
+
+                <div class="lesson-row">
+                    <div class="lesson-cell">
+                        <div class="lesson-card">
+                            <span class="lesson-number">Урок 29</span>
+                            <div class="lesson-name">Бессоюзное сложное предложение</div>
+                            <div class="lesson-description">Двоеточие и тире в БСП</div>
+                            <div class="lesson-meta">
+                                <span>⏱ 45 мин</span>
+                                <span>📊 Продвинутый</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-cell"></div>
+                </div>
+
+                <div class="lesson-row">
+                    <div class="lesson-cell">
+                        <div class="lesson-card">
+                            <span class="lesson-number">Урок 30</span>
+                            <div class="lesson-name">Сложные предложения с разными видами связи</div>
+                            <div class="lesson-description">Комбинированные сложные предложения</div>
+                            <div class="lesson-meta">
+                                <span>⏱ 55 мин</span>
+                                <span>📊 Продвинутый</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-cell"></div>
+                </div>
+
+                <div class="lesson-row">
+                    <div class="lesson-cell">
+                        <div class="lesson-card">
+                            <span class="lesson-number">Урок 31</span>
+                            <div class="lesson-name">Кавычки, скобки, тире</div>
+                            <div class="lesson-description">Особые случаи пунктуации</div>
+                            <div class="lesson-meta">
+                                <span>⏱ 40 мин</span>
+                                <span>📊 Продвинутый</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="lesson-cell"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ДОПОЛНИТЕЛЬНЫЕ МАТЕРИАЛЫ -->
+        <div class="module">
+            <div class="module-header">
+                <div class="module-icon">📚</div>
+                <div class="module-title">
+                    <h2>Дополнительные материалы</h2>
+                    <p>Справочники, шпаргалки и практические материалы для закрепления знаний</p>
+                </div>
+                <div class="module-stats">
+                    <strong>10+</strong>
+                    <span>материалов</span>
+                </div>
+            </div>
+
+            <div class="lessons-grid">
+                <div class="lesson-card">
+                    <span class="lesson-number">📋</span>
+                    <div class="lesson-name">Шпаргалка по правилам</div>
+                    <div class="lesson-description">Краткие таблицы всех правил орфографии и пунктуации</div>
+                </div>
+
+                <div class="lesson-card">
+                    <span class="lesson-number">📖</span>
+                    <div class="lesson-name">Глоссарий терминов</div>
+                    <div class="lesson-description">Словарь лингвистических терминов с примерами</div>
+                </div>
+
+                <div class="lesson-card">
+                    <span class="lesson-number">✍️</span>
+                    <div class="lesson-name">Примеры текстов</div>
+                    <div class="lesson-description">Образцы текстов для анализа и диктантов</div>
+                </div>
+
+                <div class="lesson-card">
+                    <span class="lesson-number">❓</span>
+                    <div class="lesson-name">Частые вопросы (FAQ)</div>
+                    <div class="lesson-description">Ответы на самые частые вопросы по курсу</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Футер -->
+        <div class="footer">
+            <p>© 2026 Курс русского языка. Все права защищены.</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">Полный курс изучения орфографии и пунктуации русского языка</p>
+        </div>
+    </div>
+
+    <!-- Модальное окно авторизации -->
+    <div class="auth-modal" id="authModal">
+        <div class="auth-content">
+            <button class="auth-close" onclick="closeAuth()">&times;</button>
+            <h2 class="auth-title">🎓 Вход в систему</h2>
+            <p class="auth-subtitle">Войдите или зарегистрируйтесь для отслеживания прогресса</p>
+
+            <div class="auth-tabs">
+                <button class="auth-tab active" onclick="switchTab('login')">Вход</button>
+                <button class="auth-tab" onclick="switchTab('register')">Регистрация</button>
+            </div>
+
+            <div class="error-message" id="authError"></div>
+            <div class="success-message" id="authSuccess"></div>
+
+            <!-- Форма входа -->
+            <form class="auth-form active" id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label for="loginEmail">Email</label>
+                    <input type="email" id="loginEmail" required placeholder="your@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Пароль</label>
+                    <input type="password" id="loginPassword" required placeholder="Минимум 6 символов">
+                </div>
+                <button type="submit" class="auth-button" id="loginBtn">Войти</button>
+            </form>
+
+            <!-- Форма регистрации -->
+            <form class="auth-form" id="registerForm" onsubmit="handleRegister(event)">
+                <div class="form-group">
+                    <label for="registerEmail">Email</label>
+                    <input type="email" id="registerEmail" required placeholder="your@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">Пароль</label>
+                    <input type="password" id="registerPassword" required placeholder="Минимум 6 символов">
+                </div>
+                <div class="form-group">
+                    <label for="registerPasswordConfirm">Подтвердите пароль</label>
+                    <input type="password" id="registerPasswordConfirm" required placeholder="Повторите пароль">
+                </div>
+                <button type="submit" class="auth-button" id="registerBtn">Зарегистрироваться</button>
+            </form>
+
+            <div class="auth-divider">или</div>
+
+            <button class="google-button" onclick="handleGoogleLogin()">
+                <svg width="20" height="20" viewBox="0 0 24 24">
+                    <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                    <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                    <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                    <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                </svg>
+                Войти через Google
+            </button>
+        </div>
+    </div>
+
+    <script type="module">
+        import { AuthService } from './src/firebase/services/authService.js';
+        import { ProgressService } from './src/firebase/services/progressService.js';
+        import SkillsService from './src/firebase/services/skillsService.js';
+
+        let currentUser = null;
+
+        // Проверка авторизации
+        AuthService.onAuthChange(async (user) => {
+            currentUser = user;
+            updateUI(user);
+            
+            if (user) {
+                console.log('Пользователь авторизован:', user.email);
+                // Инициализируем навыки для нового пользователя
+                const skillsResult = await SkillsService.getAllSkills(user.uid);
+                if (!skillsResult.success || skillsResult.data.length === 0) {
+                    await SkillsService.initializeSkills(user.uid);
+                }
+                // Загружаем прогресс уроков и упражнений
+                await loadLessonProgress();
+                await loadExerciseProgress();
+            }
+        });
+
+        // Обновление UI в зависимости от статуса авторизации
+        function updateUI(user) {
+            const authBtn = document.getElementById('authBtn');
+            const userPanel = document.getElementById('userPanel');
+            
+            if (user) {
+                authBtn.style.display = 'none';
+                userPanel.classList.add('show');
+                
+                // Отображаем информацию о пользователе
+                const userEmail = document.getElementById('userEmail');
+                const userAvatar = document.getElementById('userAvatar');
+                
+                userEmail.textContent = user.email;
+                userAvatar.textContent = user.email.charAt(0).toUpperCase();
+            } else {
+                authBtn.style.display = 'block';
+                userPanel.classList.remove('show');
+            }
+        }
+
+        // Показать модальное окно авторизации
+        window.showAuth = function() {
+            document.getElementById('authModal').classList.add('show');
+            clearMessages();
+        };
+
+        // Закрыть модальное окно
+        window.closeAuth = function() {
+            document.getElementById('authModal').classList.remove('show');
+            clearMessages();
+        };
+
+        // Переключение вкладок
+        window.switchTab = function(tab) {
+            const tabs = document.querySelectorAll('.auth-tab');
+            const forms = document.querySelectorAll('.auth-form');
+            
+            tabs.forEach(t => t.classList.remove('active'));
+            forms.forEach(f => f.classList.remove('active'));
+            
+            if (tab === 'login') {
+                tabs[0].classList.add('active');
+                document.getElementById('loginForm').classList.add('active');
+            } else {
+                tabs[1].classList.add('active');
+                document.getElementById('registerForm').classList.add('active');
+            }
+            
+            clearMessages();
+        };
+
+        // Обработка входа
+        window.handleLogin = async function(event) {
+            event.preventDefault();
+            clearMessages();
+            
+            const email = document.getElementById('loginEmail').value;
+            const password = document.getElementById('loginPassword').value;
+            const loginBtn = document.getElementById('loginBtn');
+            
+            loginBtn.disabled = true;
+            loginBtn.textContent = 'Вход...';
+            
+            try {
+                const result = await AuthService.login(email, password);
+                
+                if (result.success) {
+                    showSuccess('Вход выполнен успешно!');
+                    setTimeout(() => {
+                        closeAuth();
+                    }, 1500);
+                } else {
+                    showError(result.error);
+                }
+            } catch (error) {
+                showError('Произошла ошибка при входе');
+            } finally {
+                loginBtn.disabled = false;
+                loginBtn.textContent = 'Войти';
+            }
+        };
+
+        // Обработка регистрации
+        window.handleRegister = async function(event) {
+            event.preventDefault();
+            clearMessages();
+            
+            const email = document.getElementById('registerEmail').value;
+            const password = document.getElementById('registerPassword').value;
+            const passwordConfirm = document.getElementById('registerPasswordConfirm').value;
+            const registerBtn = document.getElementById('registerBtn');
+            
+            if (password !== passwordConfirm) {
+                showError('Пароли не совпадают');
+                return;
+            }
+            
+            if (password.length < 6) {
+                showError('Пароль должен содержать минимум 6 символов');
+                return;
+            }
+            
+            registerBtn.disabled = true;
+            registerBtn.textContent = 'Регистрация...';
+            
+            try {
+                const result = await AuthService.register(email, password);
+                
+                if (result.success) {
+                    showSuccess('Регистрация успешна! Добро пожаловать!');
+                    setTimeout(() => {
+                        closeAuth();
+                    }, 1500);
+                } else {
+                    showError(result.error);
+                }
+            } catch (error) {
+                showError('Произошла ошибка при регистрации');
+            } finally {
+                registerBtn.disabled = false;
+                registerBtn.textContent = 'Зарегистрироваться';
+            }
+        };
+
+        // Обработка входа через Google
+        window.handleGoogleLogin = async function() {
+            clearMessages();
+            
+            try {
+                const result = await AuthService.loginWithGoogle();
+                
+                if (result.success) {
+                    showSuccess('Вход через Google выполнен успешно!');
+                    setTimeout(() => {
+                        closeAuth();
+                    }, 1500);
+                } else {
+                    showError(result.error);
+                }
+            } catch (error) {
+                showError('Произошла ошибка при входе через Google');
+            }
+        };
+
+        // Обработка выхода
+        window.handleLogout = async function() {
+            if (!confirm('Вы уверены, что хотите выйти?')) return;
+            
+            try {
+                const result = await AuthService.logout();
+                
+                if (result.success) {
+                    console.log('Выход выполнен успешно');
+                } else {
+                    alert('Ошибка выхода: ' + result.error);
+                }
+            } catch (error) {
+                alert('Произошла ошибка при выходе');
+            }
+        };
+
+        // Показать ошибку
+        function showError(message) {
+            const errorDiv = document.getElementById('authError');
+            errorDiv.textContent = message;
+            errorDiv.classList.add('show');
+        }
+
+        // Показать успех
+        function showSuccess(message) {
+            const successDiv = document.getElementById('authSuccess');
+            successDiv.textContent = message;
+            successDiv.classList.add('show');
+        }
+
+        // Очистить сообщения
+        function clearMessages() {
+            document.getElementById('authError').classList.remove('show');
+            document.getElementById('authSuccess').classList.remove('show');
+        }
+
+        // Закрытие модального окна по клику вне его
+        document.getElementById('authModal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeAuth();
+            }
+        });
+
+        // Загрузка прогресса уроков
+        async function loadLessonProgress() {
+            if (!currentUser) return;
+            
+            try {
+                const progressResult = await ProgressService.getAllProgress(currentUser.uid);
+                
+                if (progressResult.success && progressResult.data) {
+                    // Собираем все уроки с известным прогрессом
+                    const lessonsWithProgress = new Set();
+                    
+                    progressResult.data.forEach(lessonProgress => {
+                        lessonsWithProgress.add(lessonProgress.lessonId);
+                        markLessonCompleted(lessonProgress.lessonId, lessonProgress.completed);
+                    });
+                    
+                    // Добавляем кнопки для уроков без прогресса
+                    const allLessonCards = document.querySelectorAll('[data-lesson-id]');
+                    allLessonCards.forEach(card => {
+                        const lessonId = card.getAttribute('data-lesson-id');
+                        if (!lessonsWithProgress.has(lessonId)) {
+                            markLessonCompleted(lessonId, false);
+                        }
+                    });
+                    
+                    console.log('✅ Прогресс уроков загружен:', progressResult.data.length);
+                } else {
+                    // Если нет прогресса, добавляем кнопки ко всем урокам
+                    const allLessonCards = document.querySelectorAll('[data-lesson-id]');
+                    allLessonCards.forEach(card => {
+                        const lessonId = card.getAttribute('data-lesson-id');
+                        markLessonCompleted(lessonId, false);
+                    });
+                }
+            } catch (error) {
+                console.error('❌ Ошибка загрузки прогресса уроков:', error);
+            }
+        }
+
+        // Загрузка прогресса упражнений
+        async function loadExerciseProgress() {
+            if (!currentUser) return;
+            
+            try {
+                const ExerciseService = (await import('./src/firebase/services/exerciseService.js')).default;
+                const exercisesResult = await ExerciseService.getAllResults(currentUser.uid);
+                
+                if (exercisesResult.success && exercisesResult.data) {
+                    exercisesResult.data.forEach(exercise => {
+                        updateExerciseProgress(exercise.exerciseId, exercise.taskResults);
+                    });
+                    console.log('✅ Прогресс упражнений загружен:', exercisesResult.data.length);
+                }
+            } catch (error) {
+                console.error('❌ Ошибка загрузки прогресса упражнений:', error);
+            }
+        }
+
+        // Обновить отображение прогресса упражнения
+        function updateExerciseProgress(exerciseId, taskResults) {
+            const exerciseCard = document.querySelector(`[data-exercise-id="${exerciseId}"]`);
+            if (!exerciseCard || !taskResults) return;
+            
+            // Удаляем старый бейдж, если есть
+            const oldBadge = exerciseCard.querySelector('.exercise-progress');
+            if (oldBadge) oldBadge.remove();
+            
+            // Подсчитываем пройденные задания
+            const totalTasks = taskResults.length;
+            const completedTasks = taskResults.filter(task => task.completed === true).length;
+            
+            // Обновляем текст в описании упражнения
+            const exerciseType = exerciseCard.querySelector('.exercise-type');
+            if (exerciseType) {
+                const originalText = exerciseType.textContent;
+                // Заменяем информацию о количестве заданий на прогресс
+                const updatedText = originalText.replace(/\d+\s*зад[а-я]+/, `Пройдено: ${completedTasks}/${totalTasks}`);
+                exerciseType.textContent = updatedText;
+            }
+            
+            // Создаем бейдж с прогрессом
+            const progressBadge = document.createElement('div');
+            progressBadge.className = 'exercise-progress';
+            
+            if (completedTasks === totalTasks && totalTasks > 0) {
+                progressBadge.classList.add('completed');
+                progressBadge.innerHTML = `✅ ${completedTasks}/${totalTasks}`;
+            } else {
+                progressBadge.innerHTML = `${completedTasks}/${totalTasks}`;
+            }
+            
+            exerciseCard.appendChild(progressBadge);
+        }
+
+        // Отметить урок как пройденный визуально
+        function markLessonCompleted(lessonId, isCompleted = true) {
+            const lessonCard = document.querySelector(`[data-lesson-id="${lessonId}"]`);
+            if (!lessonCard) return;
+            
+            // Проверяем, есть ли уже кнопка
+            let toggleBtn = lessonCard.querySelector('.lesson-completed-toggle');
+            
+            if (!toggleBtn) {
+                // Создаем кнопку переключения
+                toggleBtn = document.createElement('button');
+                toggleBtn.className = 'lesson-completed-toggle';
+                toggleBtn.onclick = (e) => {
+                    e.stopPropagation(); // Предотвращаем открытие урока
+                    toggleLessonCompletion(lessonId);
+                };
+                lessonCard.appendChild(toggleBtn);
+            }
+            
+            // Обновляем состояние
+            if (isCompleted) {
+                lessonCard.classList.add('completed');
+                toggleBtn.classList.add('completed');
+                toggleBtn.innerHTML = '✅ Пройдено';
+            } else {
+                lessonCard.classList.remove('completed');
+                toggleBtn.classList.remove('completed');
+                toggleBtn.innerHTML = '⭕ Не пройдено';
+            }
+        }
+
+        // Переключить статус завершения урока
+        async function toggleLessonCompletion(lessonId) {
+            if (!currentUser) {
+                alert('Пожалуйста, войдите в систему');
+                return;
+            }
+
+            try {
+                const lessonCard = document.querySelector(`[data-lesson-id="${lessonId}"]`);
+                const isCurrentlyCompleted = lessonCard.classList.contains('completed');
+                const newStatus = !isCurrentlyCompleted;
+
+                // Обновляем UI
+                markLessonCompleted(lessonId, newStatus);
+
+                // Сохраняем в Firebase
+                if (newStatus) {
+                    await ProgressService.saveProgress(currentUser.uid, lessonId, {
+                        completed: true,
+                        score: 100,
+                        timeSpent: 0
+                    });
+                    console.log('✅ Урок отмечен как пройденный:', lessonId);
+                } else {
+                    // Удаляем или обновляем статус на непройденный
+                    await ProgressService.saveProgress(currentUser.uid, lessonId, {
+                        completed: false,
+                        score: 0,
+                        timeSpent: 0
+                    });
+                    console.log('⭕ Урок отмечен как не пройденный:', lessonId);
+                }
+            } catch (error) {
+                console.error('❌ Ошибка при изменении статуса урока:', error);
+                alert('Произошла ошибка при сохранении');
+                // Откатываем изменения
+                const lessonCard = document.querySelector(`[data-lesson-id="${lessonId}"]`);
+                const wasCompleted = !lessonCard.classList.contains('completed');
+                markLessonCompleted(lessonId, wasCompleted);
+            }
+        }
+
+        // Функции навигации
+        window.openLesson = function(lessonId) {
+            window.location.href = `theory/01-orthography/${lessonId}.md`;
+        };
+
+        window.openLessonHTML = function(lessonId) {
+            window.location.href = `theory/01-orthography/${lessonId}.html`;
+        };
+
+        window.openPractice = function(practiceId) {
+            window.location.href = `theory/01-orthography/${practiceId}.html`;
+        };
+
+        // Экспорт для консоли
+        window.currentUser = () => currentUser;
+        window.AuthService = AuthService;
+    </script>
+</body>
+</html>

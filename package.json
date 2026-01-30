@@ -1,0 +1,29 @@
+{
+  "name": "russian-orthography-course",
+  "version": "1.0.0",
+  "description": "Курс по орфографии, правописанию и пунктуации русского языка с использованием Firebase",
+  "main": "src/main.js",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest"
+  },
+  "keywords": [
+    "russian",
+    "orthography",
+    "education",
+    "firebase",
+    "firestore"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "firebase": "^10.7.0"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0",
+    "vitest": "^1.0.0"
+  }
+}
