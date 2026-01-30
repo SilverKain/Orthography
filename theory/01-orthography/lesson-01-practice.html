@@ -541,7 +541,7 @@
         }
 
         // Проверка заданий
-        async function checkExercise1() {
+        window.checkExercise1 = async function() {
             let correct = 0;
             
             exercise1Data.forEach((item, index) => {
@@ -571,7 +571,7 @@
             updateProgress();
         }
 
-        async function checkExercise2() {
+        window.checkExercise2 = async function() {
             let correct = 0;
             exercise2Data.forEach((item, index) => {
                 const input = document.getElementById(`ex2_${index}`);
@@ -600,7 +600,7 @@
             updateProgress();
         }
 
-        async function checkExercise3() {
+        window.checkExercise3 = async function() {
             let correct = 0;
             exercise3Data.forEach((item, index) => {
                 const input = document.getElementById(`ex3_${index}`);
@@ -629,7 +629,7 @@
             updateProgress();
         }
 
-        async function checkTest() {
+        window.checkTest = async function() {
             let correct = 0;
             testData.forEach((item, index) => {
                 const radioGroup = document.getElementById(`test_${index}`);
@@ -665,7 +665,7 @@
         }
 
         // Показать ответы
-        function showAnswers1() {
+        window.showAnswers1 = function() {
             const answersDiv = document.getElementById('answers1');
             const content = document.getElementById('answersContent1');
             content.innerHTML = exercise1Data.map((item, index) => 
@@ -674,7 +674,7 @@
             answersDiv.classList.add('show');
         }
 
-        function showAnswers2() {
+        window.showAnswers2 = function() {
             const answersDiv = document.getElementById('answers2');
             const content = document.getElementById('answersContent2');
             content.innerHTML = exercise2Data.map((item, index) => 
@@ -683,7 +683,7 @@
             answersDiv.classList.add('show');
         }
 
-        function showAnswers3() {
+        window.showAnswers3 = function() {
             const answersDiv = document.getElementById('answers3');
             const content = document.getElementById('answersContent3');
             content.innerHTML = exercise3Data.map((item, index) => 
@@ -693,7 +693,7 @@
         }
 
         // Сброс заданий
-        function resetExercise1() {
+        window.resetExercise1 = function() {
             exercise1Data.forEach((_, index) => {
                 document.getElementById(`ex1_${index}`).value = '';
                 document.getElementById(`ex1_${index}`).className = '';
@@ -706,7 +706,7 @@
             updateProgress();
         }
 
-        function resetExercise2() {
+        window.resetExercise2 = function() {
             exercise2Data.forEach((_, index) => {
                 document.getElementById(`ex2_${index}`).value = '';
                 document.getElementById(`ex2_${index}`).className = '';
@@ -719,7 +719,7 @@
             updateProgress();
         }
 
-        function resetExercise3() {
+        window.resetExercise3 = function() {
             exercise3Data.forEach((_, index) => {
                 document.getElementById(`ex3_${index}`).value = '';
                 document.getElementById(`ex3_${index}`).className = '';
@@ -732,7 +732,7 @@
             updateProgress();
         }
 
-        function resetTest() {
+        window.resetTest = function() {
             testData.forEach((_, index) => {
                 const radioGroup = document.getElementById(`test_${index}`);
                 const radios = radioGroup.querySelectorAll('input');
@@ -939,19 +939,6 @@
             initTest();
             updateProgress();
         };
-
-        // Экспортируем функции в глобальную область
-        window.checkExercise1 = checkExercise1;
-        window.checkExercise2 = checkExercise2;
-        window.checkExercise3 = checkExercise3;
-        window.checkTest = checkTest;
-        window.showAnswers1 = showAnswers1;
-        window.showAnswers2 = showAnswers2;
-        window.showAnswers3 = showAnswers3;
-        window.resetExercise1 = resetExercise1;
-        window.resetExercise2 = resetExercise2;
-        window.resetExercise3 = resetExercise3;
-        window.resetTest = resetTest;
     </script>
 
     <script type="module">
