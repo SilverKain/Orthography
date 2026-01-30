@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Модуль 2. Урок 3 - Граница между мыслями</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .breadcrumb {
+            color: #999;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .header h1 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .header .module-info {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .nav-panel {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-btn {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .lesson-content {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .lesson-section {
+            margin-bottom: 40px;
+        }
+
+        .lesson-section h2 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .lesson-section h3 {
+            color: #764ba2;
+            font-size: 1.3em;
+            margin: 25px 0 15px 0;
+        }
+
+        .lesson-section p {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.05em;
+        }
+
+        .lesson-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .lesson-section ul li {
+            color: #555;
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .lesson-section ul li:before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .highlight-box {
+            background: #f8f9ff;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .example-box {
+            background: #fff8e1;
+            border-left: 4px solid #ffa726;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .example-box h4 {
+            color: #f57c00;
+            margin-bottom: 10px;
+        }
+
+        .practice-box {
+            background: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .practice-box h3 {
+            color: #2e7d32;
+            margin-top: 0;
+        }
+
+        .practice-question {
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 8px;
+            font-style: italic;
+        }
+
+        .answer-toggle {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.95em;
+            transition: all 0.3s;
+        }
+
+        .answer-toggle:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+
+        .answer-content {
+            display: none;
+            margin-top: 15px;
+            padding: 15px;
+            background: #f0f4ff;
+            border-left: 3px solid #667eea;
+            border-radius: 6px;
+            animation: fadeIn 0.3s;
+        }
+
+        .answer-content.show {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .answer-content p {
+            margin: 0;
+            color: #333;
+        }
+
+        .footer {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                font-size: 16px;
+                line-height: 1.6;
+            }
+
+            .container {
+                max-width: 100%;
+            }
+
+            .header {
+                padding: 20px 15px;
+                margin-bottom: 20px;
+                border-radius: 12px;
+            }
+
+            .header h1 {
+                font-size: 1.5em;
+                line-height: 1.3;
+                margin-bottom: 8px;
+            }
+
+            .breadcrumb {
+                font-size: 0.85em;
+                margin-bottom: 12px;
+            }
+
+            .module-info {
+                font-size: 1em;
+                line-height: 1.5;
+            }
+
+            .nav-panel {
+                padding: 15px;
+                margin-bottom: 20px;
+                border-radius: 12px;
+                gap: 10px;
+            }
+
+            .nav-btn {
+                padding: 14px 20px;
+                font-size: 1em;
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-btn:hover {
+                transform: translateY(-2px);
+            }
+
+            .lesson-content {
+                padding: 20px 15px;
+                margin-bottom: 20px;
+                border-radius: 12px;
+            }
+
+            .lesson-section {
+                margin-bottom: 25px;
+            }
+
+            .lesson-section h2 {
+                font-size: 1.4em;
+                line-height: 1.3;
+                margin-bottom: 12px;
+            }
+
+            .lesson-section h3 {
+                font-size: 1.2em;
+                line-height: 1.3;
+                margin-bottom: 10px;
+            }
+
+            .lesson-section p,
+            .lesson-section li {
+                font-size: 1em;
+                line-height: 1.6;
+                margin-bottom: 12px;
+            }
+
+            .example-box {
+                padding: 14px;
+                margin: 12px 0;
+                border-radius: 8px;
+                font-size: 0.95em;
+            }
+
+            .practice-question {
+                padding: 16px;
+                margin-bottom: 16px;
+                border-radius: 8px;
+            }
+
+            .answer-toggle {
+                padding: 10px 16px;
+                font-size: 0.95em;
+            }
+
+            .answer-content {
+                padding: 14px;
+                font-size: 0.95em;
+                line-height: 1.5;
+            }
+
+            .footer {
+                padding: 18px 15px;
+                margin-top: 20px;
+                border-radius: 12px;
+                font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 8px;
+                font-size: 15px;
+            }
+
+            .header {
+                padding: 18px 12px;
+            }
+
+            .header h1 {
+                font-size: 1.3em;
+            }
+
+            .lesson-content {
+                padding: 16px 12px;
+            }
+
+            .lesson-section h2 {
+                font-size: 1.25em;
+            }
+
+            .lesson-section h3 {
+                font-size: 1.1em;
+            }
+
+            .nav-btn {
+                padding: 12px 16px;
+                font-size: 0.95em;
+            }
+
+            .example-box {
+                padding: 12px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="breadcrumb">
+                <a href="../../index.html">🏠 Главная</a> → 
+                <a href="../../course-plan.html">📖 План курса</a> → 
+                Модуль 2
+            </div>
+            <h1>✍️ Модуль 2. Урок 3</h1>
+            <div class="module-info">Граница между мыслями</div>
+        </div>
+
+        <div class="nav-panel">
+            <a href="../../index.html" class="nav-btn">🏠 На главную</a>
+            <a href="../../course-plan.html" class="nav-btn">📖 План курса</a>
+            <a href="module-2-lesson-2.html" class="nav-btn">⬅️ Предыдущий урок</a>
+            <a href="./practice/module-2-lesson-3-test.html" class="nav-btn">🎯 Тест урока 3</a>
+            <a href="./practice/module-2-test.html" class="nav-btn">🏆 Общий тест модуля</a>
+        </div>
+
+        <div class="lesson-content">
+            <!-- 1. Вступление -->
+            <div class="lesson-section">
+                <h2>1. Вступление</h2>
+                <p>Прочитай фразу: <em>«Он вошёл и сразу начал говорить и я не успел его остановить»</em>.</p>
+                <p>Где здесь граница между мыслями? Не очевидно. Всё слилось в одну цепочку.</p>
+                <div class="highlight-box">
+                    <strong>Запятая в сложном предложении — это не просто пауза. Это переключение.</strong>
+                </div>
+                <p>Она показывает, что мысль заканчивается и начинается следующая. Без неё текст читается как поток сознания, в котором невозможно уловить структуру.</p>
+            </div>
+
+            <!-- 2. Смысл -->
+            <div class="lesson-section">
+                <h2>2. Смысл</h2>
+                <p><strong>Запятая между частями сложного предложения — это граница между двумя самостоятельными действиями или состояниями.</strong></p>
+                <p>Не между словами, а между мыслями. Каждая часть могла бы быть отдельным предложением, но ты соединил их, потому что они связаны по смыслу.</p>
+                <div class="highlight-box">
+                    <p><strong>Без запятой мозг не понимает, где заканчивается одна мысль и начинается другая.</strong><br>
+                    Он пытается прочитать всё как одну фразу — и теряется.</p>
+                </div>
+                <p>Проблема в том, что не всякая связка требует запятой. Союз «и» не всегда создает границу. Иногда он просто соединяет однородные части — и запятая не нужна.</p>
+            </div>
+
+            <!-- 3. Типичные ошибки -->
+            <div class="lesson-section">
+                <h2>3. Типичные ошибки</h2>
+                <p>Когда человек не чувствует, где проходит граница между мыслями, возникают две крайности:</p>
+                <ul>
+                    <li>Запятая не ставится — и части предложения сливаются в один непонятный блок</li>
+                    <li>Запятая ставится везде, где есть союз «и» — даже там, где части однородные</li>
+                </ul>
+                <div class="example-box">
+                    <h4>Почему это происходит:</h4>
+                    <p>Мозг привыкает к простым правилам: «перед союзом ставится запятая». Но это не всегда так. Нужно понимать, что соединяет союз — две мысли или два элемента внутри одной мысли.</p>
+                </div>
+            </div>
+
+            <!-- 4. Живые примеры -->
+            <div class="lesson-section">
+                <h2>4. Живые примеры</h2>
+
+                <div class="example-box">
+                    <h4>Запятая нужна: две части предложения</h4>
+                    <p><em>«Он пришёл и мы начали обсуждение»</em> → <em>«Он пришёл, и мы начали обсуждение»</em></p>
+                    <p><strong>Почему:</strong> Две самостоятельные части. «Он пришёл» — одно действие. «Мы начали обсуждение» — другое. Запятая показывает переход.</p>
+                </div>
+
+                <div class="example-box">
+                    <h4>Запятая НЕ нужна: однородные члены</h4>
+                    <p><em>«Он пришёл и сел»</em> — запятая НЕ нужна.</p>
+                    <p><strong>Почему:</strong> «Пришёл» и «сел» — это два действия одного человека, они однородные. Здесь нет перехода между мыслями, есть только перечисление действий.</p>
+                </div>
+
+                <div class="example-box">
+                    <h4>Сложный случай: союз «что»</h4>
+                    <p><em>«Я знаю что ты прав»</em> → <em>«Я знаю, что ты прав»</em></p>
+                    <p><strong>Почему:</strong> «Что ты прав» — это придаточное предложение. Оно зависит от главного, но это всё равно отдельная мысль. Запятая обязательна.</p>
+                </div>
+
+                <div class="example-box">
+                    <h4>Когда запятая мешает</h4>
+                    <p><em>«Он сказал, что придёт, и ушёл»</em> — здесь две запятые. Первая (перед «что») нужна, вторая (перед «и») тоже нужна, потому что «ушёл» — это новое действие в главном предложении.</p>
+                    <p>Но: <em>«Он сказал что придёт и уйдёт»</em> → <em>«Он сказал, что придёт и уйдёт»</em>. Здесь запятая перед «и» не нужна, потому что «придёт и уйдёт» — однородные сказуемые внутри придаточного.</p>
+                </div>
+            </div>
+
+            <!-- 5. Микро-практика -->
+            <div class="lesson-section">
+                <h2>5. Микро-практика</h2>
+                <div class="practice-box">
+                    <h3>Определи, где нужны запятые. Подумай, почему.</h3>
+                    
+                    <div class="practice-question">
+                        <strong>1. «Он позвонил и сказал что опаздывает»</strong>
+                        <p>Сколько запятых нужно? Где?</p>
+                        <button class="answer-toggle" onclick="toggleAnswer(1)">Показать размышление</button>
+                        <div class="answer-content" id="answer-1">
+                            <p>Правильно: <em>«Он позвонил и сказал, что опаздывает»</em>.<br><br>
+                            Запятая перед «и» не нужна, потому что «позвонил» и «сказал» — однородные сказуемые. Но запятая перед «что» нужна, потому что это начало придаточного предложения.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="practice-question">
+                        <strong>2. «Мы пришли и они уже ждали»</strong>
+                        <p>Нужна ли запятая перед «и»?</p>
+                        <button class="answer-toggle" onclick="toggleAnswer(2)">Показать размышление</button>
+                        <div class="answer-content" id="answer-2">
+                            <p>Правильно: <em>«Мы пришли, и они уже ждали»</em>.<br><br>
+                            Две части предложения: «Мы пришли» (первая мысль) и «они уже ждали» (вторая мысль). Запятая показывает переход.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="practice-question">
+                        <strong>3. «Он встал и вышел из комнаты»</strong>
+                        <p>Нужна ли запятая?</p>
+                        <button class="answer-toggle" onclick="toggleAnswer(3)">Показать размышление</button>
+                        <div class="answer-content" id="answer-3">
+                            <p>Запятая НЕ нужна: <em>«Он встал и вышел из комнаты»</em>.<br><br>
+                            «Встал» и «вышел» — однородные сказуемые, действия одного человека. Это не две мысли, а два действия внутри одной мысли.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="practice-question">
+                        <strong>4. «Я думаю что это правильно»</strong>
+                        <p>Где нужна запятая?</p>
+                        <button class="answer-toggle" onclick="toggleAnswer(4)">Показать размышление</button>
+                        <div class="answer-content" id="answer-4">
+                            <p>Правильно: <em>«Я думаю, что это правильно»</em>.<br><br>
+                            «Что это правильно» — придаточное предложение. Запятая перед «что» обязательна.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="practice-question">
+                        <strong>5. «Он сказал что придёт и я ему поверил»</strong>
+                        <p>Сколько запятых? Где?</p>
+                        <button class="answer-toggle" onclick="toggleAnswer(5)">Показать размышление</button>
+                        <div class="answer-content" id="answer-5">
+                            <p>Правильно: <em>«Он сказал, что придёт, и я ему поверил»</em>.<br><br>
+                            Первая запятая — перед придаточным «что придёт». Вторая запятая — после придаточного, перед новой частью «и я ему поверил». Здесь две независимые мысли в главном предложении, поэтому запятая перед «и» нужна.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 6. Самопроверка -->
+            <div class="lesson-section">
+                <h2>6. Самопроверка</h2>
+                
+                <div class="practice-box" style="background: #fff3e0; border-left-color: #ff9800;">
+                    <h3>Способ 1. Раздели на предложения</h3>
+                    <p>Попробуй разделить сложное предложение на два простых.<br>
+                    <strong>Если получилось — запятая нужна. Если нет — не нужна.</strong></p>
+                    <button class="answer-toggle" onclick="toggleAnswer(6)">Как это работает</button>
+                    <div class="answer-content" id="answer-6">
+                        <p>Пример: <em>«Он пришёл и мы начали работать»</em><br>
+                        Делим: «Он пришёл. Мы начали работать.» — получилось два полных предложения.<br>
+                        Значит, запятая нужна: <em>«Он пришёл, и мы начали работать»</em>.<br><br>
+                        Пример 2: <em>«Он пришёл и сел»</em><br>
+                        Делим: «Он пришёл. Сел.» — второе предложение неполное.<br>
+                        Значит, это однородные сказуемые, запятая не нужна.</p>
+                    </div>
+                </div>
+
+                <div class="practice-box" style="background: #fff3e0; border-left-color: #ff9800; margin-top: 20px;">
+                    <h3>Способ 2. Спроси: «Это переключение?»</h3>
+                    <p>Если после союза начинается новое действие с новым подлежащим — это переключение, запятая нужна.<br>
+                    Если действие продолжается — запятая не нужна.</p>
+                    <button class="answer-toggle" onclick="toggleAnswer(7)">Как это работает</button>
+                    <div class="answer-content" id="answer-7">
+                        <p>Пример: <em>«Он встал и она тоже поднялась»</em> — переключение на нового человека, запятая нужна.<br><br>
+                        Пример 2: <em>«Он встал и потянулся»</em> — тот же человек, продолжение действий, запятая не нужна.<br><br>
+                        Это простой способ проверить, нужна ли запятая перед «и».</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 7. Зачем это работает -->
+            <div class="lesson-section">
+                <h2>7. Зачем это работает</h2>
+                <p>Когда запятые правильно показывают границы между мыслями:</p>
+                <ul>
+                    <li>читатель не теряется в длинных предложениях</li>
+                    <li>текст не выглядит как сплошной поток</li>
+                    <li>каждая часть воспринимается как отдельный шаг, а не как случайное продолжение</li>
+                </ul>
+                <div class="highlight-box">
+                    <p><strong>Запятая — это не украшение и не формальность. Это навигация.</strong><br>
+                    Она помогает читателю понять, где одна мысль заканчивается и начинается другая. Без неё текст превращается в лабиринт.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-panel">
+            <a href="../../index.html" class="nav-btn">🏠 На главную</a>
+            <a href="../../course-plan.html" class="nav-btn">📖 План курса</a>
+            <a href="module-2-lesson-2.html" class="nav-btn">⬅️ Предыдущий урок</a>
+            <a href="./practice/module-2-lesson-3-test.html" class="nav-btn">🎯 Тест урока 3</a>
+            <a href="./practice/module-2-test.html" class="nav-btn">🏆 Общий тест модуля</a>
+        </div>
+
+        <div class="footer">
+            <p>© 2026 Ясный русский. Все права защищены.</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">Курс о ясности мысли и грамотности письма</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleAnswer(id) {
+            const answer = document.getElementById('answer-' + id);
+            const button = event.target;
+            
+            if (answer.classList.contains('show')) {
+                answer.classList.remove('show');
+                button.textContent = button.textContent.replace('Скрыть', 'Показать');
+            } else {
+                answer.classList.add('show');
+                button.textContent = button.textContent.replace('Показать', 'Скрыть');
+            }
+        }
+    </script>
+</body>
+</html>
