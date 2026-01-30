@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест - Модуль 1: Предложение: когда мысль не разваливается</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .breadcrumb {
+            color: #999;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .header h1 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .header .test-info {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .test-content {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .question-block {
+            margin-bottom: 40px;
+            padding: 30px;
+            border: 2px solid #f0f0f0;
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+
+        .question-block.answered {
+            border-color: #e0e0e0;
+        }
+
+        .question-block.correct {
+            border-color: #4caf50;
+            background: #f1f8f4;
+        }
+
+        .question-block.incorrect {
+            border-color: #f44336;
+            background: #fef5f5;
+        }
+
+        .question-number {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        .question-text {
+            font-size: 1.2em;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 500;
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option {
+            padding: 15px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: white;
+            position: relative;
+        }
+
+        .option:hover:not(.disabled) {
+            border-color: #667eea;
+            background: #f8f9ff;
+            transform: translateX(5px);
+        }
+
+        .option.selected {
+            border-color: #667eea;
+            background: #f0f4ff;
+        }
+
+        .option.correct {
+            border-color: #4caf50;
+            background: #e8f5e9;
+        }
+
+        .option.incorrect {
+            border-color: #f44336;
+            background: #ffebee;
+        }
+
+        .option.disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+
+        .option-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .option-marker {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: #f0f0f0;
+            color: #666;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        .option.correct .option-marker {
+            background: #4caf50;
+            color: white;
+        }
+
+        .option.incorrect .option-marker {
+            background: #f44336;
+            color: white;
+        }
+
+        .option-text {
+            flex: 1;
+            color: #333;
+        }
+
+        .explanation {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background: #fff8e1;
+            border-left: 4px solid #ffa726;
+            border-radius: 8px;
+            animation: slideDown 0.3s ease-out;
+        }
+
+        .explanation.show {
+            display: block;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .explanation-title {
+            font-weight: bold;
+            color: #f57c00;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .explanation-text {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .results {
+            display: none;
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .results.show {
+            display: block;
+        }
+
+        .results-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+        }
+
+        .results-title {
+            font-size: 2em;
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .results-score {
+            font-size: 3em;
+            font-weight: bold;
+            color: #764ba2;
+            margin-bottom: 20px;
+        }
+
+        .results-message {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .results-details {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .result-stat {
+            padding: 20px;
+            background: #f8f9ff;
+            border-radius: 10px;
+        }
+
+        .result-stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .result-stat-label {
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+        }
+
+        .button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .button-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .button-secondary:hover {
+            background: #f8f9ff;
+        }
+
+        .buttons-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.5s ease;
+            width: 0%;
+        }
+
+        .footer {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .test-content {
+                padding: 25px;
+            }
+            .results-details {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="breadcrumb">
+                <a href="../../../index.html">🏠 Главная</a> → 
+                <a href="../module-1-lesson-1.html">📖 Урок 1</a> → 
+                <a href="../module-1-lesson-2.html">📖 Урок 2</a> →
+                <a href="../module-1-lesson-3.html">📖 Урок 3</a> → 
+                Тест
+            </div>
+            <h1>🎯 Тест: Модуль 1</h1>
+            <div class="test-info">Предложение: когда мысль не разваливается (все 3 урока)</div>
+        </div>
+
+        <div style="background: white; border-radius: 15px; padding: 20px; margin-bottom: 30px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
+            <a href="../../../index.html" style="padding: 12px 24px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; text-decoration: none; border-radius: 8px; font-weight: bold; transition: all 0.3s;">🏠 На главную</a>
+            <a href="../module-1-lesson-1.html" style="padding: 12px 24px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; text-decoration: none; border-radius: 8px; font-weight: bold; transition: all 0.3s;">📚 Урок 1</a>
+            <a href="../module-1-lesson-2.html" style="padding: 12px 24px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; text-decoration: none; border-radius: 8px; font-weight: bold; transition: all 0.3s;">📚 Урок 2</a>
+            <a href="../module-1-lesson-3.html" style="padding: 12px 24px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; text-decoration: none; border-radius: 8px; font-weight: bold; transition: all 0.3s;">📚 Урок 3</a>
+        </div>
+
+        <div class="test-content" id="test-content">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+
+            <!-- Вопрос 1 - Урок 1 -->
+            <div class="question-block" data-question="1">
+                <div class="question-number">Вопрос 1 из 10</div>
+                <div class="question-text">Что такое центр высказывания?</div>
+                <div class="options">
+                    <div class="option" data-correct="true">
+                        <div class="option-label">
+                            <span class="option-marker">А</span>
+                            <span class="option-text">То, что ты действительно хочешь сказать — ядро мысли</span>
+                        </div>
+                    </div>
+                    <div class="option" data-correct="false">
+                        <div class="option-label">
+                            <span class="option-marker">Б</span>
+                            <span class="option-text">Подлежащее и сказуемое в предложении</span>
+                        </div>
+                    </div>
+                    <div class="option" data-correct="false">
+                        <div class="option-label">
+                            <span class="option-marker">В</span>
+                            <span class="option-text">Вступительная часть фразы</span>
+                        </div>
+                    </div>
+                    <div class="option" data-correct="false">
+                        <div class="option-label">
+                            <span class="option-marker">Г</span>
+                            <span class="option-text">Самое длинное слово</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-title">💡 Объяснение</div>
+                    <div class="explanation-text">
+                        Правильный ответ: <strong>А</strong>. Центр высказывания — это смысловое ядро, та часть предложения, ради которой оно существует. Всё остальное вращается вокруг него.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Вопрос 2 - Урок 1 -->
+            <div class="question-block" data-question="2">
+                <div class="question-number">Вопрос 2 из 10</div>
+                <div class="question-text">Какая фраза демонстрирует ясный центр?</div>
+                <div class="options">
+                    <div class="option" data-correct="true">
+                        <div class="option-label">
+                            <span class="option-marker">А</span>
+                            <span class="option-text">Не торопимся с решением</span>
+                        </div>
+                    </div>
+                    <div class="option" data-correct="false">
+                        <div class="option-label">
+                            <span class="option-marker">Б</span>
+                            <span class="option-text">Мне кажется что в данной ситуации было бы правильно принять более взвешенное решение</span>
+                        </div>
+                    </div>
+                    <div class="option" data-correct="false">
+                        <div class="option-label">
+                            <span class="option-marker">В</span>
+                            <span class="option-text">По результатам анализа можно сделать вывод что текущая стратегия нуждается в корректировке</span>
+                        </div>
+                    </div>
+                    <div class="option" data-correct="false">
+                        <div class="option-label">
+                            <span class="option-marker">Г</span>
+                            <span class="option-text">С учётом всех обстоятельств я склоняюсь к мысли что этот вариант наиболее приемлем</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-title">💡 Объяснение</div>
+                    <div class="explanation-text">
+                        Правильный ответ: <strong>А</strong>. Эта фраза коротка, но информативна. В ней нет обёртки — есть только суть. Остальные варианты прячут центр под слоями смягчений.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Вопрос 3 - Урок 1 -->
+            <div class="question-block" data-question="3">
+                <div class="question-number">Вопрос 3 из 10</div>
+                <div class="question-text">Как проверить, есть ли у предложения чёткий центр?</div>
+                <div class="options">
+                    <div class="option" data-correct="true">
+                        <div class="option-label">
+                            <span class="option-marker">А</span>
+                            <span class="option-text">Спросить: «Если бы у меня была одна секунда — что бы я сказал?»</span>
+                        </div>
+                    </div>
+                    <div class="option" data-correct="false">
+                        <div class="option-label">
+                            <span class="option-marker">Б</span>
+                            <span class="option-text">Посчитать количество запятых</span>
+                        </div>
+                    </div>
+                    <div class="option" data-correct="false">
+                        <div class="option-label">
+                            <span class="option-marker">В</span>
+                            <span class="option-text">Проверить, есть ли глагол</span>
+                        </div>
+                    </div>
+                    <div class="option" data-correct="false">
+                        <div class="option-label">
+                            <span class="option-marker">Г</span>
+                            <span class="option-text">Убедиться, что предложение длинное</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-title">💡 Объяснение</div>
+                    <div class="explanation-text">
+                        Правильный ответ: <strong>А</strong>. Это проверка на сжатие. Мозг инстинктивно убирает всё второстепенное. То, что остаётся, — и есть центр.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Вопрос 4 - Урок 2 -->
+            <div class="question-block" data-question="4">
+                <div class="question-number">Вопрос 4 из 10</div>
+                <div class="question-text">Почему предложение разваливается, даже если грамматика правильная?</div>
+                <div class="options">
+                    <div class="option" data-correct="true">
+                        <div class="option-label">
+                            <span class="option-marker">А</span>
+                            <span class="option-text">Потому что в одной фразе живут несколько мыслей, которые мешают друг другу</span>
+                        </div>
+                    </div>
+                    <div class="option" data-correct="false">
+                        <div class="option-label">
+                            <span class="option-marker">Б</span>
+                            <span class="option-text">Потому что в нём мало слов</span>
+                        </div>
+                    </div>
+                    <div class="option" data-correct="false">
+                        <div class="option-label">
+                            <span class="option-marker">В</span>
+                            <span class="option-text">Потому что использованы сложные слова</span>
+                        </div>
+                    </div>
+                    <div class="option" data-correct="false">
+                        <div class="option-label">
+                            <span class="option-marker">Г</span>
+                            <span class="option-text">Потому что не хватает запятых</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-title">💡 Объяснение</div>
+                    <div class="explanation-text">
+                        Правильный ответ: <strong>А</strong>. Предложение разваливается не из-за грамматики, а потому что пытается сказать слишком много одновременно.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Вопрос 5 - Урок 2 -->
+            <div class="question-block" data-question="5">
+                <div class="question-number">Вопрос 5 из 10</div>
+                <div class="question-text">Какое правило помогает избежать распада предложения?</div>
+                <div class="options">
+                    <div class="option" data-correct="true">
+                        <div class="option-label">
+                            <span class="option-marker">А</span>
+                            <span class="option-text">Одно предложение — одна мысль</span>
+                        </div>
+                    </div>
+                    <div class="option" data-correct="false">
+                        <div class="option-label">
+                            <span class="option-marker">Б</span>
+                            <span class="option-text">Одно предложение — минимум 20 слов</span>
+                        </div>
+                    </div>
+                    <div class="option" data-correct="false">
+                        <div class="option-label">
+                            <span class="option-marker">В</span>
+                            <span class="option-text">Чем длиннее предложение, тем лучше</span>
+                        </div>
+                    </div>
+                    <div class="option" data-correct="false">
+                        <div class="option-label">
+                            <span class="option-marker">Г</span>
+                            <span class="option-text">Использовать как можно больше союзов</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-title">💡 Объяснение</div>
+                    <div class="explanation-text">
+                        Правильный ответ: <strong>А</strong>. Это базовая механика восприятия. Мозг берёт одну идею, обрабатывает, потом берёт вторую. Если идей три — он теряет нить.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Вопрос 6 - Урок 2 -->
+            <div class="question-block" data-question="6">
+                <div class="question-number">Вопрос 6 из 10</div>
+                <div class="question-text">Сколько союзов в одном предложении — сигнал о возможном перегрузе?</div>
+                <div class="options">
+                    <div class="option" data-correct="false">
+                        <div class="option-label">
+                            <span class="option-marker">А</span>
+                            <span class="option-text">Один — уже много</span>
+                        </div>
+                    </div>
+                    <div class="option" data-correct="true">
+                        <div class="option-label">
+                            <span class="option-marker">Б</span>
+                            <span class="option-text">Два и более — стоит проверить</span>
+                        </div>
+                    </div>
+                    <div class="option" data-correct="false">
+                        <div class="option-label">
+                            <span class="option-marker">В</span>
+                            <span class="option-text">Пять и более</span>
+                        </div>
+                    </div>
+                    <div class="option" data-correct="false">
+                        <div class="option-label">
+                            <span class="option-marker">Г</span>
+                            <span class="option-text">Количество не имеет значения</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-title">💡 Объяснение</div>
+                    <div class="explanation-text">
+                        Правильный ответ: <strong>Б</strong>. Один союз — норма. Два — сигнал. Три — почти наверняка перегруз. Каждый союз — маркер склейки разных идей.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Вопрос 7 - Урок 2 -->
+            <div class="question-block" data-question="7">
+                <div class="question-number">Вопрос 7 из 10</div>
+                <div class="question-text">Как проверить, не распадается ли предложение?</div>
+                <div class="options">
+                    <div class="option" data-correct="true">
+                        <div class="option-label">
+                            <span class="option-marker">А</span>
+                            <span class="option-text">Прочитать вслух на одном дыхании — если не хватило воздуха, фраза слишком длинная</span>
+                        </div>
+                    </div>
+                    <div class="option" data-correct="false">
+                        <div class="option-label">
+                            <span class="option-marker">Б</span>
+                            <span class="option-text">Посчитать количество слов</span>
+                        </div>
+                    </div>
+                    <div class="option" data-correct="false">
+                        <div class="option-label">
+                            <span class="option-marker">В</span>
+                            <span class="option-text">Проверить все запятые</span>
+                        </div>
+                    </div>
+                    <div class="option" data-correct="false">
+                        <div class="option-label">
+                            <span class="option-marker">Г</span>
+                            <span class="option-text">Убедиться, что есть подлежащее и сказуемое</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-title">💡 Объяснение</div>
+                    <div class="explanation-text">
+                        Правильный ответ: <strong>А</strong>. «Правило одного вдоха» — физическая проверка. Если фраза не помещается в один вдох, в ней несколько мыслей.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Вопрос 8 - Урок 3 -->
+            <div class="question-block" data-question="8">
+                <div class="question-number">Вопрос 8 из 10</div>
+                <div class="question-text">Что такое баланс информации?</div>
+                <div class="options">
+                    <div class="option" data-correct="true">
+                        <div class="option-label">
+                            <span class="option-marker">А</span>
+                            <span class="option-text">Когда читатель получает столько информации, сколько успевает усвоить за один раз</span>
+                        </div>
+                    </div>
+                    <div class="option" data-correct="false">
+                        <div class="option-label">
+                            <span class="option-marker">Б</span>
+                            <span class="option-text">Когда в предложении ровно 15 слов</span>
+                        </div>
+                    </div>
+                    <div class="option" data-correct="false">
+                        <div class="option-label">
+                            <span class="option-marker">В</span>
+                            <span class="option-text">Когда используются только простые слова</span>
+                        </div>
+                    </div>
+                    <div class="option" data-correct="false">
+                        <div class="option-label">
+                            <span class="option-marker">Г</span>
+                            <span class="option-text">Когда в предложении много деталей</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-title">💡 Объяснение</div>
+                    <div class="explanation-text">
+                        Правильный ответ: <strong>А</strong>. Баланс — про смысловую нагрузку, не про длину в словах. Это порция информации, которую мозг может обработать без паузы.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Вопрос 9 - Урок 3 -->
+            <div class="question-block" data-question="9">
+                <div class="question-number">Вопрос 9 из 10</div>
+                <div class="question-text">Что такое «недогруз» в предложении?</div>
+                <div class="options">
+                    <div class="option" data-correct="true">
+                        <div class="option-label">
+                            <span class="option-marker">А</span>
+                            <span class="option-text">Когда фраза формально корректна, но ничего не говорит — одна обёртка</span>
+                        </div>
+                    </div>
+                    <div class="option" data-correct="false">
+                        <div class="option-label">
+                            <span class="option-marker">Б</span>
+                            <span class="option-text">Когда предложение слишком короткое</span>
+                        </div>
+                    </div>
+                    <div class="option" data-correct="false">
+                        <div class="option-label">
+                            <span class="option-marker">В</span>
+                            <span class="option-text">Когда в предложении мало запятых</span>
+                        </div>
+                    </div>
+                    <div class="option" data-correct="false">
+                        <div class="option-label">
+                            <span class="option-marker">Г</span>
+                            <span class="option-text">Когда используются простые слова</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-title">💡 Объяснение</div>
+                    <div class="explanation-text">
+                        Правильный ответ: <strong>А</strong>. Недогруз — это когда предложение занимает пространство, но не несёт смысла. «В целом», «можно сказать» — заполнители.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Вопрос 10 - Урок 3 -->
+            <div class="question-block" data-question="10">
+                <div class="question-number">Вопрос 10 из 10</div>
+                <div class="question-text">Как проверить фразу на недогруз?</div>
+                <div class="options">
+                    <div class="option" data-correct="true">
+                        <div class="option-label">
+                            <span class="option-marker">А</span>
+                            <span class="option-text">Убрать половину слов — если смысл остался, было недогруженно</span>
+                        </div>
+                    </div>
+                    <div class="option" data-correct="false">
+                        <div class="option-label">
+                            <span class="option-marker">Б</span>
+                            <span class="option-text">Посчитать количество запятых</span>
+                        </div>
+                    </div>
+                    <div class="option" data-correct="false">
+                        <div class="option-label">
+                            <span class="option-marker">В</span>
+                            <span class="option-text">Убедиться, что есть глагол</span>
+                        </div>
+                    </div>
+                    <div class="option" data-correct="false">
+                        <div class="option-label">
+                            <span class="option-marker">Г</span>
+                            <span class="option-text">Прочитать вслух</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-title">💡 Объяснение</div>
+                    <div class="explanation-text">
+                        Правильный ответ: <strong>А</strong>. «Тест на удаление». Если из фразы можно убрать половину, и ничего не изменится — эти слова были лишними.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="results" id="results">
+            <div class="results-icon" id="results-icon">🎉</div>
+            <div class="results-title">Тест завершён!</div>
+            <div class="results-score">
+                <span id="score">0</span> / 10
+            </div>
+            <div class="results-message" id="results-message">Отличный результат!</div>
+            
+            <div class="results-details">
+                <div class="result-stat">
+                    <div class="result-stat-value" id="correct-count">0</div>
+                    <div class="result-stat-label">Правильных ответов</div>
+                </div>
+                <div class="result-stat">
+                    <div class="result-stat-value" id="incorrect-count">0</div>
+                    <div class="result-stat-label">Неправильных ответов</div>
+                </div>
+                <div class="result-stat">
+                    <div class="result-stat-value" id="percentage">0%</div>
+                    <div class="result-stat-label">Процент верных</div>
+                </div>
+            </div>
+
+            <div class="buttons-group">
+                <a href="../../../index.html" class="button">🏠 На главную</a>
+                <a href="../module-1-lesson-1.html" class="button">📚 Урок 1</a>
+                <a href="../module-1-lesson-2.html" class="button">📚 Урок 2</a>
+                <a href="../module-1-lesson-3.html" class="button">📚 Урок 3</a>
+                <button onclick="restartTest()" class="button button-secondary">🔄 Пройти ещё раз</button>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>© 2026 Ясный русский. Все права защищены.</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">Курс о ясности мысли и грамотности письма</p>
+        </div>
+    </div>
+
+    <script>
+        let answeredQuestions = 0;
+        let correctAnswers = 0;
+        const totalQuestions = 10;
+
+        document.querySelectorAll('.option').forEach(option => {
+            option.addEventListener('click', function() {
+                const questionBlock = this.closest('.question-block');
+                const options = questionBlock.querySelectorAll('.option');
+                
+                if (questionBlock.classList.contains('answered')) {
+                    return;
+                }
+
+                questionBlock.classList.add('answered');
+                answeredQuestions++;
+
+                const isCorrect = this.dataset.correct === 'true';
+                
+                if (isCorrect) {
+                    this.classList.add('correct');
+                    questionBlock.classList.add('correct');
+                    correctAnswers++;
+                } else {
+                    this.classList.add('incorrect');
+                    questionBlock.classList.add('incorrect');
+                    options.forEach(opt => {
+                        if (opt.dataset.correct === 'true') {
+                            opt.classList.add('correct');
+                        }
+                    });
+                }
+
+                options.forEach(opt => {
+                    opt.classList.add('disabled');
+                });
+
+                const explanation = questionBlock.querySelector('.explanation');
+                explanation.classList.add('show');
+
+                updateProgress();
+
+                if (answeredQuestions === totalQuestions) {
+                    setTimeout(showResults, 1000);
+                }
+            });
+        });
+
+        function updateProgress() {
+            const progress = (answeredQuestions / totalQuestions) * 100;
+            document.getElementById('progress-fill').style.width = progress + '%';
+        }
+
+        function showResults() {
+            document.getElementById('test-content').style.display = 'none';
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.classList.add('show');
+
+            const score = correctAnswers;
+            const percentage = Math.round((correctAnswers / totalQuestions) * 100);
+            
+            document.getElementById('score').textContent = score;
+            document.getElementById('correct-count').textContent = correctAnswers;
+            document.getElementById('incorrect-count').textContent = totalQuestions - correctAnswers;
+            document.getElementById('percentage').textContent = percentage + '%';
+
+            let message, icon;
+            if (percentage === 100) {
+                message = 'Идеально! Ты полностью освоил модуль о структуре предложений.';
+                icon = '🏆';
+            } else if (percentage >= 80) {
+                message = 'Отличный результат! Ты понимаешь, как строить устойчивые предложения.';
+                icon = '🎉';
+            } else if (percentage >= 60) {
+                message = 'Хорошо! Стоит вернуться к отдельным урокам для закрепления.';
+                icon = '👍';
+            } else {
+                message = 'Рекомендуем перечитать уроки модуля и обратить внимание на примеры.';
+                icon = '📚';
+            }
+
+            document.getElementById('results-message').textContent = message;
+            document.getElementById('results-icon').textContent = icon;
+
+            resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function restartTest() {
+            answeredQuestions = 0;
+            correctAnswers = 0;
+
+            document.getElementById('progress-fill').style.width = '0%';
+
+            document.querySelectorAll('.question-block').forEach(block => {
+                block.classList.remove('answered', 'correct', 'incorrect');
+                
+                const options = block.querySelectorAll('.option');
+                options.forEach(opt => {
+                    opt.classList.remove('selected', 'correct', 'incorrect', 'disabled');
+                });
+
+                const explanation = block.querySelector('.explanation');
+                explanation.classList.remove('show');
+            });
+
+            document.getElementById('results').classList.remove('show');
+            document.getElementById('test-content').style.display = 'block';
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    </script>
+</body>
+</html>

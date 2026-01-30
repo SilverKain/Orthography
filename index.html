@@ -596,13 +596,67 @@
         }
 
         @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                font-size: 16px;
+                line-height: 1.6;
+            }
+
+            .container {
+                max-width: 100%;
+            }
+
+            .header {
+                padding: 20px 15px;
+                margin-bottom: 20px;
+                border-radius: 12px;
+            }
+
             .header h1 {
-                font-size: 1.8em;
+                font-size: 1.6em;
+                line-height: 1.3;
+                margin-bottom: 8px;
+            }
+
+            .header p {
+                font-size: 1em;
+                line-height: 1.5;
+            }
+
+            .module {
+                padding: 20px 15px;
+                margin-bottom: 20px;
+                border-radius: 12px;
             }
 
             .module-header {
                 flex-direction: column;
                 text-align: center;
+                gap: 12px;
+                margin-bottom: 15px;
+            }
+
+            .module-icon {
+                font-size: 2.2em;
+            }
+
+            .module-title h2 {
+                font-size: 1.5em;
+                line-height: 1.3;
+            }
+
+            .module-title p {
+                font-size: 0.95em;
+                line-height: 1.5;
+            }
+
+            .module-stats {
+                padding: 10px 15px;
+                margin-top: 10px;
+            }
+
+            .module-stats strong {
+                font-size: 1.3em;
             }
 
             .lesson-row {
@@ -611,19 +665,232 @@
 
             .lessons-grid {
                 grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .lesson-card {
+                padding: 16px;
+                border-radius: 8px;
+            }
+
+            .lesson-card:hover {
+                transform: translateX(3px);
+            }
+
+            .lesson-completed-toggle {
+                top: 12px;
+                right: 12px;
+                padding: 5px 10px;
+                font-size: 0.75em;
+            }
+
+            .lesson-number {
+                padding: 4px 8px;
+                font-size: 0.85em;
+            }
+
+            .lesson-name {
+                font-size: 1.05em;
+                line-height: 1.4;
+                margin-bottom: 6px;
+                padding-right: 60px;
+            }
+
+            .lesson-description {
+                font-size: 0.9em;
+                line-height: 1.5;
+            }
+
+            .lesson-meta {
+                font-size: 0.8em;
+                gap: 10px;
+                flex-wrap: wrap;
+            }
+
+            .exercise-card {
+                padding: 14px;
+                border-radius: 8px;
+            }
+
+            .exercise-card:hover {
+                transform: translateX(3px);
+            }
+
+            .exercise-progress {
+                top: 12px;
+                right: 12px;
+                padding: 4px 8px;
+                font-size: 0.7em;
+            }
+
+            .exercise-number {
+                font-size: 0.8em;
+            }
+
+            .exercise-name {
+                font-size: 0.95em;
+                line-height: 1.4;
+                padding-right: 50px;
+            }
+
+            .exercise-type {
+                font-size: 0.82em;
+                line-height: 1.4;
             }
 
             .nav-panel {
+                padding: 15px;
                 flex-direction: column;
+                gap: 10px;
+                margin-bottom: 20px;
+                border-radius: 12px;
+            }
+
+            .nav-btn {
+                padding: 14px 20px;
+                font-size: 1em;
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-btn:hover {
+                transform: translateY(-2px);
             }
 
             .auth-content {
-                padding: 30px 20px;
+                padding: 25px 18px;
+                max-width: 95%;
+                border-radius: 12px;
+            }
+
+            .auth-title {
+                font-size: 1.6em;
+                margin-bottom: 8px;
+            }
+
+            .auth-subtitle {
+                font-size: 0.95em;
+                margin-bottom: 20px;
+            }
+
+            .auth-tabs {
+                gap: 8px;
+                margin-bottom: 20px;
+            }
+
+            .auth-tab {
+                padding: 12px 8px;
+                font-size: 0.95em;
+            }
+
+            .form-group {
+                margin-bottom: 16px;
+            }
+
+            .form-group label {
+                font-size: 0.95em;
+                margin-bottom: 6px;
+            }
+
+            .form-group input {
+                padding: 12px;
+                font-size: 1em;
+                border-radius: 6px;
+            }
+
+            .auth-button {
+                padding: 14px;
+                font-size: 1em;
+                border-radius: 6px;
+            }
+
+            .google-button {
+                padding: 12px;
+                font-size: 0.95em;
+            }
+
+            .footer {
+                padding: 18px 15px;
+                margin-top: 20px;
+                border-radius: 12px;
+                font-size: 0.9em;
             }
 
             .user-panel {
                 flex-direction: column;
                 text-align: center;
+                gap: 12px;
+                padding: 15px;
+            }
+
+            .user-info {
+                font-size: 0.95em;
+            }
+
+            .logout-btn {
+                width: 100%;
+                padding: 12px;
+            }
+        }
+
+        /* Дополнительная адаптация для очень маленьких экранов */
+        @media (max-width: 480px) {
+            body {
+                padding: 8px;
+                font-size: 15px;
+            }
+
+            .header {
+                padding: 18px 12px;
+            }
+
+            .header h1 {
+                font-size: 1.4em;
+            }
+
+            .header p {
+                font-size: 0.95em;
+            }
+
+            .module {
+                padding: 16px 12px;
+            }
+
+            .module-title h2 {
+                font-size: 1.3em;
+            }
+
+            .module-icon {
+                font-size: 2em;
+            }
+
+            .lesson-card {
+                padding: 14px;
+            }
+
+            .lesson-name {
+                font-size: 1em;
+            }
+
+            .lesson-description {
+                font-size: 0.88em;
+            }
+
+            .exercise-card {
+                padding: 12px;
+            }
+
+            .nav-btn {
+                padding: 12px 16px;
+                font-size: 0.95em;
+            }
+
+            .auth-content {
+                padding: 20px 15px;
+            }
+
+            .auth-title {
+                font-size: 1.4em;
             }
         }
     </style>
@@ -707,23 +974,29 @@
             </div>
 
             <div class="lessons-grid">
-                <div class="lesson-card">
-                    <span class="lesson-number">Урок 1</span>
-                    <div class="lesson-name">Кто здесь главный</div>
-                    <div class="lesson-description">Как находить центр высказывания. Почему лишние обороты утяжеляют фразу</div>
-                </div>
+                <a href="./theory/modules/module-1-lesson-1.html" style="text-decoration: none; color: inherit;">
+                    <div class="lesson-card">
+                        <span class="lesson-number">Урок 1</span>
+                        <div class="lesson-name">Центр высказывания</div>
+                        <div class="lesson-description">Как находить ядро мысли в предложении. Почему лишние обороты прячут главное</div>
+                    </div>
+                </a>
 
-                <div class="lesson-card">
-                    <span class="lesson-number">Урок 2</span>
-                    <div class="lesson-name">Сложность без перегруза</div>
-                    <div class="lesson-description">Когда одно предложение становится слишком длинным. Где его логично разорвать</div>
-                </div>
+                <a href="./theory/modules/module-1-lesson-2.html" style="text-decoration: none; color: inherit;">
+                    <div class="lesson-card">
+                        <span class="lesson-number">Урок 2</span>
+                        <div class="lesson-name">Когда предложение разваливается</div>
+                        <div class="lesson-description">Почему фразы с несколькими мыслями требуют перечитывания. Где ставить точки вместо союзов</div>
+                    </div>
+                </a>
 
-                <div class="lesson-card">
-                    <span class="lesson-number">Урок 3</span>
-                    <div class="lesson-name">Однородность и псевдологика</div>
-                    <div class="lesson-description">Почему фраза «ломается», хотя всё вроде согласовано. Как мозг автоматически соединяет несоединимое</div>
-                </div>
+                <a href="./theory/modules/module-1-lesson-3.html" style="text-decoration: none; color: inherit;">
+                    <div class="lesson-card">
+                        <span class="lesson-number">Урок 3</span>
+                        <div class="lesson-name">Баланс информации</div>
+                        <div class="lesson-description">Как держать оптимальную нагрузку на одну фразу. Недогруз и перегруз — две крайности текста</div>
+                    </div>
+                </a>
             </div>
         </div>
 
