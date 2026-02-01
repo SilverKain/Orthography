@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Модуль 1. Урок 2 - Когда предложение разваливается</title>
+    <title>Модуль 2. Урок 4 - Где мысль заканчивается</title>
     <style>
         * {
             margin: 0;
@@ -171,6 +171,11 @@
             margin-top: 0;
         }
 
+        .practice-box h4 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+
         .practice-question {
             margin: 15px 0;
             padding: 15px;
@@ -179,7 +184,7 @@
             font-style: italic;
         }
 
-        .answer-toggle {
+        .toggle-button {
             margin-top: 10px;
             padding: 10px 20px;
             background: #667eea;
@@ -191,12 +196,12 @@
             transition: all 0.3s;
         }
 
-        .answer-toggle:hover {
+        .toggle-button:hover {
             background: #5568d3;
             transform: translateY(-2px);
         }
 
-        .answer-content {
+        .answer {
             display: none;
             margin-top: 15px;
             padding: 15px;
@@ -206,7 +211,7 @@
             animation: fadeIn 0.3s;
         }
 
-        .answer-content.show {
+        .answer.show {
             display: block;
         }
 
@@ -215,7 +220,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        .answer-content p {
+        .answer p {
             margin: 0;
             color: #333;
         }
@@ -322,12 +327,12 @@
                 border-radius: 8px;
             }
 
-            .answer-toggle {
+            .toggle-button {
                 padding: 10px 16px;
                 font-size: 0.95em;
             }
 
-            .answer-content {
+            .answer {
                 padding: 14px;
                 font-size: 0.95em;
                 line-height: 1.5;
@@ -385,51 +390,50 @@
             <div class="breadcrumb">
                 <a href="../../index.html">🏠 Главная</a> → 
                 <a href="../../course-plan.html">📖 План курса</a> → 
-                Модуль 1
+                Модуль 2
             </div>
-            <h1>📝 Модуль 1. Урок 2</h1>
-            <div class="module-info">Устная логика и письменная: почему они не совпадают</div>
+            <h1>✍️ Модуль 2. Урок 4</h1>
+            <div class="module-info">Где мысль заканчивается, а где просто обрывается</div>
         </div>
 
         <div class="nav-panel">
             <a href="../../index.html" class="nav-btn">🏠 На главную</a>
             <a href="../../course-plan.html" class="nav-btn">📖 План курса</a>
-            <a href="module-1-lesson-1.html" class="nav-btn">⬅️ Предыдущий урок</a>
-            <a href="module-1-lesson-3.html" class="nav-btn">➡️ Следующий урок</a>
-            <a href="./practice/module-1-lesson-2-test.html" class="nav-btn">🎯 Тест урока 2</a>
-            <a href="./practice/module-1-test.html" class="nav-btn">🏆 Общий тест модуля</a>
+            <a href="module-2-lesson-3.html" class="nav-btn">⬅️ Предыдущий урок</a>
+            <a href="./practice/module-2-lesson-4-test.html" class="nav-btn">🎯 Тест урока 4</a>
+            <a href="./practice/module-2-test.html" class="nav-btn">🏆 Общий тест модуля</a>
         </div>
 
         <div class="lesson-content">
             <!-- 1. Вступление -->
             <div class="lesson-section">
                 <h2>1. Вступление</h2>
-                <p>Есть фразы, которые в разговоре звучат нормально.<br>
-Иногда даже убедительно.</p>
-                <p>Но стоит их записать — и появляется странное ощущение:<br>
-что-то не так, хотя вроде бы сказано то же самое.</p>
-                <div class="highlight-box">
-                    <p><strong>Проблема не в «плохом письме».<br>
-Проблема в том, что устная и письменная логика живут по разным правилам.</strong></p>
-                </div>
+                <p>Иногда предложение обрывается так,<br>
+будто автору стало ясно — и он остановился.</p>
+                <p>Точка есть.<br>
+Ощущение завершённости — нет.</p>
+                <p>Читатель чувствует паузу,<br>
+но не понимает, что именно произошло:<br>
+мысль закончилась<br>
+или просто перестали писать.</p>
             </div>
 
             <!-- 2. Смысл -->
             <div class="lesson-section">
                 <h2>2. Смысл</h2>
-                <p>В разговоре мысль поддерживают:<br>
-интонация,<br>
-паузы,<br>
-жесты,<br>
-контекст ситуации.</p>
-                <p>Мы можем начать фразу, не зная, чем она закончится.<br>
-Собеседник подхватывает, догадывается, уточняет.</p>
-                <p>Текст лишён этой поддержки.<br>
-Он не может спросить, переспросить или понять по тону.</p>
+                <p>Мысль имеет форму,<br>
+даже если она короткая.</p>
+                <p>У неё есть:<br>
+направление,<br>
+движение,<br>
+момент завершения.</p>
+                <p>Обрыв возникает тогда,<br>
+когда автор заканчивает предложение<br>
+в точке собственного понимания,<br>
+а не в точке, где мысль стала доступной читателю.</p>
                 <div class="highlight-box">
-                    <p><strong>Поэтому письменная мысль должна быть собрана заранее.<br>
-Если этого не произошло,<br>
-на бумаге остаётся не сообщение, а след разговора.</strong></p>
+                    <p><strong>Мозгу автора достаточно намёка.<br>
+Тексту — нет.</strong></p>
                 </div>
             </div>
 
@@ -437,15 +441,15 @@
             <div class="lesson-section">
                 <h2>3. Типичные ошибки</h2>
                 <ul>
-                    <li>Фраза держится на интонации, которой в тексте нет.</li>
-                    <li>Мысль начинается раньше, чем становится понятной.</li>
-                    <li>Важное подразумевается, а не проговаривается.</li>
-                    <li>Предложение звучит как реплика, а не как законченная мысль.</li>
-                    <li>Автор уверен, что читатель «схватит по ходу».</li>
+                    <li>Предложение заканчивается оценкой без вывода.</li>
+                    <li>Мысль обрывается на уточнении.</li>
+                    <li>Автор «слышит» продолжение, но не пишет его.</li>
+                    <li>Точка ставится по ощущению, а не по смыслу.</li>
+                    <li>Конец предложения не даёт результата.</li>
                 </ul>
                 <div class="highlight-box">
-                    <p>Мозг переносит устный сценарий туда,<br>
-где он не работает.</p>
+                    <p>Мозг останавливается раньше,<br>
+чем мысль становится завершённой формой.</p>
                 </div>
             </div>
 
@@ -454,24 +458,24 @@
                 <h2>4. Живые примеры</h2>
 
                 <div class="example-box">
-                    <h4>Переписка:</h4>
-                    <p><em>«Я посмотрел, в принципе можно, но есть моменты.»</em></p>
-                    <p>(В устной речи это может сопровождаться паузой или интонацией сомнения.<br>
-В тексте неясно: это согласие с оговорками, скрытый отказ или приглашение к обсуждению.)</p>
-                </div>
-
-                <div class="example-box">
                     <h4>Рабочий текст:</h4>
-                    <p><em>«Мы это обсуждали, и тогда стало понятно, как лучше действовать.»</em></p>
-                    <p>(Читатель не участвовал в том разговоре.<br>
-Без конкретизации «понятно» остаётся пустым словом, не несущим информации.)</p>
+                    <p><em>Этот вариант выглядит более перспективным.</em></p>
+                    <p>(Для автора критерии понятны.<br>
+Читатель не знает, с чем сравнивают вариант и в чём именно его «перспектива».)</p>
                 </div>
 
                 <div class="example-box">
-                    <h4>Внутренний перенос речи в текст:</h4>
-                    <p><em>«Ну тут, в общем, всё логично.»</em></p>
-                    <p>(Так говорят в разговоре, когда не хотят разворачивать аргументацию.<br>
-В тексте эта фраза не объясняет ничего и лишь имитирует вывод.)</p>
+                    <h4>Переписка:</h4>
+                    <p><em>Я пока склоняюсь к этому решению.</em></p>
+                    <p>(Непонятно, это финальный выбор или временное настроение.<br>
+Точка ставит паузу, но не закрывает мысль.)</p>
+                </div>
+
+                <div class="example-box">
+                    <h4>Комментарий:</h4>
+                    <p><em>В таком подходе есть нюансы.</em></p>
+                    <p>(Фраза останавливается на намёке.<br>
+Читатель ждёт: эти нюансы мешают, требуют учёта или просто существуют?)</p>
                 </div>
             </div>
 
@@ -479,45 +483,52 @@
             <div class="lesson-section">
                 <h2>5. Микро-практика</h2>
                 <div class="practice-box">
-                    
-                    <div class="practice-question">
-                        <strong>1. Где эта фраза держится на воображаемой интонации?</strong>
-                        <button class="answer-toggle" onclick="toggleAnswer(1)">Показать размышление</button>
-                        <div class="answer-content" id="answer-1">
-                            <p>(Если убрать мысленное ударение или паузу, часто оказывается, что слов недостаточно.)</p>
-                        </div>
+                    <h4>Задание 1: Что читатель должен унести?</h4>
+                    <p><em>Что читатель должен унести после этой точки?</em></p>
+                    <button class="toggle-button" onclick="toggleAnswer('answer1')">Показать решение</button>
+                    <div id="answer1" class="answer">
+                        <p><strong>Решение:</strong><br>
+Если нельзя сформулировать результат, предложение не завершено.</p>
                     </div>
-                    
-                    <div class="practice-question">
-                        <strong>2. Что в разговоре ты бы пояснил жестом или взглядом?</strong>
-                        <button class="answer-toggle" onclick="toggleAnswer(2)">Показать размышление</button>
-                        <div class="answer-content" id="answer-2">
-                            <p>(В тексте такие места требуют прямого называния причины или вывода.)</p>
-                        </div>
+                </div>
+
+                <div class="practice-box">
+                    <h4>Задание 2: Это вывод или ощущение?</h4>
+                    <p><em>Это вывод или ощущение?</em></p>
+                    <button class="toggle-button" onclick="toggleAnswer('answer2')">Показать решение</button>
+                    <div id="answer2" class="answer">
+                        <p><strong>Решение:</strong><br>
+Ощущение может быть началом мысли, но не её концом.</p>
                     </div>
-                    
-                    <div class="practice-question">
-                        <strong>3. Где предложение звучит как начало диалога?</strong>
-                        <button class="answer-toggle" onclick="toggleAnswer(3)">Показать размышление</button>
-                        <div class="answer-content" id="answer-3">
-                            <p>(Если фраза как будто ждёт реакции, значит, мысль не завершена.)</p>
-                        </div>
+                </div>
+
+                <div class="practice-box">
+                    <h4>Задание 3: Можно ли добавить одно предложение?</h4>
+                    <p><em>Можно ли добавить одно предложение, которое завершит движение?</em></p>
+                    <button class="toggle-button" onclick="toggleAnswer('answer3')">Показать решение</button>
+                    <div id="answer3" class="answer">
+                        <p><strong>Решение:</strong><br>
+Если да, значит, точка поставлена слишком рано.</p>
                     </div>
-                    
-                    <div class="practice-question">
-                        <strong>4. Если представить, что читатель не может задать вопрос — где он застрянет?</strong>
-                        <button class="answer-toggle" onclick="toggleAnswer(4)">Показать размышление</button>
-                        <div class="answer-content" id="answer-4">
-                            <p>(Именно там в тексте есть логический провал.)</p>
-                        </div>
+                </div>
+
+                <div class="practice-box">
+                    <h4>Задание 4: Где предложение заканчивается слишком рано?</h4>
+                    <p><em>Где предложение заканчивается слишком рано?</em></p>
+                    <button class="toggle-button" onclick="toggleAnswer('answer4')">Показать решение</button>
+                    <div id="answer4" class="answer">
+                        <p><strong>Решение:</strong><br>
+Чаще всего сразу после оценки или общего слова.</p>
                     </div>
-                    
-                    <div class="practice-question">
-                        <strong>5. Где конец фразы не проясняет её начало?</strong>
-                        <button class="answer-toggle" onclick="toggleAnswer(5)">Показать размышление</button>
-                        <div class="answer-content" id="answer-5">
-                            <p>(Это типичный след устной логики, перенесённой на письмо.)</p>
-                        </div>
+                </div>
+
+                <div class="practice-box">
+                    <h4>Задание 5: Что здесь осталось «в воздухе»?</h4>
+                    <p><em>Что здесь осталось «в воздухе»?</em></p>
+                    <button class="toggle-button" onclick="toggleAnswer('answer5')">Показать решение</button>
+                    <div id="answer5" class="answer">
+                        <p><strong>Решение:</strong><br>
+Именно это читатель будет додумывать за автора.</p>
                     </div>
                 </div>
             </div>
@@ -525,34 +536,33 @@
             <!-- 6. Самопроверка -->
             <div class="lesson-section">
                 <h2>6. Самопроверка</h2>
-                
-                <div class="practice-box" style="background: #fff3e0; border-left-color: #ff9800;">
-                    <h3>Понятно ли, что произошло, без мысленного диалога с автором?</h3>
-                    <button class="answer-toggle" onclick="toggleAnswer(6)">Как это работает</button>
-                    <div class="answer-content" id="answer-6">
-                        <p>(Если приходится «догадываться», текст всё ещё разговаривает, а не сообщает.)</p>
-                    </div>
+                <p><strong>Вопрос 1:</strong><br>
+Есть ли результат после прочтения предложения?</p>
+                <button class="toggle-button" onclick="toggleAnswer('check1')">Показать ответ</button>
+                <div id="check1" class="answer">
+                    <p>Если после точки ничего не изменилось в понимании, это обрыв.</p>
                 </div>
 
-                <div class="practice-box" style="background: #fff3e0; border-left-color: #ff9800; margin-top: 20px;">
-                    <h3>Можно ли убрать половину слов и сохранить смысл?</h3>
-                    <button class="answer-toggle" onclick="toggleAnswer(7)">Как это работает</button>
-                    <div class="answer-content" id="answer-7">
-                        <p>(Если смысл исчезает, значит, он держался на интонации, а не на формулировке.)</p>
-                    </div>
+                <p><strong>Вопрос 2:</strong><br>
+Можно ли задать вопрос «и что?»?</p>
+                <button class="toggle-button" onclick="toggleAnswer('check2')">Показать ответ</button>
+                <div id="check2" class="answer">
+                    <p>Если вопрос возникает естественно, мысль не доведена.</p>
                 </div>
             </div>
 
             <!-- 7. Зачем это нужно -->
             <div class="lesson-section">
                 <h2>7. Зачем это нужно</h2>
-                <p>Письменная логика делает текст автономным.<br>
-Он работает без автора рядом.</p>
+                <p>Завершённые мысли<br>
+не требуют додумывания.</p>
+                <p>Читатель понимает,<br>
+где остановиться,<br>
+и что именно произошло.</p>
                 <div class="highlight-box">
-                    <p><strong>Читателю не нужно угадывать,<br>
-а автор выглядит собранным и ясным — даже в сложных темах.</strong></p>
-                    <p>Текст перестаёт быть разговором с самим собой<br>
-и становится коммуникацией.</p>
+                    <p><strong>Текст перестаёт обрываться<br>
+и начинает двигаться от точки к точке,<br>
+а не от намёка к намёку.</strong></p>
                 </div>
             </div>
         </div>
@@ -560,10 +570,9 @@
         <div class="nav-panel">
             <a href="../../index.html" class="nav-btn">🏠 На главную</a>
             <a href="../../course-plan.html" class="nav-btn">📖 План курса</a>
-            <a href="module-1-lesson-1.html" class="nav-btn">⬅️ Предыдущий урок</a>
-            <a href="module-1-lesson-3.html" class="nav-btn">➡️ Следующий урок</a>
-            <a href="./practice/module-1-lesson-2-test.html" class="nav-btn">🎯 Тест урока 2</a>
-            <a href="./practice/module-1-test.html" class="nav-btn">🏆 Общий тест модуля</a>
+            <a href="module-2-lesson-3.html" class="nav-btn">⬅️ Предыдущий урок</a>
+            <a href="./practice/module-2-lesson-4-test.html" class="nav-btn">🎯 Тест урока 4</a>
+            <a href="./practice/module-2-test.html" class="nav-btn">🏆 Общий тест модуля</a>
         </div>
 
         <div class="footer">
@@ -574,7 +583,7 @@
 
     <script>
         function toggleAnswer(id) {
-            const answer = document.getElementById('answer-' + id);
+            const answer = document.getElementById(id);
             const button = event.target;
             
             if (answer.classList.contains('show')) {
