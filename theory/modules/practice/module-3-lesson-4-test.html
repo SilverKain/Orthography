@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Тест - Урок 3: Граница между мыслями</title>
+    <title>Тест - Урок 4: Когда текст разваливается из-за лишних связок</title>
     <style>
         * {
             margin: 0;
@@ -64,21 +64,6 @@
             padding: 40px;
             margin-bottom: 30px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        }
-
-        .progress-bar {
-            height: 8px;
-            background: #f0f0f0;
-            border-radius: 10px;
-            overflow: hidden;
-            margin-bottom: 30px;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            width: 0%;
-            transition: width 0.5s ease;
         }
 
         .question-block {
@@ -265,7 +250,7 @@
             font-size: 3em;
             font-weight: bold;
             color: #764ba2;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
 
         .results-message {
@@ -278,7 +263,7 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
-            margin-bottom: 30px;
+            margin: 30px 0;
         }
 
         .result-stat {
@@ -287,42 +272,32 @@
             border-radius: 10px;
         }
 
-        .stat-value {
+        .result-stat-value {
             font-size: 2em;
             font-weight: bold;
             color: #667eea;
         }
 
-        .stat-label {
+        .result-stat-label {
             color: #666;
             margin-top: 5px;
         }
 
-        .buttons-group {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
         .button {
-            padding: 15px 30px;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1em;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
             display: inline-block;
-        }
-
-        .button-primary {
+            padding: 15px 30px;
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
         }
 
-        .button-primary:hover {
+        .button:hover {
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
@@ -335,6 +310,29 @@
 
         .button-secondary:hover {
             background: #f8f9ff;
+        }
+
+        .buttons-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.5s ease;
+            width: 0%;
         }
 
         .footer {
@@ -364,14 +362,16 @@
             }
 
             .header h1 {
-                font-size: 1.5em;
+                font-size: 1.6em;
                 line-height: 1.3;
-                margin-bottom: 8px;
             }
 
             .breadcrumb {
                 font-size: 0.85em;
-                margin-bottom: 12px;
+            }
+
+            .test-info {
+                font-size: 1em;
             }
 
             .test-content {
@@ -381,18 +381,30 @@
             }
 
             .question-block {
-                padding: 18px 14px;
+                padding: 20px 15px;
                 margin-bottom: 25px;
+            }
+
+            .question-number {
+                font-size: 0.85em;
+                padding: 6px 12px;
             }
 
             .question-text {
                 font-size: 1.1em;
-                line-height: 1.5;
+                line-height: 1.4;
                 margin-bottom: 16px;
             }
 
             .option {
                 padding: 14px 16px;
+                margin-bottom: 10px;
+            }
+
+            .option-marker {
+                width: 26px;
+                height: 26px;
+                font-size: 0.9em;
             }
 
             .option-text {
@@ -405,8 +417,22 @@
                 margin-top: 16px;
             }
 
+            .explanation-title {
+                font-size: 0.95em;
+            }
+
+            .explanation-text {
+                font-size: 0.9em;
+                line-height: 1.6;
+            }
+
             .results {
                 padding: 25px 15px;
+                border-radius: 12px;
+            }
+
+            .results-icon {
+                font-size: 3em;
             }
 
             .results-title {
@@ -415,6 +441,10 @@
 
             .results-score {
                 font-size: 2.5em;
+            }
+
+            .results-message {
+                font-size: 1.1em;
             }
 
             .results-details {
@@ -484,17 +514,17 @@
         <div class="header">
             <div class="breadcrumb">
                 <a href="../../../index.html">🏠 Главная</a> → 
-                <a href="../module-2-lesson-3.html">📖 Урок 3</a> → 
+                <a href="../module-3-lesson-4.html">📖 Урок 4</a> → 
                 Тест
             </div>
-            <h1>🎯 Тест: Модуль 2, Урок 3</h1>
-            <div class="test-info">Почему длинные фразы утомляют, а короткие — нет</div>
+            <h1>🎯 Тест: Модуль 3, Урок 4</h1>
+            <div class="test-info">Когда текст разваливается из-за лишних связок</div>
         </div>
 
         <div style="background: white; border-radius: 15px; padding: 20px; margin-bottom: 30px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
             <a href="../../../index.html" style="padding: 12px 24px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; text-decoration: none; border-radius: 8px; font-weight: bold; transition: all 0.3s;">🏠 На главную</a>
-            <a href="../module-2-lesson-3.html" style="padding: 12px 24px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; text-decoration: none; border-radius: 8px; font-weight: bold; transition: all 0.3s;">📚 Вернуться к уроку 3</a>
-            <a href="../module-2-lesson-4.html" style="padding: 12px 24px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; text-decoration: none; border-radius: 8px; font-weight: bold; transition: all 0.3s;">➡️ К уроку 4</a>
+            <a href="../module-3-lesson-4.html" style="padding: 12px 24px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; text-decoration: none; border-radius: 8px; font-weight: bold; transition: all 0.3s;">📚 Вернуться к уроку 4</a>
+            <a href="../module-3-lesson-5.html" style="padding: 12px 24px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; text-decoration: none; border-radius: 8px; font-weight: bold; transition: all 0.3s;">➡️ К уроку 5</a>
         </div>
 
         <div class="test-content" id="test-content">
@@ -504,320 +534,375 @@
 
             <!-- Вопрос 1 -->
             <div class="question-block" data-question="1">
-                <div class="question-number">Вопрос 1 из 8</div>
-                <div class="question-text">Почему длинное предложение может читаться легко?</div>
+                <div class="question-number">Вопрос 1 из 9</div>
+                <div class="question-text">В чём основная ошибка автора, который злоупотребляет связками?</div>
                 <div class="options">
                     <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">А</span>
-                            <span class="option-text">Потому что в нём мало вводных слов</span>
+                            <span class="option-text">Он использует слишком сложные слова</span>
                         </div>
                     </div>
                     <div class="option" data-correct="true">
                         <div class="option-label">
                             <span class="option-marker">Б</span>
-                            <span class="option-text">Потому что главное действие ясно с начала</span>
+                            <span class="option-text">Он пытается заменить мысль маркерами логики</span>
                         </div>
                     </div>
                     <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">В</span>
-                            <span class="option-text">Потому что читатель привык к сложным конструкциям</span>
+                            <span class="option-text">Он нарушает грамматические правила</span>
                         </div>
                     </div>
                     <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">Г</span>
-                            <span class="option-text">Потому что в нём используются знакомые слова</span>
+                            <span class="option-text">Он пишет слишком формально</span>
                         </div>
                     </div>
                 </div>
                 <div class="explanation">
-                    <div class="explanation-title">💡 Объяснение:</div>
-                    <div class="explanation-text">Утомление возникает не из-за длины, а из-за потери ориентира. Если читатель с первых слов понимает, что происходит и куда движется мысль, длина перестаёт быть нагрузкой. Остальные варианты путают причину с внешними признаками.</div>
+                    <div class="explanation-title">💡 Объяснение</div>
+                    <div class="explanation-text">
+                        Правильный ответ: <strong>Б</strong>. Связка начинает подменять реальный логический шаг. Слова есть, движения мысли — нет.
+                    </div>
                 </div>
             </div>
 
             <!-- Вопрос 2 -->
             <div class="question-block" data-question="2">
-                <div class="question-number">Вопрос 2 из 8</div>
-                <div class="question-text">Что именно утомляет читателя в длинных фразах?</div>
+                <div class="question-number">Вопрос 2 из 9</div>
+                <div class="question-text">Зачем вообще нужна связка в тексте?</div>
                 <div class="options">
                     <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">А</span>
-                            <span class="option-text">Большое количество слов</span>
+                            <span class="option-text">Чтобы текст выглядел умнее</span>
                         </div>
                     </div>
                     <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">Б</span>
-                            <span class="option-text">Сложная пунктуация</span>
+                            <span class="option-text">Чтобы увеличить объём</span>
                         </div>
                     </div>
                     <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">В</span>
-                            <span class="option-text">Необходимость перечитывать</span>
+                            <span class="option-text">Чтобы украсить стиль</span>
                         </div>
                     </div>
                     <div class="option" data-correct="true">
                         <div class="option-label">
                             <span class="option-marker">Г</span>
-                            <span class="option-text">Ожидание смысла до самого конца</span>
+                            <span class="option-text">Чтобы показать, что происходит с мыслью</span>
                         </div>
                     </div>
                 </div>
                 <div class="explanation">
-                    <div class="explanation-title">💡 Объяснение:</div>
-                    <div class="explanation-text">Читателю приходится удерживать начало в памяти, не понимая, зачем оно. Это когнитивная нагрузка, а не «сложность языка». Перечитывание — следствие, а не причина.</div>
+                    <div class="explanation-title">💡 Объяснение</div>
+                    <div class="explanation-text">
+                        Правильный ответ: <strong>Г</strong>. Связка — это указатель действия мысли (поворот, вывод, следствие), а не декоративный элемент.
+                    </div>
                 </div>
             </div>
 
             <!-- Вопрос 3 -->
             <div class="question-block" data-question="3">
-                <div class="question-number">Вопрос 3 из 8</div>
-                <div class="question-text">Какой признак говорит о том, что предложение перегружает читателя?</div>
+                <div class="question-number">Вопрос 3 из 9</div>
+                <div class="question-text">Когда связка становится лишней?</div>
                 <div class="options">
                     <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">А</span>
-                            <span class="option-text">В нём больше двух запятых</span>
+                            <span class="option-text">Когда она длинная</span>
                         </div>
                     </div>
                     <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">Б</span>
-                            <span class="option-text">Его трудно читать вслух</span>
+                            <span class="option-text">Когда она повторяется</span>
                         </div>
                     </div>
                     <div class="option" data-correct="true">
                         <div class="option-label">
                             <span class="option-marker">В</span>
-                            <span class="option-text">Главное действие появляется в самом конце</span>
+                            <span class="option-text">Когда без неё смысл не меняется</span>
                         </div>
                     </div>
                     <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">Г</span>
-                            <span class="option-text">Оно длиннее одной строки</span>
+                            <span class="option-text">Когда она стоит в начале предложения</span>
                         </div>
                     </div>
                 </div>
                 <div class="explanation">
-                    <div class="explanation-title">💡 Объяснение:</div>
-                    <div class="explanation-text">Когда действие появляется слишком поздно, читатель всё время идёт «вслепую». Запятые, длина строки и чтение вслух — косвенные сигналы, но не суть проблемы.</div>
+                    <div class="explanation-title">💡 Объяснение</div>
+                    <div class="explanation-text">
+                        Правильный ответ: <strong>В</strong>. Если связку можно убрать без потери ориентира, она не выполняет работу.
+                    </div>
                 </div>
             </div>
 
             <!-- Вопрос 4 -->
             <div class="question-block" data-question="4">
-                <div class="question-number">Вопрос 4 из 8</div>
-                <div class="question-text">Почему короткое предложение тоже может быть тяжёлым?</div>
+                <div class="question-number">Вопрос 4 из 9</div>
+                <div class="question-text">Что не так с фразой: «Однако стоит отметить, что данный подход имеет свои особенности»?</div>
                 <div class="options">
                     <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">А</span>
-                            <span class="option-text">Потому что оно слишком резкое</span>
+                            <span class="option-text">Слишком общая лексика</span>
                         </div>
                     </div>
                     <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">Б</span>
-                            <span class="option-text">Потому что в нём нет пояснений</span>
+                            <span class="option-text">Нет конкретных примеров</span>
                         </div>
                     </div>
                     <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">В</span>
-                            <span class="option-text">Потому что оно требует додумывания</span>
+                            <span class="option-text">Нарушена логика времени</span>
                         </div>
                     </div>
                     <div class="option" data-correct="true">
                         <div class="option-label">
                             <span class="option-marker">Г</span>
-                            <span class="option-text">Потому что направление мысли неясно</span>
+                            <span class="option-text">Связка обещает поворот, которого нет</span>
                         </div>
                     </div>
                 </div>
                 <div class="explanation">
-                    <div class="explanation-title">💡 Объяснение:</div>
-                    <div class="explanation-text">Если читатель не понимает, что именно происходит и зачем эта фраза, длина не спасает. Усталость возникает от неопределённости, а не от объёма.</div>
+                    <div class="explanation-title">💡 Объяснение</div>
+                    <div class="explanation-text">
+                        Правильный ответ: <strong>Г</strong>. «Однако» создаёт ожидание столкновения мыслей, но текст его не оправдывает.
+                    </div>
                 </div>
             </div>
 
             <!-- Вопрос 5 -->
             <div class="question-block" data-question="5">
-                <div class="question-number">Вопрос 5 из 8</div>
-                <div class="question-text">Что делает длинное предложение «работающим»?</div>
+                <div class="question-number">Вопрос 5 из 9</div>
+                <div class="question-text">Почему фраза «Таким образом, мы можем сделать вывод, что задача сложная» звучит пусто?</div>
                 <div class="options">
                     <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">А</span>
-                            <span class="option-text">Ритмическое чередование частей</span>
-                        </div>
-                    </div>
-                    <div class="option" data-correct="true">
-                        <div class="option-label">
-                            <span class="option-marker">Б</span>
-                            <span class="option-text">Постепенное раскрытие мысли</span>
+                            <span class="option-text">Потому что вывод слишком очевиден</span>
                         </div>
                     </div>
                     <div class="option" data-correct="false">
                         <div class="option-label">
+                            <span class="option-marker">Б</span>
+                            <span class="option-text">Потому что слово «таким образом» канцелярское</span>
+                        </div>
+                    </div>
+                    <div class="option" data-correct="true">
+                        <div class="option-label">
                             <span class="option-marker">В</span>
-                            <span class="option-text">Использование формально точных слов</span>
+                            <span class="option-text">Потому что нет предварительного движения к выводу</span>
                         </div>
                     </div>
                     <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">Г</span>
-                            <span class="option-text">Наличие вводного обобщения</span>
+                            <span class="option-text">Потому что предложение слишком короткое</span>
                         </div>
                     </div>
                 </div>
                 <div class="explanation">
-                    <div class="explanation-title">💡 Объяснение:</div>
-                    <div class="explanation-text">Хорошее предложение ведёт читателя шаг за шагом. Мысль раскрывается постепенно, и каждое следующее звено понятно из предыдущего. Остальные пункты могут помогать, но не решают задачу ориентации.</div>
+                    <div class="explanation-title">💡 Объяснение</div>
+                    <div class="explanation-text">
+                        Правильный ответ: <strong>В</strong>. Связка указывает на итог, но путь к нему в тексте отсутствует.
+                    </div>
                 </div>
             </div>
 
             <!-- Вопрос 6 -->
             <div class="question-block" data-question="6">
-                <div class="question-number">Вопрос 6 из 8</div>
-                <div class="question-text">Какой вопрос лучше всего задать себе при проверке длинной фразы?</div>
+                <div class="question-number">Вопрос 6 из 9</div>
+                <div class="question-text">Какой признак того, что связка маскирует слабую мысль?</div>
                 <div class="options">
                     <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">А</span>
-                            <span class="option-text">«Можно ли сократить?»</span>
+                            <span class="option-text">Она стоит в середине предложения</span>
                         </div>
                     </div>
                     <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">Б</span>
-                            <span class="option-text">«Достаточно ли формально?»</span>
-                        </div>
-                    </div>
-                    <div class="option" data-correct="true">
-                        <div class="option-label">
-                            <span class="option-marker">В</span>
-                            <span class="option-text">«Понятно ли направление с начала?»</span>
+                            <span class="option-text">Она звучит уверенно</span>
                         </div>
                     </div>
                     <div class="option" data-correct="false">
                         <div class="option-label">
+                            <span class="option-marker">В</span>
+                            <span class="option-text">Она часто повторяется</span>
+                        </div>
+                    </div>
+                    <div class="option" data-correct="true">
+                        <div class="option-label">
                             <span class="option-marker">Г</span>
-                            <span class="option-text">«Не слишком ли разговорно?»</span>
+                            <span class="option-text">Без неё фраза выглядит пустой</span>
                         </div>
                     </div>
                 </div>
                 <div class="explanation">
-                    <div class="explanation-title">💡 Объяснение:</div>
-                    <div class="explanation-text">Ключевая проверка — не длина и не стиль, а направление движения. Если направление ясно сразу, фраза работает. Если нет — она утомляет, даже будучи короткой.</div>
+                    <div class="explanation-title">💡 Объяснение</div>
+                    <div class="explanation-text">
+                        Правильный ответ: <strong>Г</strong>. Если без связки остаётся только намёк, значит, связка прикрывала отсутствие содержания.
+                    </div>
                 </div>
             </div>
 
             <!-- Вопрос 7 -->
             <div class="question-block" data-question="7">
-                <div class="question-number">Вопрос 7 из 8</div>
-                <div class="question-text">Что происходит, когда в предложении несколько смысловых центров?</div>
+                <div class="question-number">Вопрос 7 из 9</div>
+                <div class="question-text">Что происходит с текстом, когда «каждое предложение на поводке»?</div>
                 <div class="options">
                     <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">А</span>
-                            <span class="option-text">Фраза становится выразительнее</span>
-                        </div>
-                    </div>
-                    <div class="option" data-correct="true">
-                        <div class="option-label">
-                            <span class="option-marker">Б</span>
-                            <span class="option-text">Читатель теряет фокус</span>
+                            <span class="option-text">Он становится логичнее</span>
                         </div>
                     </div>
                     <div class="option" data-correct="false">
                         <div class="option-label">
+                            <span class="option-marker">Б</span>
+                            <span class="option-text">Он выглядит аккуратным</span>
+                        </div>
+                    </div>
+                    <div class="option" data-correct="true">
+                        <div class="option-label">
                             <span class="option-marker">В</span>
-                            <span class="option-text">Текст выглядит умнее</span>
+                            <span class="option-text">Он начинает вязнуть</span>
                         </div>
                     </div>
                     <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">Г</span>
-                            <span class="option-text">Появляется нужная сложность</span>
+                            <span class="option-text">Он читается быстрее</span>
                         </div>
                     </div>
                 </div>
                 <div class="explanation">
-                    <div class="explanation-title">💡 Объяснение:</div>
-                    <div class="explanation-text">Когда несколько центров конкурируют, читатель не понимает, за что «держаться». Это снова вопрос ориентира: внимание рассеивается, и возникает усталость.</div>
+                    <div class="explanation-title">💡 Объяснение</div>
+                    <div class="explanation-text">
+                        Правильный ответ: <strong>В</strong>. Избыточные связки тормозят движение и создают ощущение натужности.
+                    </div>
                 </div>
             </div>
 
             <!-- Вопрос 8 -->
             <div class="question-block" data-question="8">
-                <div class="question-number">Вопрос 8 из 8</div>
-                <div class="question-text">Почему перенос части информации в отдельное предложение часто помогает?</div>
+                <div class="question-number">Вопрос 8 из 9</div>
+                <div class="question-text">Какой вопрос — самый точный тест для проверки связки?</div>
                 <div class="options">
                     <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">А</span>
-                            <span class="option-text">Потому что текст становится короче</span>
+                            <span class="option-text">Красиво ли это звучит?</span>
                         </div>
                     </div>
                     <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">Б</span>
-                            <span class="option-text">Потому что так правильнее по стилю</span>
+                            <span class="option-text">Принято ли так писать?</span>
                         </div>
                     </div>
                     <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">В</span>
-                            <span class="option-text">Потому что читатель отдыхает</span>
+                            <span class="option-text">Не будет ли слишком просто без неё?</span>
                         </div>
                     </div>
                     <div class="option" data-correct="true">
                         <div class="option-label">
                             <span class="option-marker">Г</span>
-                            <span class="option-text">Потому что каждая мысль получает своё действие</span>
+                            <span class="option-text">Что именно она здесь делает?</span>
                         </div>
                     </div>
                 </div>
                 <div class="explanation">
-                    <div class="explanation-title">💡 Объяснение:</div>
-                    <div class="explanation-text">Разделение — не упрощение, а пересборка движения. Каждая мысль начинает выполнять свою функцию, а читателю не нужно удерживать всё одновременно.</div>
+                    <div class="explanation-title">💡 Объяснение</div>
+                    <div class="explanation-text">
+                        Правильный ответ: <strong>Г</strong>. Если нельзя назвать функцию связки, она не работает.
+                    </div>
                 </div>
             </div>
 
+            <!-- Вопрос 9 -->
+            <div class="question-block" data-question="9">
+                <div class="question-number">Вопрос 9 из 9</div>
+                <div class="question-text">Что означает ситуация, когда текст понятен даже без всех маркеров?</div>
+                <div class="options">
+                    <div class="option" data-correct="false">
+                        <div class="option-label">
+                            <span class="option-marker">А</span>
+                            <span class="option-text">Связки подобраны идеально</span>
+                        </div>
+                    </div>
+                    <div class="option" data-correct="false">
+                        <div class="option-label">
+                            <span class="option-marker">Б</span>
+                            <span class="option-text">Текст слишком простой</span>
+                        </div>
+                    </div>
+                    <div class="option" data-correct="true">
+                        <div class="option-label">
+                            <span class="option-marker">В</span>
+                            <span class="option-text">Связки избыточны</span>
+                        </div>
+                    </div>
+                    <div class="option" data-correct="false">
+                        <div class="option-label">
+                            <span class="option-marker">Г</span>
+                            <span class="option-text">Логика слишком очевидна</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="explanation">
+                    <div class="explanation-title">💡 Объяснение</div>
+                    <div class="explanation-text">
+                        Правильный ответ: <strong>В</strong>. Если ход мысли читается без маркеров, часть из них — лишняя нагрузка.
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- Результаты -->
         <div class="results" id="results">
-            <div class="results-icon" id="results-icon">🎯</div>
+            <div class="results-icon" id="results-icon">🎉</div>
             <div class="results-title">Тест завершён!</div>
-            <div class="results-score"><span id="score">0</span> / 8</div>
-            <div class="results-message" id="results-message"></div>
+            <div class="results-score">
+                <span id="score">0</span> / 9
+            </div>
+            <div class="results-message" id="results-message">Отличный результат!</div>
             
             <div class="results-details">
                 <div class="result-stat">
-                    <div class="stat-value" id="correct-count">0</div>
-                    <div class="stat-label">Правильно</div>
+                    <div class="result-stat-value" id="correct-count">0</div>
+                    <div class="result-stat-label">Правильных ответов</div>
                 </div>
                 <div class="result-stat">
-                    <div class="stat-value" id="incorrect-count">0</div>
-                    <div class="stat-label">Неправильно</div>
+                    <div class="result-stat-value" id="incorrect-count">0</div>
+                    <div class="result-stat-label">Неправильных ответов</div>
                 </div>
                 <div class="result-stat">
-                    <div class="stat-value" id="percentage">0%</div>
-                    <div class="stat-label">Процент</div>
+                    <div class="result-stat-value" id="percentage">0%</div>
+                    <div class="result-stat-label">Процент верных</div>
                 </div>
             </div>
 
             <div class="buttons-group">
-                <button class="button button-primary" onclick="restartTest()">🔄 Пройти заново</button>
-                <a href="../module-2-lesson-3.html" class="button button-secondary">📚 Вернуться к уроку</a>
-                <a href="../module-2-lesson-4.html" class="button button-secondary">➡️ К уроку 4</a>
+                <a href="../../../index.html" class="button">🏠 На главную</a>
+                <a href="../module-3-lesson-4.html" class="button">📚 Вернуться к уроку 4</a>
+                <a href="../module-3-lesson-5.html" class="button">➡️ К уроку 5</a>
+                <button onclick="restartTest()" class="button button-secondary">🔄 Пройти ещё раз</button>
             </div>
         </div>
 
@@ -830,7 +915,7 @@
     <script>
         let answeredQuestions = 0;
         let correctAnswers = 0;
-        const totalQuestions = 8;
+        const totalQuestions = 9;
 
         document.querySelectorAll('.option').forEach(option => {
             option.addEventListener('click', function() {
@@ -895,16 +980,16 @@
 
             let message, icon;
             if (percentage === 100) {
-                message = 'Идеально! Ты понимаешь, где проходят границы между мыслями.';
+                message = 'Идеально! Ты понял, когда связки помогают, а когда только мешают.';
                 icon = '🏆';
             } else if (percentage >= 75) {
-                message = 'Отлично! Ты чувствуешь структуру сложного предложения.';
+                message = 'Отлично! Ты видишь разницу между рабочей связкой и декоративной.';
                 icon = '🎉';
             } else if (percentage >= 50) {
                 message = 'Неплохо! Стоит ещё раз вернуться к уроку для закрепления.';
                 icon = '👍';
             } else {
-                message = 'Рекомендуем перечитать урок и обратить внимание на примеры.';
+                message = 'Рекомендуем перечитать урок и обратить внимание на примеры избыточных связок.';
                 icon = '📚';
             }
 

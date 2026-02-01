@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Тест - Модуль 2: Запятая как индикатор смысла</title>
+    <title>Тест - Урок 2: Как читатель понимает: продолжение это или поворот</title>
     <style>
         * {
             margin: 0;
@@ -64,21 +64,6 @@
             padding: 40px;
             margin-bottom: 30px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        }
-
-        .progress-bar {
-            height: 8px;
-            background: #f0f0f0;
-            border-radius: 10px;
-            overflow: hidden;
-            margin-bottom: 30px;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            width: 0%;
-            transition: width 0.5s ease;
         }
 
         .question-block {
@@ -265,7 +250,7 @@
             font-size: 3em;
             font-weight: bold;
             color: #764ba2;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
 
         .results-message {
@@ -278,7 +263,7 @@
             display: grid;
             grid-template-columns: repeat(3, 1fr);
             gap: 20px;
-            margin-bottom: 30px;
+            margin: 30px 0;
         }
 
         .result-stat {
@@ -287,42 +272,32 @@
             border-radius: 10px;
         }
 
-        .stat-value {
+        .result-stat-value {
             font-size: 2em;
             font-weight: bold;
             color: #667eea;
         }
 
-        .stat-label {
+        .result-stat-label {
             color: #666;
             margin-top: 5px;
         }
 
-        .buttons-group {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
         .button {
-            padding: 15px 30px;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1em;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-decoration: none;
             display: inline-block;
-        }
-
-        .button-primary {
+            padding: 15px 30px;
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
         }
 
-        .button-primary:hover {
+        .button:hover {
             transform: translateY(-3px);
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
@@ -335,6 +310,29 @@
 
         .button-secondary:hover {
             background: #f8f9ff;
+        }
+
+        .buttons-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e0e0e0;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.5s ease;
+            width: 0%;
         }
 
         .footer {
@@ -364,14 +362,16 @@
             }
 
             .header h1 {
-                font-size: 1.5em;
+                font-size: 1.6em;
                 line-height: 1.3;
-                margin-bottom: 8px;
             }
 
             .breadcrumb {
                 font-size: 0.85em;
-                margin-bottom: 12px;
+            }
+
+            .test-info {
+                font-size: 1em;
             }
 
             .test-content {
@@ -381,18 +381,30 @@
             }
 
             .question-block {
-                padding: 18px 14px;
+                padding: 20px 15px;
                 margin-bottom: 25px;
+            }
+
+            .question-number {
+                font-size: 0.85em;
+                padding: 6px 12px;
             }
 
             .question-text {
                 font-size: 1.1em;
-                line-height: 1.5;
+                line-height: 1.4;
                 margin-bottom: 16px;
             }
 
             .option {
                 padding: 14px 16px;
+                margin-bottom: 10px;
+            }
+
+            .option-marker {
+                width: 26px;
+                height: 26px;
+                font-size: 0.9em;
             }
 
             .option-text {
@@ -405,8 +417,22 @@
                 margin-top: 16px;
             }
 
+            .explanation-title {
+                font-size: 0.95em;
+            }
+
+            .explanation-text {
+                font-size: 0.9em;
+                line-height: 1.6;
+            }
+
             .results {
                 padding: 25px 15px;
+                border-radius: 12px;
+            }
+
+            .results-icon {
+                font-size: 3em;
             }
 
             .results-title {
@@ -415,6 +441,10 @@
 
             .results-score {
                 font-size: 2.5em;
+            }
+
+            .results-message {
+                font-size: 1.1em;
             }
 
             .results-details {
@@ -484,20 +514,17 @@
         <div class="header">
             <div class="breadcrumb">
                 <a href="../../../index.html">🏠 Главная</a> → 
-                <a href="../module-2-lesson-1.html">📖 Урок 1</a> → 
-                <a href="../module-2-lesson-2.html">📖 Урок 2</a> →
-                <a href="../module-2-lesson-3.html">📖 Урок 3</a> → 
+                <a href="../module-3-lesson-2.html">📖 Урок 2</a> → 
                 Тест
             </div>
-            <h1>🎯 Тест: Модуль 2</h1>
-            <div class="test-info">Запятая как индикатор смысла (все 3 урока)</div>
+            <h1>🎯 Тест: Модуль 3, Урок 2</h1>
+            <div class="test-info">Как читатель понимает: продолжение это или поворот</div>
         </div>
 
         <div style="background: white; border-radius: 15px; padding: 20px; margin-bottom: 30px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); display: flex; gap: 15px; flex-wrap: wrap; justify-content: center;">
             <a href="../../../index.html" style="padding: 12px 24px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; text-decoration: none; border-radius: 8px; font-weight: bold; transition: all 0.3s;">🏠 На главную</a>
-            <a href="../module-2-lesson-1.html" style="padding: 12px 24px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; text-decoration: none; border-radius: 8px; font-weight: bold; transition: all 0.3s;">📚 Урок 1</a>
-            <a href="../module-2-lesson-2.html" style="padding: 12px 24px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; text-decoration: none; border-radius: 8px; font-weight: bold; transition: all 0.3s;">📚 Урок 2</a>
-            <a href="../module-2-lesson-3.html" style="padding: 12px 24px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; text-decoration: none; border-radius: 8px; font-weight: bold; transition: all 0.3s;">📚 Урок 3</a>
+            <a href="../module-3-lesson-2.html" style="padding: 12px 24px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; text-decoration: none; border-radius: 8px; font-weight: bold; transition: all 0.3s;">📚 Вернуться к уроку 2</a>
+            <a href="../module-3-lesson-3.html" style="padding: 12px 24px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; text-decoration: none; border-radius: 8px; font-weight: bold; transition: all 0.3s;">➡️ К уроку 3</a>
         </div>
 
         <div class="test-content" id="test-content">
@@ -505,414 +532,377 @@
                 <div class="progress-fill" id="progress-fill"></div>
             </div>
 
-            <!-- Вопрос 1 - Урок 1 -->
+            <!-- Вопрос 1 -->
             <div class="question-block" data-question="1">
-                <div class="question-number">Вопрос 1 из 10</div>
-                <div class="question-text">Почему «на слух» не всегда надёжный способ для расстановки запятых?</div>
+                <div class="question-number">Вопрос 1 из 9</div>
+                <div class="question-text">Какой главный вопрос возникает у читателя при переходе к новому абзацу?</div>
                 <div class="options">
-                    <div class="option" data-correct="true">
+                    <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">А</span>
-                            <span class="option-text">Пауза в речи не всегда совпадает с границей смысла</span>
+                            <span class="option-text">Насколько он длинный</span>
                         </div>
                     </div>
                     <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">Б</span>
-                            <span class="option-text">Мы все говорим с разной скоростью</span>
+                            <span class="option-text">Это новая тема или старая</span>
                         </div>
                     </div>
-                    <div class="option" data-correct="false">
+                    <div class="option" data-correct="true">
                         <div class="option-label">
                             <span class="option-marker">В</span>
-                            <span class="option-text">Паузы появляются только в письменной речи</span>
+                            <span class="option-text">Продолжается мысль или происходит поворот</span>
                         </div>
                     </div>
                     <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">Г</span>
-                            <span class="option-text">Правила пунктуации постоянно меняются</span>
+                            <span class="option-text">Согласен ли автор сам с собой</span>
                         </div>
                     </div>
                 </div>
                 <div class="explanation">
                     <div class="explanation-title">💡 Объяснение</div>
                     <div class="explanation-text">
-                        Правильный ответ: <strong>А</strong>. Пауза может быть связана с дыханием, интонацией или подбором слов. Запятая же ставится по смысловой структуре, а не по интонации.
+                        Правильный ответ: <strong>В</strong>. Читатель всегда проверяет направление движения. Он хочет понять: его ведут дальше по той же линии или предлагают свернуть.
                     </div>
                 </div>
             </div>
 
-            <!-- Вопрос 2 - Урок 1 -->
+            <!-- Вопрос 2 -->
             <div class="question-block" data-question="2">
-                <div class="question-number">Вопрос 2 из 10</div>
-                <div class="question-text">Где пауза есть, а запятая не нужна?</div>
+                <div class="question-number">Вопрос 2 из 9</div>
+                <div class="question-text">Почему ощущение «скачка» возникает даже без явной ошибки?</div>
                 <div class="options">
-                    <div class="option" data-correct="true">
-                        <div class="option-label">
-                            <span class="option-marker">А</span>
-                            <span class="option-text">Я хочу сказать честно</span>
-                        </div>
-                    </div>
                     <div class="option" data-correct="false">
                         <div class="option-label">
+                            <span class="option-marker">А</span>
+                            <span class="option-text">Потому что предложения слишком резкие</span>
+                        </div>
+                    </div>
+                    <div class="option" data-correct="true">
+                        <div class="option-label">
                             <span class="option-marker">Б</span>
-                            <span class="option-text">Я думаю что ты прав</span>
+                            <span class="option-text">Потому что отсутствует сигнал смены направления</span>
                         </div>
                     </div>
                     <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">В</span>
-                            <span class="option-text">Завтра в 10 утра приходи</span>
+                            <span class="option-text">Потому что текст перегружен деталями</span>
                         </div>
                     </div>
                     <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">Г</span>
-                            <span class="option-text">Он пришёл и она встала</span>
+                            <span class="option-text">Потому что читатель отвлёкся</span>
                         </div>
                     </div>
                 </div>
                 <div class="explanation">
                     <div class="explanation-title">💡 Объяснение</div>
                     <div class="explanation-text">
-                        Правильный ответ: <strong>А</strong>. «Честно» здесь — обстоятельство образа действия (как сказать?), а не вводное слово. Пауза возможна для интонации, но запятая не нужна.
+                        Правильный ответ: <strong>Б</strong>. Скачок — это не ошибка формы, а ошибка навигации. Поворот есть, но он не обозначен, поэтому выглядит как обрыв.
                     </div>
                 </div>
             </div>
 
-            <!-- Вопрос 3 - Урок 1 -->
+            <!-- Вопрос 3 -->
             <div class="question-block" data-question="3">
-                <div class="question-number">Вопрос 3 из 10</div>
-                <div class="question-text">Что показывает запятая в предложении?</div>
+                <div class="question-number">Вопрос 3 из 9</div>
+                <div class="question-text">Что означает фраза «Связь — это не слово, а сигнал движения мысли»?</div>
                 <div class="options">
-                    <div class="option" data-correct="true">
+                    <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">А</span>
-                            <span class="option-text">Границу смысловых блоков, переключение между частями высказывания</span>
+                            <span class="option-text">Связки не нужны</span>
                         </div>
                     </div>
                     <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">Б</span>
-                            <span class="option-text">Место для вдоха при чтении</span>
+                            <span class="option-text">Связь создаётся только союзами</span>
                         </div>
                     </div>
                     <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">В</span>
-                            <span class="option-text">Конец грамматической основы</span>
+                            <span class="option-text">Любое продолжение должно быть длинным</span>
                         </div>
                     </div>
-                    <div class="option" data-correct="false">
+                    <div class="option" data-correct="true">
                         <div class="option-label">
                             <span class="option-marker">Г</span>
-                            <span class="option-text">Эмоциональную окраску</span>
+                            <span class="option-text">Важно показать роль следующего шага</span>
                         </div>
                     </div>
                 </div>
                 <div class="explanation">
                     <div class="explanation-title">💡 Объяснение</div>
                     <div class="explanation-text">
-                        Правильный ответ: <strong>А</strong>. Запятая — это знак структуры мысли. Она показывает переходы, выделяет дополнительную информацию, маркирует придаточные части.
+                        Правильный ответ: <strong>Г</strong>. Связь — это понимание читателем функции абзаца: он продолжает, уточняет, возражает или подводит итог.
                     </div>
                 </div>
             </div>
 
-            <!-- Вопрос 4 - Урок 2 -->
+            <!-- Вопрос 4 -->
             <div class="question-block" data-question="4">
-                <div class="question-number">Вопрос 4 из 10</div>
-                <div class="question-text">Что такое уточнение в предложении?</div>
+                <div class="question-number">Вопрос 4 из 9</div>
+                <div class="question-text">Почему фразы «Этот подход имеет ряд преимуществ. Он активно используется в смежных проектах.» могут вызвать неуверенность у читателя?</div>
                 <div class="options">
-                    <div class="option" data-correct="true">
+                    <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">А</span>
-                            <span class="option-text">Дополнительная информация, которая сужает смысл основного слова</span>
+                            <span class="option-text">Потому что нет конкретных примеров</span>
                         </div>
                     </div>
                     <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">Б</span>
-                            <span class="option-text">Любое слово, которое можно убрать</span>
+                            <span class="option-text">Потому что предложения слишком похожи</span>
                         </div>
                     </div>
-                    <div class="option" data-correct="false">
+                    <div class="option" data-correct="true">
                         <div class="option-label">
                             <span class="option-marker">В</span>
-                            <span class="option-text">Синоним к основному слову</span>
+                            <span class="option-text">Потому что неясно, подтверждение это или новая мысль</span>
                         </div>
                     </div>
                     <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">Г</span>
-                            <span class="option-text">Вводное слово в начале фразы</span>
+                            <span class="option-text">Потому что стиль слишком сухой</span>
                         </div>
                     </div>
                 </div>
                 <div class="explanation">
                     <div class="explanation-title">💡 Объяснение</div>
                     <div class="explanation-text">
-                        Правильный ответ: <strong>А</strong>. Уточнение делает основной член предложения более конкретным: «Завтра, в 10 утра» — «в 10 утра» уточняет «завтра».
+                        Правильный ответ: <strong>В</strong>. Использование в других проектах может быть: аргументом в пользу, отдельным фактом, началом новой линии. Без сигнала читатель вынужден выбирать сам.
                     </div>
                 </div>
             </div>
 
-            <!-- Вопрос 5 - Урок 2 -->
+            <!-- Вопрос 5 -->
             <div class="question-block" data-question="5">
-                <div class="question-number">Вопрос 5 из 10</div>
-                <div class="question-text">Где нужна запятая?<br>«Он пришёл рано около восьми часов»</div>
+                <div class="question-number">Вопрос 5 из 9</div>
+                <div class="question-text">Как читатель воспринимает неотмеченный поворот?</div>
                 <div class="options">
-                    <div class="option" data-correct="true">
+                    <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">А</span>
-                            <span class="option-text">Он пришёл рано, около восьми часов</span>
+                            <span class="option-text">Как логичное развитие</span>
                         </div>
                     </div>
                     <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">Б</span>
-                            <span class="option-text">Он пришёл, рано около восьми часов</span>
+                            <span class="option-text">Как уточнение</span>
                         </div>
                     </div>
                     <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">В</span>
-                            <span class="option-text">Запятая не нужна</span>
+                            <span class="option-text">Как интересный приём</span>
                         </div>
                     </div>
-                    <div class="option" data-correct="false">
+                    <div class="option" data-correct="true">
                         <div class="option-label">
                             <span class="option-marker">Г</span>
-                            <span class="option-text">Он, пришёл рано, около восьми часов</span>
+                            <span class="option-text">Как странный разрыв</span>
                         </div>
                     </div>
                 </div>
                 <div class="explanation">
                     <div class="explanation-title">💡 Объяснение</div>
                     <div class="explanation-text">
-                        Правильный ответ: <strong>А</strong>. «Около восьми часов» уточняет «рано», поэтому выделяется запятой.
+                        Правильный ответ: <strong>Г</strong>. Если поворот не помечен, он не читается как смена курса, а ощущается как потеря нити.
                     </div>
                 </div>
             </div>
 
-            <!-- Вопрос 6 - Урок 2 -->
+            <!-- Вопрос 6 -->
             <div class="question-block" data-question="6">
-                <div class="question-number">Вопрос 6 из 10</div>
-                <div class="question-text">Что такое пояснение?</div>
+                <div class="question-number">Вопрос 6 из 9</div>
+                <div class="question-text">Зачем в микро-практике задаётся вопрос «Должен ли читатель здесь расслабиться или насторожиться»?</div>
                 <div class="options">
-                    <div class="option" data-correct="true">
+                    <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">А</span>
-                            <span class="option-text">Разъяснение того, что уже сказано другими словами</span>
+                            <span class="option-text">Для проверки эмоциональности текста</span>
                         </div>
                     </div>
                     <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">Б</span>
-                            <span class="option-text">Добавка новой информации</span>
+                            <span class="option-text">Для определения длины абзаца</span>
                         </div>
                     </div>
-                    <div class="option" data-correct="false">
+                    <div class="option" data-correct="true">
                         <div class="option-label">
                             <span class="option-marker">В</span>
-                            <span class="option-text">Конкретизация времени или места</span>
+                            <span class="option-text">Для распознавания поворота</span>
                         </div>
                     </div>
                     <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">Г</span>
-                            <span class="option-text">Придаточное предложение</span>
+                            <span class="option-text">Для оценки сложности темы</span>
                         </div>
                     </div>
                 </div>
                 <div class="explanation">
                     <div class="explanation-title">💡 Объяснение</div>
                     <div class="explanation-text">
-                        Правильный ответ: <strong>А</strong>. Пояснение — это то же самое другими словами: «Он был упрям, то есть не менял своих решений».
+                        Правильный ответ: <strong>В</strong>. Настороженность — признак смены направления. Если текст поворачивает, читателя нужно к этому подготовить.
                     </div>
                 </div>
             </div>
 
-            <!-- Вопрос 7 - Урок 3 -->
+            <!-- Вопрос 7 -->
             <div class="question-block" data-question="7">
-                <div class="question-number">Вопрос 7 из 10</div>
-                <div class="question-text">Что показывает запятая в сложном предложении?</div>
+                <div class="question-number">Вопрос 7 из 9</div>
+                <div class="question-text">Что означает ситуация, когда абзац можно убрать без потери логики?</div>
                 <div class="options">
-                    <div class="option" data-correct="true">
+                    <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">А</span>
-                            <span class="option-text">Границу между двумя самостоятельными мыслями — переключение</span>
+                            <span class="option-text">Абзац плохо написан</span>
                         </div>
                     </div>
                     <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">Б</span>
-                            <span class="option-text">Конец предложения</span>
+                            <span class="option-text">Абзац стилистически слаб</span>
                         </div>
                     </div>
                     <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">В</span>
-                            <span class="option-text">Место для паузы</span>
+                            <span class="option-text">Абзац дублирует предыдущий</span>
                         </div>
                     </div>
-                    <div class="option" data-correct="false">
+                    <div class="option" data-correct="true">
                         <div class="option-label">
                             <span class="option-marker">Г</span>
-                            <span class="option-text">Начало нового абзаца</span>
+                            <span class="option-text">Абзац не встроен в движение мысли</span>
                         </div>
                     </div>
                 </div>
                 <div class="explanation">
                     <div class="explanation-title">💡 Объяснение</div>
                     <div class="explanation-text">
-                        Правильный ответ: <strong>А</strong>. Запятая в сложном предложении — это переход между мыслями. Она помогает читателю не потеряться в структуре.
+                        Правильный ответ: <strong>Г</strong>. Если шаг можно пропустить, значит, он не является обязательным элементом маршрута.
                     </div>
                 </div>
             </div>
 
-            <!-- Вопрос 8 - Урок 3 -->
+            <!-- Вопрос 8 -->
             <div class="question-block" data-question="8">
-                <div class="question-number">Вопрос 8 из 10</div>
-                <div class="question-text">Нужна ли запятая?<br>«Он пришёл и мы начали обсуждение»</div>
+                <div class="question-number">Вопрос 8 из 9</div>
+                <div class="question-text">Почему уточнение часто выглядит как новая мысль?</div>
                 <div class="options">
-                    <div class="option" data-correct="true">
+                    <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">А</span>
-                            <span class="option-text">Да, нужна перед «и»: две части предложения</span>
+                            <span class="option-text">Потому что оно слишком длинное</span>
                         </div>
                     </div>
                     <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">Б</span>
-                            <span class="option-text">Нет, не нужна: это однородные члены</span>
+                            <span class="option-text">Потому что в нём используются другие слова</span>
                         </div>
                     </div>
-                    <div class="option" data-correct="false">
+                    <div class="option" data-correct="true">
                         <div class="option-label">
                             <span class="option-marker">В</span>
-                            <span class="option-text">Нужна запятая после «и»</span>
+                            <span class="option-text">Потому что не обозначено как уточнение</span>
                         </div>
                     </div>
                     <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">Г</span>
-                            <span class="option-text">Можно ставить по желанию</span>
+                            <span class="option-text">Потому что читатель не внимателен</span>
                         </div>
                     </div>
                 </div>
                 <div class="explanation">
                     <div class="explanation-title">💡 Объяснение</div>
                     <div class="explanation-text">
-                        Правильный ответ: <strong>А</strong>. «Он пришёл, и мы начали обсуждение» — две самостоятельные части с разными подлежащими. Запятая нужна.
+                        Правильный ответ: <strong>В</strong>. Без сигнала «я поясняю предыдущее» уточнение воспринимается как смена темы.
                     </div>
                 </div>
             </div>
 
-            <!-- Вопрос 9 - Урок 3 -->
+            <!-- Вопрос 9 -->
             <div class="question-block" data-question="9">
-                <div class="question-number">Вопрос 9 из 10</div>
-                <div class="question-text">Когда запятая перед «и» НЕ нужна?</div>
+                <div class="question-number">Вопрос 9 из 9</div>
+                <div class="question-text">Какой вопрос самый точный для проверки абзаца?</div>
                 <div class="options">
-                    <div class="option" data-correct="true">
+                    <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">А</span>
-                            <span class="option-text">Когда «и» соединяет однородные члены: «Он встал и вышел»</span>
+                            <span class="option-text">Красиво ли он звучит</span>
                         </div>
                     </div>
                     <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">Б</span>
-                            <span class="option-text">Когда «и» соединяет две части сложного предложения</span>
+                            <span class="option-text">Есть ли в нём примеры</span>
                         </div>
                     </div>
                     <div class="option" data-correct="false">
                         <div class="option-label">
                             <span class="option-marker">В</span>
-                            <span class="option-text">Запятая перед «и» всегда нужна</span>
+                            <span class="option-text">Можно ли его сократить</span>
                         </div>
                     </div>
-                    <div class="option" data-correct="false">
+                    <div class="option" data-correct="true">
                         <div class="option-label">
                             <span class="option-marker">Г</span>
-                            <span class="option-text">Когда предложение короткое</span>
+                            <span class="option-text">Зачем он стоит именно здесь</span>
                         </div>
                     </div>
                 </div>
                 <div class="explanation">
                     <div class="explanation-title">💡 Объяснение</div>
                     <div class="explanation-text">
-                        Правильный ответ: <strong>А</strong>. «Он встал и вышел» — однородные сказуемые. Это не переход между мыслями, а перечисление действий внутри одной мысли.
+                        Правильный ответ: <strong>Г</strong>. Если роль абзаца нельзя объяснить чётко, значит, его функция в движении мысли не определена.
                     </div>
                 </div>
             </div>
-
-            <!-- Вопрос 10 - Урок 3 -->
-            <div class="question-block" data-question="10">
-                <div class="question-number">Вопрос 10 из 10</div>
-                <div class="question-text">Как проверить, нужна ли запятая в сложном предложении?</div>
-                <div class="options">
-                    <div class="option" data-correct="true">
-                        <div class="option-label">
-                            <span class="option-marker">А</span>
-                            <span class="option-text">Попробовать разделить на два предложения: если получается — запятая нужна</span>
-                        </div>
-                    </div>
-                    <div class="option" data-correct="false">
-                        <div class="option-label">
-                            <span class="option-marker">Б</span>
-                            <span class="option-text">Прочитать вслух и поставить запятую там, где делаешь паузу</span>
-                        </div>
-                    </div>
-                    <div class="option" data-correct="false">
-                        <div class="option-label">
-                            <span class="option-marker">В</span>
-                            <span class="option-text">Посчитать количество слов</span>
-                        </div>
-                    </div>
-                    <div class="option" data-correct="false">
-                        <div class="option-label">
-                            <span class="option-marker">Г</span>
-                            <span class="option-text">Всегда ставить запятую перед союзами</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="explanation">
-                    <div class="explanation-title">💡 Объяснение</div>
-                    <div class="explanation-text">
-                        Правильный ответ: <strong>А</strong>. Простой способ: попробуй разделить предложение на два. Если каждая часть может быть отдельным предложением — запятая нужна.
-                    </div>
-                </div>
-            </div>
-
         </div>
 
-        <!-- Результаты -->
         <div class="results" id="results">
-            <div class="results-icon" id="results-icon">🎯</div>
+            <div class="results-icon" id="results-icon">🎉</div>
             <div class="results-title">Тест завершён!</div>
-            <div class="results-score"><span id="score">0</span> / 10</div>
-            <div class="results-message" id="results-message"></div>
+            <div class="results-score">
+                <span id="score">0</span> / 9
+            </div>
+            <div class="results-message" id="results-message">Отличный результат!</div>
             
             <div class="results-details">
                 <div class="result-stat">
-                    <div class="stat-value" id="correct-count">0</div>
-                    <div class="stat-label">Правильно</div>
+                    <div class="result-stat-value" id="correct-count">0</div>
+                    <div class="result-stat-label">Правильных ответов</div>
                 </div>
                 <div class="result-stat">
-                    <div class="stat-value" id="incorrect-count">0</div>
-                    <div class="stat-label">Неправильно</div>
+                    <div class="result-stat-value" id="incorrect-count">0</div>
+                    <div class="result-stat-label">Неправильных ответов</div>
                 </div>
                 <div class="result-stat">
-                    <div class="stat-value" id="percentage">0%</div>
-                    <div class="stat-label">Процент</div>
+                    <div class="result-stat-value" id="percentage">0%</div>
+                    <div class="result-stat-label">Процент верных</div>
                 </div>
             </div>
 
             <div class="buttons-group">
-                <button class="button button-primary" onclick="restartTest()">🔄 Пройти заново</button>
-                <a href="../../../index.html" class="button button-secondary">🏠 На главную</a>
-                <a href="../module-2-lesson-1.html" class="button button-secondary">📚 Урок 1</a>
+                <a href="../../../index.html" class="button">🏠 На главную</a>
+                <a href="../module-3-lesson-2.html" class="button">📚 Вернуться к уроку 2</a>
+                <a href="../module-3-lesson-3.html" class="button">➡️ К уроку 3</a>
+                <button onclick="restartTest()" class="button button-secondary">🔄 Пройти ещё раз</button>
             </div>
         </div>
 
@@ -925,7 +915,7 @@
     <script>
         let answeredQuestions = 0;
         let correctAnswers = 0;
-        const totalQuestions = 10;
+        const totalQuestions = 9;
 
         document.querySelectorAll('.option').forEach(option => {
             option.addEventListener('click', function() {
@@ -990,16 +980,16 @@
 
             let message, icon;
             if (percentage === 100) {
-                message = 'Идеально! Ты полностью освоил модуль о запятых и смысловых границах.';
+                message = 'Идеально! Ты понял, как читатель распознаёт продолжение и поворот.';
                 icon = '🏆';
-            } else if (percentage >= 80) {
-                message = 'Отличный результат! Ты понимаешь, как запятая служит индикатором смысла.';
+            } else if (percentage >= 75) {
+                message = 'Отлично! Ты видишь разницу между логическими шагами и понимаешь роль сигналов.';
                 icon = '🎉';
-            } else if (percentage >= 60) {
-                message = 'Хороший результат! Некоторые темы стоит повторить.';
+            } else if (percentage >= 50) {
+                message = 'Неплохо! Стоит ещё раз вернуться к уроку для закрепления.';
                 icon = '👍';
             } else {
-                message = 'Рекомендуем вернуться к урокам и внимательно проработать примеры.';
+                message = 'Рекомендуем перечитать урок и обратить внимание на примеры навигации в тексте.';
                 icon = '📚';
             }
 
