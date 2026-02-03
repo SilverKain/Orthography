@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Случайный тест - Курс русского языка</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 50px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+            animation: fadeIn 0.5s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .icon {
+            font-size: 5em;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        h1 {
+            color: #667eea;
+            font-size: 2.5em;
+            margin-bottom: 15px;
+        }
+
+        .description {
+            color: #666;
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 18px 40px;
+            font-size: 1.2em;
+            font-weight: bold;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: #667eea;
+            border: 2px solid #667eea;
+        }
+
+        .btn-secondary:hover {
+            background: #f8f9ff;
+            transform: translateY(-2px);
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9ff;
+            border-radius: 12px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        .stat-label {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+
+        .loading {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .loading.active {
+            display: block;
+        }
+
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @media (max-width: 768px) {
+            .card {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+
+            .icon {
+                font-size: 4em;
+            }
+
+            .stats {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="icon">🎲</div>
+            <h1>Случайный тест</h1>
+            <p class="description">
+                Проверьте свои знания! Система выберет для вас случайный тест из любого модуля курса.
+                Это отличный способ повторить материал и проверить, что вы усвоили.
+            </p>
+
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">23</div>
+                    <div class="stat-label">Доступных теста</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">Модулей</div>
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button class="btn btn-primary" onclick="startRandomTest()">
+                    🎯 Начать случайный тест
+                </button>
+                <a href="./course-plan.html" class="btn btn-secondary">
+                    ← Вернуться к плану курса
+                </a>
+            </div>
+
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p style="margin-top: 15px; color: #666;">Выбираем тест...</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Список всех доступных тестов
+        const allTests = [
+            { module: 1, lesson: 1, title: 'Центр высказывания', path: 'theory/modules/practice/module-1-lesson-1-test.html' },
+            { module: 1, lesson: 2, title: 'Устная и письменная логика', path: 'theory/modules/practice/module-1-lesson-2-test.html' },
+            { module: 1, lesson: 3, title: 'Когнитивная нагрузка', path: 'theory/modules/practice/module-1-lesson-3-test.html' },
+            
+            { module: 2, lesson: 1, title: 'Структура предложения', path: 'theory/modules/practice/module-2-lesson-1-test.html' },
+            { module: 2, lesson: 2, title: 'Сложное предложение', path: 'theory/modules/practice/module-2-lesson-2-test.html' },
+            { module: 2, lesson: 3, title: 'Связь и разрыв', path: 'theory/modules/practice/module-2-lesson-3-test.html' },
+            { module: 2, lesson: 4, title: 'Интонация и пунктуация', path: 'theory/modules/practice/module-2-lesson-4-test.html' },
+            
+            { module: 3, lesson: 1, title: 'Согласование подлежащего и сказуемого', path: 'theory/modules/practice/module-3-lesson-1-test.html' },
+            { module: 3, lesson: 2, title: 'Глаголы-связки и именное сказуемое', path: 'theory/modules/practice/module-3-lesson-2-test.html' },
+            { module: 3, lesson: 3, title: 'Падежное управление', path: 'theory/modules/practice/module-3-lesson-3-test.html' },
+            { module: 3, lesson: 4, title: 'Деепричастные обороты', path: 'theory/modules/practice/module-3-lesson-4-test.html' },
+            { module: 3, lesson: 5, title: 'Однородные члены', path: 'theory/modules/practice/module-3-lesson-5-test.html' },
+            { module: 3, lesson: 6, title: 'Распространённые обороты', path: 'theory/modules/practice/module-3-lesson-6-test.html' },
+            { module: 3, lesson: 7, title: 'Вводные конструкции', path: 'theory/modules/practice/module-3-lesson-7-test.html' },
+            { module: 3, lesson: 8, title: 'Сравнительные обороты', path: 'theory/modules/practice/module-3-lesson-8-test.html' },
+            
+            { module: 4, lesson: 1, title: 'Удвоение смысла', path: 'theory/modules/practice/module-4-lesson-1-test.html' },
+            { module: 4, lesson: 2, title: 'Размытые и бытовые обороты', path: 'theory/modules/practice/module-4-lesson-2-test.html' },
+            { module: 4, lesson: 3, title: 'Именные и глагольные формы', path: 'theory/modules/practice/module-4-lesson-3-test.html' },
+            { module: 4, lesson: 4, title: 'Причастия и отглагольные существительные', path: 'theory/modules/practice/module-4-lesson-4-test.html' },
+            
+            { module: 5, lesson: 1, title: 'Анализ ошибок', path: 'theory/modules/practice/module-5-lesson-1-test.html' },
+            { module: 5, lesson: 2, title: 'Редактирование чужого текста', path: 'theory/modules/practice/module-5-lesson-2-test.html' },
+            { module: 5, lesson: 3, title: 'Выявление паттернов в своих текстах', path: 'theory/modules/practice/module-5-lesson-3-test.html' },
+            { module: 5, lesson: 4, title: 'Стратегия завершения текста', path: 'theory/modules/practice/module-5-lesson-4-test.html' }
+        ];
+
+        function startRandomTest() {
+            // Показываем индикатор загрузки
+            const loading = document.getElementById('loading');
+            const buttonGroup = document.querySelector('.button-group');
+            
+            loading.classList.add('active');
+            buttonGroup.style.display = 'none';
+
+            // Имитация выбора (для эффекта)
+            setTimeout(() => {
+                // Выбираем случайный тест
+                const randomIndex = Math.floor(Math.random() * allTests.length);
+                const selectedTest = allTests[randomIndex];
+                
+                // Сохраняем информацию о том, что это случайный тест
+                sessionStorage.setItem('isRandomTest', 'true');
+                sessionStorage.setItem('randomTestInfo', JSON.stringify({
+                    module: selectedTest.module,
+                    lesson: selectedTest.lesson,
+                    title: selectedTest.title
+                }));
+
+                // Переходим к выбранному тесту
+                window.location.href = selectedTest.path;
+            }, 1000);
+        }
+
+        // Анимация при загрузке страницы
+        window.addEventListener('load', () => {
+            document.querySelector('.card').style.animation = 'fadeIn 0.5s ease-out';
+        });
+    </script>
+</body>
+</html>
