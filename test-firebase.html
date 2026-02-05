@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Тест Firebase подключения</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .status {
+            padding: 20px;
+            margin: 10px 0;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+        .success {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        .error {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        .info {
+            background: #d1ecf1;
+            border: 1px solid #bee5eb;
+            color: #0c5460;
+        }
+        button {
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        button:hover {
+            background: #5568d3;
+        }
+        #log {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            max-height: 400px;
+            overflow-y: auto;
+            font-family: monospace;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔥 Тест Firebase подключения</h1>
+    
+    <div class="status info" style="margin-bottom: 10px;">
+        <strong>⚠️ Важно:</strong> Эта страница должна открываться через HTTP-сервер (например, Live Server в VS Code), 
+        а не напрямую из файловой системы (file://)
+    </div>
+
+    <div id="status" class="status info">
+        ⏳ Проверка подключения...
+    </div>
+
+    <div>
+        <button onclick="testConnection()">Проверить подключение</button>
+        <button onclick="testAuth()">Проверить авторизацию</button>
+        <button onclick="testSaveData()">Тест сохранения данных</button>
+        <button onclick="clearLog()">Очистить лог</button>
+    </div>
+
+    <div id="log"></div>
+
+    <script type="module">
+        import { saveTestResult, checkAuth, auth, db } from './src/firebase/firebase-test-integration.js';
+
+        function log(message, type = 'info') {
+            const logDiv = document.getElementById('log');
+            const timestamp = new Date().toLocaleTimeString();
+            const color = type === 'error' ? '#dc3545' : type === 'success' ? '#28a745' : '#333';
+            logDiv.innerHTML += `<div style="color: ${color}; margin: 5px 0;">[${timestamp}] ${message}</div>`;
+            logDiv.scrollTop = logDiv.scrollHeight;
+        }
+
+        window.clearLog = function() {
+            document.getElementById('log').innerHTML = '';
+        };
+
+        window.testConnection = async function() {
+            try {
+                log('Проверка подключения к Firebase...', 'info');
+                
+                // Проверяем, что модули загружены
+                if (auth && db) {
+                    log('✅ Firebase успешно инициализирован!', 'success');
+                    log('   Auth: ' + (auth ? 'OK' : 'FAIL'), 'info');
+                    log('   Firestore: ' + (db ? 'OK' : 'FAIL'), 'info');
+                    document.getElementById('status').className = 'status success';
+                    document.getElementById('status').textContent = '✅ Firebase подключен успешно!';
+                } else {
+                    throw new Error('Firebase модули не загружены');
+                }
+            } catch (error) {
+                log('❌ Ошибка подключения: ' + error.message, 'error');
+                log('   Stack: ' + error.stack, 'error');
+                document.getElementById('status').className = 'status error';
+                document.getElementById('status').textContent = '❌ Ошибка подключения: ' + error.message;
+            }
+        };
+
+        window.testAuth = async function() {
+            try {
+                log('Проверка авторизации...', 'info');
+                
+                const result = await checkAuth();
+                
+                if (result.authenticated) {
+                    log('✅ Пользователь авторизован: ' + result.user.email, 'success');
+                    log('   UID: ' + result.user.uid, 'info');
+                    log('   Display Name: ' + (result.user.displayName || 'не указано'), 'info');
+                } else {
+                    log('⚠️ Пользователь не авторизован', 'error');
+                    log('   Перейдите на главную страницу для входа', 'info');
+                }
+            } catch (error) {
+                log('❌ Ошибка проверки авторизации: ' + error.message, 'error');
+                log('   Stack: ' + error.stack, 'error');
+            }
+        };
+
+        window.testSaveData = async function() {
+            try {
+                log('Тестовое сохранение данных...', 'info');
+                
+                const testData = {
+                    lessonId: 'test-module-0-lesson-0',
+                    score: 95,
+                    correctAnswers: 19,
+                    totalQuestions: 20
+                };
+                
+                log('Данные для сохранения: ' + JSON.stringify(testData), 'info');
+                
+                const result = await saveTestResult(
+                    testData.lessonId,
+                    testData.score,
+                    testData.correctAnswers,
+                    testData.totalQuestions
+                );
+                
+                if (result.success) {
+                    log('✅ Данные успешно сохранены!', 'success');
+                    log('   Пользователь: ' + result.user, 'info');
+                    log('   Проверьте Firebase Console для подтверждения', 'info');
+                } else {
+                    log('⚠️ Данные не сохранены: ' + result.error, 'error');
+                }
+            } catch (error) {
+                log('❌ Ошибка сохранения: ' + error.message, 'error');
+                log('   Stack: ' + error.stack, 'error');
+            }
+        };
+
+        // Автоматическая проверка при загрузке
+        window.addEventListener('load', async () => {
+            log('Страница загружена, начинаем тесты...', 'info');
+            try {
+                await testConnection();
+                await new Promise(resolve => setTimeout(resolve, 500));
+                await testAuth();
+            } catch (error) {
+                log('❌ Ошибка при автоматическом тестировании: ' + error.message, 'error');
+                log('   Stack: ' + error.stack, 'error');
+            }
+        });
+
+        // Обработка ошибок модуля
+        window.addEventListener('error', (event) => {
+            log('❌ Глобальная ошибка: ' + event.message, 'error');
+            log('   Файл: ' + event.filename, 'error');
+            log('   Строка: ' + event.lineno, 'error');
+        });
+
+        // Обработка ошибок Promise
+        window.addEventListener('unhandledrejection', (event) => {
+            log('❌ Необработанный Promise: ' + event.reason, 'error');
+        });
+    </script>
+</body>
+</html>

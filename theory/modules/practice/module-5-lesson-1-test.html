@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -881,10 +881,14 @@
         </div>
     </div>
 
-    <script>
+    <script> type="module">
+        import { saveTestResult, checkAuth } from '../../../src/firebase/firebase-test-integration.js';
+
+
         let answeredQuestions = 0;
         let correctAnswers = 0;
         const totalQuestions = 8;
+        const lessonId = 'module-5-lesson-1'; // ID СѓСЂРѕРєР° РґР»СЏ СЃРѕС…СЂР°РЅРµРЅРёСЏ РІ Firebase
 
         document.querySelectorAll('.option').forEach(option => {
             option.addEventListener('click', function() {
@@ -964,7 +968,18 @@
 
             document.getElementById('results-message').textContent = message;
             document.getElementById('results-icon').textContent = icon;
-
+            // РЎРѕС…СЂР°РЅРµРЅРёРµ СЂРµР·СѓР»СЊС‚Р°С‚РѕРІ РІ Firebase
+            saveTestResult(lessonId, percentage, correctAnswers, totalQuestions)
+                .then(result => {
+                    if (result.success) {
+                        console.log('вњ… Р РµР·СѓР»СЊС‚Р°С‚С‹ СЃРѕС…СЂР°РЅРµРЅС‹ РґР»СЏ РїРѕР»СЊР·РѕРІР°С‚РµР»СЏ:', result.user);
+                    } else {
+                        console.warn('вљ пёЏ Р РµР·СѓР»СЊС‚Р°С‚С‹ РЅРµ СЃРѕС…СЂР°РЅРµРЅС‹:', result.error);
+                    }
+                })
+                .catch(error => {
+                    console.error('вќЊ РћС€РёР±РєР° РїСЂРё СЃРѕС…СЂР°РЅРµРЅРёРё:', error);
+                });
             resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
@@ -994,3 +1009,4 @@
     </script>
 </body>
 </html>
+

@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Модуль 1. Введение - Где язык и мысль расходятся</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.7;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .breadcrumb {
+            color: #999;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+
+        .breadcrumb a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            text-decoration: underline;
+        }
+
+        .header h1 {
+            color: #667eea;
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .header .module-info {
+            color: #666;
+            font-size: 1.1em;
+        }
+
+        .nav-panel {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-btn {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .lesson-content {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .lesson-section {
+            margin-bottom: 40px;
+        }
+
+        .lesson-section h2 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+
+        .lesson-section h3 {
+            color: #764ba2;
+            font-size: 1.3em;
+            margin: 25px 0 15px 0;
+        }
+
+        .lesson-section p {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.05em;
+        }
+
+        .lesson-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .lesson-section ul li {
+            color: #555;
+            margin-bottom: 12px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .lesson-section ul li:before {
+            content: "—";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .highlight-box {
+            background: #f8f9ff;
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 25px 0;
+            border-radius: 8px;
+        }
+
+        .footer {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                font-size: 16px;
+                line-height: 1.6;
+            }
+
+            .container {
+                max-width: 100%;
+            }
+
+            .header {
+                padding: 20px 15px;
+                margin-bottom: 20px;
+                border-radius: 12px;
+            }
+
+            .header h1 {
+                font-size: 1.5em;
+                line-height: 1.3;
+                margin-bottom: 8px;
+            }
+
+            .breadcrumb {
+                font-size: 0.85em;
+                margin-bottom: 12px;
+            }
+
+            .module-info {
+                font-size: 1em;
+                line-height: 1.5;
+            }
+
+            .nav-panel {
+                padding: 15px;
+                margin-bottom: 20px;
+                border-radius: 12px;
+                gap: 10px;
+            }
+
+            .nav-btn {
+                padding: 14px 20px;
+                font-size: 1em;
+                width: 100%;
+                text-align: center;
+            }
+
+            .nav-btn:hover {
+                transform: translateY(-2px);
+            }
+
+            .lesson-content {
+                padding: 20px 15px;
+                margin-bottom: 20px;
+                border-radius: 12px;
+            }
+
+            .lesson-section {
+                margin-bottom: 25px;
+            }
+
+            .lesson-section h2 {
+                font-size: 1.4em;
+                line-height: 1.3;
+                margin-bottom: 12px;
+            }
+
+            .lesson-section h3 {
+                font-size: 1.2em;
+                line-height: 1.3;
+                margin-bottom: 10px;
+            }
+
+            .lesson-section p,
+            .lesson-section li {
+                font-size: 1em;
+                line-height: 1.6;
+                margin-bottom: 12px;
+            }
+
+            .footer {
+                padding: 18px 15px;
+                margin-top: 20px;
+                border-radius: 12px;
+                font-size: 0.9em;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 8px;
+                font-size: 15px;
+            }
+
+            .header {
+                padding: 18px 12px;
+            }
+
+            .header h1 {
+                font-size: 1.3em;
+            }
+
+            .lesson-content {
+                padding: 16px 12px;
+            }
+
+            .lesson-section h2 {
+                font-size: 1.25em;
+            }
+
+            .lesson-section h3 {
+                font-size: 1.1em;
+            }
+
+            .nav-btn {
+                padding: 12px 16px;
+                font-size: 0.95em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="breadcrumb">
+                <a href="../../index.html">🏠 Главная</a> → 
+                <a href="../../course-plan.html">📖 План курса</a> → 
+                Модуль 2
+            </div>
+            <h1>📝 Модуль 2. Введение</h1>
+            <div class="module-info">Точка опоры фразы: о чём ты говоришь на самом деле</div>
+        </div>
+
+        <div class="nav-panel">
+            <a href="../../index.html" class="nav-btn">🏠 На главную</a>
+            <a href="../../course-plan.html" class="nav-btn">📖 План курса</a>
+            <a href="module-2-lesson-1.html" class="nav-btn">➡️ Следующий урок</a>
+        </div>
+
+        <div class="lesson-content">
+            <!-- Вступление к модулю -->
+            <div class="lesson-section">
+                <h2>Введение в модуль 2</h2>
+                <p>Этот модуль — про момент, который чаще всего упускают взрослые пишущие люди.<br>
+Не ошибки. Не стиль. Не «красоту формулировок».</p>
+                
+                <p>А точку, где мысль должна встать на опору —<br>
+и либо встаёт, либо расползается.</p>
+                
+                <p>Во многих текстах проблема не в том, <em>как</em> сказано,<br>
+а в том, что фраза так и не решила, <strong>что именно она утверждает</strong>,<br>
+кто действует<br>
+и за счёт чего держится смысл.</p>
+                
+                <p>Поэтому текст выглядит «нормально»,<br>
+но не работает:<br>
+не убеждает, не проясняет, не оставляет следа.</p>
+            </div>
+
+            <div class="lesson-section">
+                <h2>О чём этот модуль на самом деле</h2>
+                <p>Модуль 2 — не про грамматику как набор правил.<br>
+Он про <strong>ответственность фразы</strong>.</p>
+                
+                <p>Каждый урок разбирает один способ,<br>
+которым язык уходит от ясности:</p>
+                <ul>
+                    <li>мысль подменяется темой</li>
+                    <li>утверждение растворяется в формулировке</li>
+                    <li>подлежащее ничего не называет</li>
+                    <li>действия происходят без действующих лиц</li>
+                    <li>указательные слова заменяют решение назвать смысл</li>
+                </ul>
+                
+                <p>Это не случайные ошибки.<br>
+Это устойчивые способы <em>не выбирать главное</em>.</p>
+            </div>
+
+            <div class="lesson-section">
+                <h2>Зачем понимать эти темы</h2>
+                <p>Пока ты не видишь,<br>
+где именно фраза теряет опору,<br>
+ты начинаешь «чинить» не то:</p>
+                
+                <ul>
+                    <li>переписываешь слова</li>
+                    <li>упрощаешь формулировки</li>
+                    <li>убираешь обороты</li>
+                </ul>
+                
+                <p>Но мутность остаётся.</p>
+                
+                <div class="highlight-box">
+                    <p>Понимание тем этого модуля даёт другое умение:<br>
+                    <strong>видеть, где мысль ещё не стала утверждением</strong>.</p>
+                </div>
+                
+                <p>Ты начинаешь замечать:</p>
+                <ul>
+                    <li>где фраза говорит «о чём-то», но не говорит «что»</li>
+                    <li>где субъект исчезает</li>
+                    <li>где указательное слово закрывает пустоту</li>
+                    <li>где текст избегает ясности под видом аккуратности</li>
+                </ul>
+                
+                <p>И в этот момент редактирование перестаёт быть угадыванием.<br>
+Оно становится решением.</p>
+            </div>
+
+            <div class="lesson-section">
+                <h2>Что меняется после модуля</h2>
+                <p>После уроков 4–7 ты начинаешь:</p>
+                <ul>
+                    <li>быстрее находить центр фразы</li>
+                    <li>чувствовать, когда подлежащее формальное</li>
+                    <li>замечать безличность как приём, а не как нейтральность</li>
+                    <li>автоматически настораживаться при «это», «данный», «такой»</li>
+                    <li>задавать тексту вопрос: <em>кто здесь действует и что утверждается?</em></li>
+                </ul>
+                
+                <p>Это не делает текст «жёстким».<br>
+Это делает его <strong>внятным</strong>.</p>
+                
+                <div class="highlight-box">
+                    <p><strong>А внятность —<br>
+это и есть минимальное уважение к читателю<br>
+и к собственной мысли.</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <div class="nav-panel">
+            <a href="../../index.html" class="nav-btn">🏠 На главную</a>
+            <a href="../../course-plan.html" class="nav-btn">📖 План курса</a>
+            <a href="module-2-lesson-1.html" class="nav-btn">➡️ Следующий урок</a>
+        </div>
+
+        <div class="footer">
+            <p>© 2026 Ясный русский. Все права защищены.</p>
+            <p style="margin-top: 10px; font-size: 0.9em;">Курс о ясности мысли и грамотности письма</p>
+        </div>
+    </div>
+</body>
+</html>

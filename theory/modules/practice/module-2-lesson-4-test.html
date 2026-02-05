@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
@@ -880,10 +880,14 @@
         </div>
     </div>
 
-    <script>
+    <script type="module">
+        import { saveTestResult, checkAuth } from '../../../src/firebase/firebase-test-integration.js';
+
+
         let answeredQuestions = 0;
         let correctAnswers = 0;
         const totalQuestions = 8;
+        const lessonId = 'module-2-lesson-4'; 
 
         document.querySelectorAll('.option').forEach(option => {
             option.addEventListener('click', function() {
@@ -963,7 +967,18 @@
 
             document.getElementById('results-message').textContent = message;
             document.getElementById('results-icon').textContent = icon;
-
+          
+            saveTestResult(lessonId, percentage, correctAnswers, totalQuestions)
+                .then(result => {
+                    if (result.success) {
+                        console.log('✅ Результаты сохранены для пользователя:', result.user);
+                    } else {
+                        console.warn('⚠️ Результаты не сохранены:', result.error);
+                    }
+                })
+                .catch(error => {
+                    console.error('❌ Ошибка при сохранении:', error);
+                });
             resultsDiv.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
@@ -990,6 +1005,10 @@
 
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+
+        // Делаем restartTest глобальной функцией
+        window.restartTest = restartTest;
     </script>
 </body>
 </html>
+
