@@ -30,6 +30,15 @@
             padding: 30px;
             margin-bottom: 30px;
             box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .header-content {
+            flex: 1;
             text-align: center;
         }
 
@@ -899,23 +908,28 @@
     <div class="container">
         <!-- Шапка -->
         <div class="header">
-            <h1>📚 Ясный русский</h1>
-            <p>Как текст перестаёт спотыкаться. Курс о ясности мысли и грамотности письма</p>
+            <div class="header-content">
+                <h1>📚 Ясный русский</h1>
+                <p>Как текст перестаёт спотыкаться. Курс о ясности мысли и грамотности письма</p>
+            </div>
+            
+            <!-- Панель пользователя -->
+            <div class="user-panel" id="userPanel">
+                <div class="user-avatar" id="userAvatar">U</div>
+                <div class="user-info">
+                    <div class="user-email" id="userEmail">user@example.com</div>
+                    <div class="user-status">Авторизован</div>
+                </div>
+                <button class="logout-btn" onclick="handleLogout()">Выйти</button>
+            </div>
         </div>
 
         <!-- Навигация -->
         <div class="nav-panel">
             <!-- <a href="/skills-matrix.html" class="nav-btn">📊 Матрица навыков</a> -->
-            <!--button class="nav-btn" id="authBtn" onclick="showAuth()">🔐 Войти / Регистрация</button>
-            <div class="user-panel" id="userPanel">
-                <div class="user-avatar" id="userAvatar"></div>
-                <div class="user-info">
-                    <div class="user-email" id="userEmail"></div>
-                    <div class="user-status">✅ Авторизован</div>
-                </div>
-                <button class="logout-btn" onclick="handleLogout()">Выйти</button>
-            </div-->
+            <button class="nav-btn" id="authBtn" onclick="openAuth()">🔐 Войти</button>
             <a href="./course-plan.html" class="nav-btn">📖 План курса</a>
+            <a href="./statistics.html" class="nav-btn">📊 Статистика</a>
         </div>
 
         <!-- МОДУЛЬ 1 -->
@@ -1321,6 +1335,9 @@
             document.getElementById('authModal').classList.add('show');
             clearMessages();
         };
+
+        // Алиас для совместимости
+        window.openAuth = window.showAuth;
 
         // Закрыть модальное окно
         window.closeAuth = function() {

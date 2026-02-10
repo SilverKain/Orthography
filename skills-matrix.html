@@ -48,9 +48,50 @@
             display: flex;
             align-items: center;
             gap: 15px;
-            background: #f5f5f5;
-            padding: 10px 20px;
+            background: #f8f9fa;
+            padding: 12px 20px;
             border-radius: 10px;
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        .user-email {
+            font-weight: bold;
+            color: #333;
+            font-size: 0.95em;
+        }
+
+        .user-status {
+            font-size: 0.8em;
+            color: #666;
+            margin-top: 2px;
+        }
+
+        .logout-btn {
+            padding: 8px 16px;
+            background: #f44336;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9em;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #d32f2f;
         }
 
         .filters {
@@ -589,10 +630,14 @@
     <div class="container">
         <div class="header">
             <h1>📊 Матрица навыков</h1>
-            <div class="user-info">
-                <span id="userEmail">Загрузка...</span>
+            <div class="user-info" id="userPanel">
+                <div class="user-avatar" id="userAvatar">U</div>
+                <div>
+                    <div class="user-email" id="userEmail">Загрузка...</div>
+                    <div class="user-status">Авторизован</div>
+                </div>
                 <button class="btn btn-reset" onclick="window.location.href='./index.html'" style="background: #2196F3; color: white; border: none; margin-right: 10px;">🏠 На главную</button>
-                <button class="btn btn-reset" onclick="logout()">Выйти</button>
+                <button class="logout-btn" onclick="logout()">Выйти</button>
             </div>
         </div>
 

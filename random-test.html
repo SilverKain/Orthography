@@ -16,12 +16,121 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
         }
 
         .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Шапка */
+        .header {
+            background: white;
+            border-radius: 15px;
+            padding: 20px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .header-content {
+            flex: 1;
+        }
+
+        .header h2 {
+            color: #667eea;
+            font-size: 1.5em;
+            margin: 0;
+        }
+
+        /* Панель пользователя */
+        .user-panel {
+            display: none;
+            align-items: center;
+            gap: 15px;
+            background: #f8f9fa;
+            padding: 10px 18px;
+            border-radius: 10px;
+        }
+
+        .user-panel.show {
+            display: flex;
+        }
+
+        .user-avatar {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1em;
+        }
+
+        .user-info {
+            flex: 1;
+        }
+
+        .user-email {
+            font-weight: bold;
+            color: #333;
+            font-size: 0.9em;
+        }
+
+        .user-status {
+            font-size: 0.75em;
+            color: #666;
+            margin-top: 2px;
+        }
+
+        .logout-btn {
+            padding: 6px 14px;
+            background: #f44336;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.85em;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: #d32f2f;
+        }
+
+        .auth-btn {
+            padding: 8px 18px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 0.9em;
+            transition: all 0.3s;
+        }
+
+        .auth-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .content-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: calc(100vh - 150px);
+        }
+
+        .content-container {
             max-width: 800px;
             width: 100%;
         }
@@ -187,7 +296,28 @@
 </head>
 <body>
     <div class="container">
-        <div class="card">
+        <!-- Шапка -->
+        <div class="header">
+            <div class="header-content">
+                <h2>🎲 Случайный тест</h2>
+            </div>
+            
+            <!-- Панель пользователя -->
+            <div class="user-panel" id="userPanel">
+                <div class="user-avatar" id="userAvatar">U</div>
+                <div class="user-info">
+                    <div class="user-email" id="userEmail">user@example.com</div>
+                    <div class="user-status">Авторизован</div>
+                </div>
+                <button class="logout-btn" onclick="handleLogout()">Выйти</button>
+            </div>
+            
+            <button class="auth-btn" id="authBtn" onclick="openAuth()" style="display: block;">🔐 Войти</button>
+        </div>
+
+        <div class="content-wrapper">
+            <div class="content-container">
+                <div class="card">
             <div class="icon">🎲</div>
             <h1>Случайный тест</h1>
             <p class="description">
@@ -222,7 +352,49 @@
         </div>
     </div>
 
-    <script>
+    <script type="module">
+        import { AuthService } from './src/firebase/services/authService.js';
+
+        // Обновление UI в зависимости от статуса авторизации
+        function updateUI(user) {
+            const authBtn = document.getElementById('authBtn');
+            const userPanel = document.getElementById('userPanel');
+            
+            if (user) {
+                authBtn.style.display = 'none';
+                userPanel.classList.add('show');
+                
+                const userEmail = document.getElementById('userEmail');
+                const userAvatar = document.getElementById('userAvatar');
+                
+                userEmail.textContent = user.email;
+                userAvatar.textContent = user.email.charAt(0).toUpperCase();
+            } else {
+                authBtn.style.display = 'block';
+                userPanel.classList.remove('show');
+            }
+        }
+
+        // Проверка авторизации
+        AuthService.onAuthChange((user) => {
+            updateUI(user);
+        });
+
+        // Функции для кнопок
+        window.openAuth = function() {
+            window.location.href = './index.html#auth';
+        };
+
+        window.handleLogout = async function() {
+            if (!confirm('Вы уверены, что хотите выйти?')) return;
+            
+            try {
+                await AuthService.logout();
+            } catch (error) {
+                alert('Произошла ошибка при выходе');
+            }
+        };
+
         // Список всех доступных тестов
         const allTests = [
             { module: 1, lesson: 1, title: 'Центр высказывания', path: 'theory/modules/practice/module-1-lesson-1-test.html' },
@@ -286,5 +458,8 @@
             document.querySelector('.card').style.animation = 'fadeIn 0.5s ease-out';
         });
     </script>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
