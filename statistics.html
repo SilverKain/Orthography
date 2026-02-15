@@ -171,6 +171,17 @@
             flex: 1;
         }
 
+        .test-name a {
+            color: inherit;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .test-name a:hover {
+            color: #667eea;
+            text-decoration: underline;
+        }
+
         .test-score {
             display: flex;
             align-items: center;
@@ -615,12 +626,11 @@
         </div>
 
         <!-- Статистика по модулям -->
-     !-- Модальное окно авторизации -->
+     <!-- Модальное окно авторизации -->
     <div class="auth-modal" id="authModal">
         <div class="auth-content">
             <button class="auth-close" onclick="closeAuth()">&times;</button>
             <h2 class="auth-title">🎓 Вход в систему</h2>
-            <p class="auth-subtitle">Войдите или зарегистрируйтесь для просмотра статистики</p>
 
             <div class="auth-tabs">
                 <button class="auth-tab active" onclick="switchTab('login')">Вход</button>
@@ -691,7 +701,6 @@
     <div class="auth-content">
         <button class="auth-close" onclick="closeAuth()">&times;</button>
         <h2 class="auth-title">🎓 Вход в систему</h2>
-        <p class="auth-subtitle">Войдите или зарегистрируйтесь для просмотра статистики</p>
 
         <div class="auth-tabs">
             <button class="auth-tab active" onclick="switchTab('login')">Вход</button>
@@ -1089,9 +1098,16 @@
                                 scoreClass = getScoreClass(score);
                             }
 
+                            // Ссылка на страницу с тестом для модулей 1 и 2
+                            const testLink = (moduleNum === 1 || moduleNum === 2) 
+                                ? `./theory/modules/module-${test.module}-lesson-${test.lesson}.html`
+                                : null;
+
                             html += `
                                 <div class="test-result">
-                                    <div class="test-name">${test.name}</div>
+                                    <div class="test-name">
+                                        ${testLink ? `<a href="${testLink}" style="color: inherit; text-decoration: none;">${test.name}</a>` : test.name}
+                                    </div>
                                     <div class="test-score">
                                         <span class="score-value ${scoreClass}">${scoreText}</span>
                                     </div>
